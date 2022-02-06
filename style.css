@@ -1,0 +1,186 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Global */
+
+:root {
+  --blue: #363aeb;
+  --green: #00a851;
+  --white: #fcfcfc;
+  --dark-text: #3b3b3b;
+}
+
+body {
+  font-family: sans-serif;
+  color: var(--dark-text);
+  background-color: var(--white);
+  overflow: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  object-fit: cover;
+  margin: 0 auto;
+}
+
+/* Layout */
+
+.header {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.header h1 {
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.dogs-list {
+  display: grid;
+  grid-auto-columns: 150px;
+  grid-auto-flow: column;
+  column-gap: 10px;
+
+  padding: 1rem;
+
+  list-style-type: none;
+  overflow-y: auto;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: minmax(300px, 500px);
+
+  justify-content: center;
+
+  margin: 3rem 0;
+}
+
+.main__dog-section {
+  padding: 1rem;
+
+  border: 1px solid var(--dark-text);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.form {
+  display: grid;
+}
+
+/* Components */
+
+.dogs-list__button {
+  display: grid;
+  place-content: center;
+  width: 100%;
+
+  text-align: center;
+  font-size: 1.5rem;
+
+  padding: 1rem;
+
+  border: 1px solid var(--white);
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition: all 300ms;
+}
+
+.dogs-list__button:hover {
+  background-color: var(--green);
+  border: 1px solid var(--green);
+  /* color: var(--dark-text); */
+}
+
+.dogs-list__button--add {
+  font-size: 3rem;
+}
+
+.main__dog-section h2 {
+  margin: 1rem 0;
+}
+
+.main__dog-section img {
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.main__dog-section p {
+  display: inline-block;
+  margin: 1rem;
+}
+
+.main__dog-section__btn {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 3fr 2fr;
+  width: 80%;
+}
+
+.main__dog-section__desc {
+  padding: 1rem;
+}
+
+.main__dog-section button {
+  padding: 1rem;
+  font-size: 1.2rem;
+
+  background-color: var(--blue);
+  color: var(--white);
+
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+
+  transition: all 300ms;
+}
+
+.main__dog-section button:hover {
+  /* color: var(--dark-text); */
+  background-color: var(--green);
+}
+
+.form > button {
+  width: 30%;
+  justify-self: center;
+  margin: 1rem 0;
+}
+
+.form__button {
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: 1.2rem;
+  justify-self: center;
+
+  background-color: var(--blue);
+  color: var(--white);
+
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+
+  transition: all 300ms;
+}
+
+.form__button:hover {
+  background-color: var(--green);
+}
+
+.form input,
+textarea {
+  margin-bottom: 1rem;
+}
+
+.form textarea {
+  resize: none;
+  font: inherit;
+  padding: 0.5rem;
+}
