@@ -35,11 +35,13 @@ function generateDogCard(dogId, dogName, dogImagePath, dogBio, isGoodDog) {
   const DOG_CARD = document.createElement('section')
   DOG_CARD.setAttribute('class', 'main__dog-section')
 
+  const BOOL_STRING = isGoodDog.toString()
+
   DOG_CARD.appendChild(generateCardHeading(dogName))
   DOG_CARD.appendChild(generateDogImage(dogImagePath, dogName))
   DOG_CARD.appendChild(generateBioSection(dogBio))
-  DOG_CARD.appendChild(generateNaughtyLabel(isGoodDog))
-  DOG_CARD.appendChild(generateNaughtyButton(dogId, isGoodDog))
+  DOG_CARD.appendChild(generateNaughtyLabel(BOOL_STRING))
+  DOG_CARD.appendChild(generateNaughtyButton(dogId, BOOL_STRING))
 
   return DOG_CARD
 }
@@ -140,25 +142,17 @@ function changeIsGoodStatus(dogCardId, buttonID, pureID) {
 }
 
 function naughtyStatus(booleanStatus) {
-  if (booleanStatus == 'true') {
+  if (booleanStatus === 'true') {
     return 'No!'
   }
   return 'Yes!'
 }
 
 function naughtyButtonStatus(booleanStatus) {
-  if (booleanStatus == 'true') {
+  if (booleanStatus === 'true') {
     return 'Good dog!'
   }
   return 'Naughty Dog!'
-}
-
-function getRealBooleanValue(stringBoolean) {
-  if (isGoodDog == 'false') {
-    return false
-  }
-
-  return true
 }
 
 setUp()
