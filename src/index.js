@@ -100,7 +100,6 @@ function generateNaughtyLabel(isGoodDog) {
 
 function generateNaughtyButton(dogId, isGoodDog) {
   const NAUGHTY_BUTTON = document.createElement('button')
-  NAUGHTY_BUTTON.setAttribute('class', 'main__dog-section__btn')
   NAUGHTY_BUTTON.setAttribute('id', `naughtyButtonId#${dogId}`)
   NAUGHTY_BUTTON.setAttribute('data-isgood', isGoodDog)
   const BUTTON_TEXT_NODE = document.createTextNode(naughtyButtonStatus(isGoodDog))
@@ -128,9 +127,9 @@ function addEventListenerToNaughtyButtonOfThisCard(dogCardId) {
 function changeIsGoodStatus(dogCardId, buttonID, pureID) {
   let currentIsGoodStatus = document.getElementById(buttonID).getAttribute('data-isgood')
 
-  if ( currentIsGoodStatus == 'true' ) {
+  if (currentIsGoodStatus == 'true') {
     currentIsGoodStatus = 'false'
-  } else if ( currentIsGoodStatus === 'false' ) {
+  } else if (currentIsGoodStatus === 'false') {
     currentIsGoodStatus = 'true'
   }
 
