@@ -115,6 +115,9 @@ function addEventListenerToNaughtyButtonOfThisCard(dogCardId) {
   document.getElementById(CONSTRUCTED_BUTTON_ID).addEventListener("click", function () {
     changeIsGoodStatus(dogCardId, CONSTRUCTED_BUTTON_ID, PURE_ID)
     replaceCard(dogCardId)
+
+    // The function calls itself because the button with the original
+    // eventListener was removed when changing the isGood status on click
     addEventListenerToNaughtyButtonOfThisCard(dogCardId)
   });
 
