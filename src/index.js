@@ -5,7 +5,7 @@ const MAIN_SECTION = document.querySelector('main')
 function setUp() {
   for (const DOG of data) {
     generateMenu(DOG.id, DOG.name)
-    generateStackOfDogCard(DOG.id, DOG.name, DOG.image, DOG.bio, DOG.isGoodDog)
+    ALL_DOG_CARDS[`dogId#${DOG.id}`] = generateDogCard(DOG.id, DOG.name, DOG.image, DOG.bio, DOG.isGoodDog)
   }
 }
 
@@ -20,16 +20,18 @@ function generateMenu(dogId, dogName) {
 }
 
 function addEventlistenersToMenuItem(dogMenuId) {
-  const MENU_ITEM_CLICK = document.getElementById(dogMenuId)
-
-  MENU_ITEM_CLICK.addEventListener("click", function () {
-    console.log(ALL_DOG_CARDS[this.id])
-    document.querySelector('.main__dog-section').remove()
-    MAIN_SECTION.appendChild(ALL_DOG_CARDS[this.id])
+  document.getElementById(dogMenuId).addEventListener("click", function () {
+    replaceCard(this.id)
+    addEventListenerToNaughtyButtonOfThisCard(this.id)
   });
 }
 
-function generateStackOfDogCard(dogId, dogName, dogImagePath, dogBio, isGoodDog) {
+function replaceCard(thisId) {
+  document.querySelector('.main__dog-section').remove()
+  MAIN_SECTION.appendChild(ALL_DOG_CARDS[thisId])
+}
+
+function generateDogCard(dogId, dogName, dogImagePath, dogBio, isGoodDog) {
   const DOG_CARD = document.createElement('section')
   DOG_CARD.setAttribute('class', 'main__dog-section')
 
@@ -39,7 +41,7 @@ function generateStackOfDogCard(dogId, dogName, dogImagePath, dogBio, isGoodDog)
   DOG_CARD.appendChild(generateNaughtyLabel(isGoodDog))
   DOG_CARD.appendChild(generateNaughtyButton(dogId, isGoodDog))
 
-  ALL_DOG_CARDS[`dogId#${dogId}`] = DOG_CARD
+  return DOG_CARD
 }
 
 function generateCardHeading(dogName) {
@@ -78,14 +80,18 @@ function generateBioSection(dogBio) {
 
 function generateNaughtyLabel(isGoodDog) {
   const NAUGHTY_LABEL = document.createElement('p')
+  NAUGHTY_LABEL.setAttribute('class', 'naughtyGoodStatus')
   const NAUGHTY_TEXT_NODE = document.createTextNode('Is naughty?');
   const NAUGHTY_EM = document.createElement('em')
+  const NAUGHTY_STATUS_SPAN = document.createElement('span')
+  NAUGHTY_STATUS_SPAN.setAttribute('class', 'naughtyGoodStatus')
   const NAUGHTY_STATUS_NODE = document.createTextNode(naughtyStatus(isGoodDog));
+  NAUGHTY_STATUS_SPAN.appendChild(NAUGHTY_STATUS_NODE)
   const NAUGHTY_STATUS_SPACE = document.createTextNode(' ');
   NAUGHTY_EM.appendChild(NAUGHTY_TEXT_NODE)
   NAUGHTY_LABEL.appendChild(NAUGHTY_EM)
   NAUGHTY_LABEL.appendChild(NAUGHTY_STATUS_SPACE)
-  NAUGHTY_LABEL.appendChild(NAUGHTY_STATUS_NODE)
+  NAUGHTY_LABEL.appendChild(NAUGHTY_STATUS_SPAN)
 
   return NAUGHTY_LABEL
 }
@@ -94,24 +100,62 @@ function generateNaughtyButton(dogId, isGoodDog) {
   const NAUGHTY_BUTTON = document.createElement('button')
   NAUGHTY_BUTTON.setAttribute('class', 'main__dog-section__btn')
   NAUGHTY_BUTTON.setAttribute('id', `naughtyButtonId#${dogId}`)
+  NAUGHTY_BUTTON.setAttribute('data-isgood', isGoodDog)
   const BUTTON_TEXT_NODE = document.createTextNode(naughtyButtonStatus(isGoodDog))
   NAUGHTY_BUTTON.appendChild(BUTTON_TEXT_NODE)
 
   return NAUGHTY_BUTTON
 }
 
+function addEventListenerToNaughtyButtonOfThisCard(dogCardId) {
+  const SPLIT_ID = dogCardId.split("#");
+  const PURE_ID = SPLIT_ID[1]
+  const CONSTRUCTED_BUTTON_ID = 'naughtyButtonId#' + PURE_ID
+
+  document.getElementById(CONSTRUCTED_BUTTON_ID).addEventListener("click", function () {
+    changeIsGoodStatus(dogCardId, CONSTRUCTED_BUTTON_ID, PURE_ID)
+    replaceCard(dogCardId)
+    addEventListenerToNaughtyButtonOfThisCard(dogCardId)
+  });
+
+}
+
+function changeIsGoodStatus(dogCardId, buttonID, pureID) {
+  let currentIsGoodStatus = document.getElementById(buttonID).getAttribute('data-isgood')
+
+  if ( currentIsGoodStatus == 'true' ) {
+    currentIsGoodStatus = 'false'
+  } else if ( currentIsGoodStatus === 'false' ) {
+    currentIsGoodStatus = 'true'
+  }
+
+  ALL_DOG_CARDS[dogCardId].querySelector('.naughtyGoodStatus').remove()
+  ALL_DOG_CARDS[dogCardId].querySelector('button').remove()
+
+  ALL_DOG_CARDS[dogCardId].appendChild(generateNaughtyLabel(currentIsGoodStatus))
+  ALL_DOG_CARDS[dogCardId].appendChild(generateNaughtyButton(pureID, currentIsGoodStatus))
+}
+
 function naughtyStatus(booleanStatus) {
-  if (booleanStatus) {
+  if (booleanStatus == 'true') {
     return 'No!'
   }
   return 'Yes!'
 }
 
 function naughtyButtonStatus(booleanStatus) {
-  if (booleanStatus) {
+  if (booleanStatus == 'true') {
     return 'Good dog!'
   }
   return 'Naughty Dog!'
+}
+
+function getRealBooleanValue(stringBoolean) {
+  if (isGoodDog == 'false') {
+    return false
+  }
+
+  return true
 }
 
 setUp()
