@@ -12,7 +12,11 @@ const data = [
   {
     id: 2,
     name: "Nugget",
-    bio: `Bio 2`,
+    bio: `Interests: I like piña coladas and gettin' caught in the rain. I'm not into yoga and makin' love at midnight in the dunes on the cape. Experience: Associate Software Engineer at Zendesk
+    (2016 - 2017), I use React and Ruby on Rails to build good apps.
+    Zendesk Intern at Zendesk: (2015 - 2016)
+    Education: Melbourne University, MA in Philosophy, Completed in 2016.
+    Skills: React, Ruby on Rails, Travis CI, Docker.`,
     isGoodDog: false,
     image: "https://curriculum-content.s3.amazonaws.com/js/woof-woof/dog_2.jpg"
   },
