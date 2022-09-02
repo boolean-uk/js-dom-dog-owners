@@ -3,22 +3,26 @@ const DOGS_MENU = document.querySelector('.dogs-list')
 const MAIN_SECTION = document.querySelector('main')
 const ADD_DOG_BUTTON = document.querySelector('.dogs-list__button--add')
 
-
 function setUp() {
   for (const DOG of data) {
-    generateMenu(DOG.id, DOG.name)
+    generateMenu(DOG.id, DOG.name, 'append')
     ALL_DOG_CARDS[`dogId#${DOG.id}`] = generateDogCard(DOG.id, DOG.name, DOG.image, DOG.bio, DOG.isGoodDog)
   }
   addEventlistenersToAddDogButton()
 }
 
-function generateMenu(dogId, dogName) {
+function generateMenu(dogId, dogName, prependOrAppend) {
   const MENU_ITEM = document.createElement('li')
   const DOG_ID = `dogId#${dogId}`
   MENU_ITEM.setAttribute('id', DOG_ID)
   MENU_ITEM.setAttribute('class', 'dogs-list__button')
   MENU_ITEM.innerText = dogName
   DOGS_MENU.appendChild(MENU_ITEM)
+  if ( prependOrAppend === 'append' ) {
+    DOGS_MENU.appendChild(MENU_ITEM)
+  } else if ( prependOrAppend === 'prepend' ) {
+    ADD_DOG_BUTTON.after(MENU_ITEM, '')
+  }
   addEventlistenersToMenuItem(`dogId#${dogId}`)
 }
 
@@ -33,6 +37,7 @@ function addEventlistenersToAddDogButton() {
   ADD_DOG_BUTTON.addEventListener("click", function () {
     document.querySelector('.main__dog-section').remove()
     MAIN_SECTION.appendChild(generateForm())
+    addEventListenerToFormSubmitButton()
   });
 }
 
@@ -134,6 +139,13 @@ function addEventListenerToNaughtyButtonOfThisCard(dogCardId) {
 
 }
 
+function addEventListenerToFormSubmitButton() {
+  document.getElementById('submit').addEventListener('click', function (event) {
+    event.preventDefault()
+    processFormInputs()
+  })
+}
+
 function changeIsGoodStatus(dogCardId, buttonID, pureID) {
   let currentIsGoodStatus = document.getElementById(buttonID).getAttribute('data-isgood')
 
@@ -166,8 +178,6 @@ function naughtyButtonStatus(booleanStatus) {
 
 setUp()
 
-console.log(generateForm())
-
 // Form Section
 function generateForm() {
   const FORM_SECTION = document.createElement('section')
@@ -190,11 +200,14 @@ function createFormHeading() {
 function createDogForm() {
   const DOG_FORM = document.createElement('form')
   DOG_FORM.setAttribute('class', 'form')
+  DOG_FORM.setAttribute('action', '#')
 
   DOG_FORM.appendChild(createDogNameLabel())
   DOG_FORM.appendChild(createDogNameInput())
+  DOG_FORM.appendChild(createDogNameErrorField())
   DOG_FORM.appendChild(createDogImageLabel())
   DOG_FORM.appendChild(createDogImageInput())
+  DOG_FORM.appendChild(createDogImageErrorField())
   DOG_FORM.appendChild(createDogBioLabel())
   DOG_FORM.appendChild(createDogBioTextArea())
   DOG_FORM.appendChild(createSubmitButton())
@@ -213,11 +226,20 @@ function createDogNameLabel() {
 
 function createDogNameInput() {
   const DOG_NAME_INPUT = document.createElement('input')
+  DOG_NAME_INPUT.setAttribute('required', '')
   DOG_NAME_INPUT.setAttribute('type', 'text')
   DOG_NAME_INPUT.setAttribute('id', 'name')
   DOG_NAME_INPUT.setAttribute('name', 'name')
 
   return DOG_NAME_INPUT
+}
+
+function createDogNameErrorField() {
+  const DOG_NAME_ERROR = document.createElement('div')
+  DOG_NAME_ERROR.setAttribute('id', 'formErrorName')
+  DOG_NAME_ERROR.setAttribute('class', 'formErrorMessage')
+
+  return DOG_NAME_ERROR
 }
 
 function createDogImageLabel() {
@@ -231,11 +253,20 @@ function createDogImageLabel() {
 
 function createDogImageInput() {
   const DOG_IMAGE_INPUT = document.createElement('input')
+  DOG_IMAGE_INPUT.setAttribute('required', '')
   DOG_IMAGE_INPUT.setAttribute('type', 'url')
   DOG_IMAGE_INPUT.setAttribute('id', 'image')
   DOG_IMAGE_INPUT.setAttribute('name', 'image')
 
   return DOG_IMAGE_INPUT
+}
+
+function createDogImageErrorField() {
+  const DOG_IMAGE_ERROR = document.createElement('div')
+  DOG_IMAGE_ERROR.setAttribute('id', 'formErrorImage')
+  DOG_IMAGE_ERROR.setAttribute('class', 'formErrorMessage')
+
+  return DOG_IMAGE_ERROR
 }
 
 function createDogBioLabel() {
@@ -265,4 +296,25 @@ function createSubmitButton() {
   SUBMIT_BUTTON.setAttribute('class', "form__button")
 
   return SUBMIT_BUTTON
+}
+
+function processFormInputs() {
+  const DOG_NAME_VALUE = document.querySelector('#name').value
+  const DOG_IMAGE_VALUE = document.querySelector('#image').value
+  const DOG_BIO_VALUE = document.querySelector('#bio').value
+
+  if (DOG_NAME_VALUE.length < 2) {
+    document.getElementById('formErrorName').innerText = 'The entered dog name is either empty or too short'
+  }
+  if (DOG_IMAGE_VALUE.length < 5) {
+    document.getElementById('formErrorImage').innerText = 'This does not look like it is long enough for a valid URL'
+  }
+
+  const NEW_DOG_ID = Object.keys(ALL_DOG_CARDS).length + 1
+  const PREPENDED_NEW_DOG_ID = 'dogId#' + NEW_DOG_ID
+
+  ALL_DOG_CARDS[PREPENDED_NEW_DOG_ID] = generateDogCard(NEW_DOG_ID, DOG_NAME_VALUE, DOG_IMAGE_VALUE, DOG_BIO_VALUE, 'true')
+  
+  generateMenu(NEW_DOG_ID, DOG_NAME_VALUE, 'prepend')
+  replaceCard(PREPENDED_NEW_DOG_ID)
 }
