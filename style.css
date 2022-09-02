@@ -153,6 +153,20 @@ img {
   margin: 1rem 0;
 }
 
+.form input,
+textarea {
+  margin: 0.4rem 0 1rem 0;
+  padding: 0.4rem;
+  border-radius: 10px;
+  border: 1px gray solid;
+}
+
+.form textarea {
+  resize: none;
+  font: inherit;
+  padding: 0.5rem;
+}
+
 .form__button {
   padding: 1rem;
   margin: 1rem 0;
@@ -171,15 +185,7 @@ img {
 
 .form__button:hover {
   background-color: var(--green);
+  border: none;
 }
 
-.form input,
-textarea {
-  margin-bottom: 1rem;
-}
 
-.form textarea {
-  resize: none;
-  font: inherit;
-  padding: 0.5rem;
-}

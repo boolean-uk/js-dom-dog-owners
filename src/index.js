@@ -1,12 +1,15 @@
 const ALL_DOG_CARDS = {}
 const DOGS_MENU = document.querySelector('.dogs-list')
 const MAIN_SECTION = document.querySelector('main')
+const ADD_DOG_BUTTON = document.querySelector('.dogs-list__button--add')
+
 
 function setUp() {
   for (const DOG of data) {
     generateMenu(DOG.id, DOG.name)
     ALL_DOG_CARDS[`dogId#${DOG.id}`] = generateDogCard(DOG.id, DOG.name, DOG.image, DOG.bio, DOG.isGoodDog)
   }
+  addEventlistenersToAddDogButton()
 }
 
 function generateMenu(dogId, dogName) {
@@ -23,6 +26,13 @@ function addEventlistenersToMenuItem(dogMenuId) {
   document.getElementById(dogMenuId).addEventListener("click", function () {
     replaceCard(this.id)
     addEventListenerToNaughtyButtonOfThisCard(this.id)
+  });
+}
+
+function addEventlistenersToAddDogButton() {
+  ADD_DOG_BUTTON.addEventListener("click", function () {
+    document.querySelector('.main__dog-section').remove()
+    MAIN_SECTION.appendChild(generateForm())
   });
 }
 
@@ -155,3 +165,104 @@ function naughtyButtonStatus(booleanStatus) {
 }
 
 setUp()
+
+console.log(generateForm())
+
+// Form Section
+function generateForm() {
+  const FORM_SECTION = document.createElement('section')
+  FORM_SECTION.setAttribute('class', 'main__dog-section')
+
+  FORM_SECTION.appendChild(createFormHeading())
+  FORM_SECTION.appendChild(createDogForm())
+
+  return FORM_SECTION
+}
+
+function createFormHeading() {
+  const FORM_HEADING = document.createElement('h2')
+  const FORM_HEADING_TEXT_NODE = document.createTextNode('Add a new Dog')
+  FORM_HEADING.appendChild(FORM_HEADING_TEXT_NODE)
+
+  return FORM_HEADING
+}
+
+function createDogForm() {
+  const DOG_FORM = document.createElement('form')
+  DOG_FORM.setAttribute('class', 'form')
+
+  DOG_FORM.appendChild(createDogNameLabel())
+  DOG_FORM.appendChild(createDogNameInput())
+  DOG_FORM.appendChild(createDogImageLabel())
+  DOG_FORM.appendChild(createDogImageInput())
+  DOG_FORM.appendChild(createDogBioLabel())
+  DOG_FORM.appendChild(createDogBioTextArea())
+  DOG_FORM.appendChild(createSubmitButton())
+
+  return DOG_FORM
+}
+
+function createDogNameLabel() {
+  const DOG_NAME_LABEL = document.createElement('label')
+  DOG_NAME_LABEL.setAttribute('for', 'name')
+  const DOG_NAME_LABEL_TEXT_NODE = document.createTextNode("Dog's name")
+  DOG_NAME_LABEL.appendChild(DOG_NAME_LABEL_TEXT_NODE)
+
+  return DOG_NAME_LABEL
+}
+
+function createDogNameInput() {
+  const DOG_NAME_INPUT = document.createElement('input')
+  DOG_NAME_INPUT.setAttribute('type', 'text')
+  DOG_NAME_INPUT.setAttribute('id', 'name')
+  DOG_NAME_INPUT.setAttribute('name', 'name')
+
+  return DOG_NAME_INPUT
+}
+
+function createDogImageLabel() {
+  const DOG_IMAGE_LABEL = document.createElement('label')
+  DOG_IMAGE_LABEL.setAttribute('for', 'image')
+  const DOG_IMAGE_LABEL_TEXT_NODE = document.createTextNode("Dog's picture")
+  DOG_IMAGE_LABEL.appendChild(DOG_IMAGE_LABEL_TEXT_NODE)
+
+  return DOG_IMAGE_LABEL
+}
+
+function createDogImageInput() {
+  const DOG_IMAGE_INPUT = document.createElement('input')
+  DOG_IMAGE_INPUT.setAttribute('type', 'url')
+  DOG_IMAGE_INPUT.setAttribute('id', 'image')
+  DOG_IMAGE_INPUT.setAttribute('name', 'image')
+
+  return DOG_IMAGE_INPUT
+}
+
+function createDogBioLabel() {
+  const DOG_BIO_LABEL = document.createElement('label')
+  DOG_BIO_LABEL.setAttribute('for', 'bio')
+  const DOG_BIO_LABEL_TEXT_NODE = document.createTextNode("Dog's bio")
+  DOG_BIO_LABEL.appendChild(DOG_BIO_LABEL_TEXT_NODE)
+
+  return DOG_BIO_LABEL
+}
+
+function createDogBioTextArea() {
+  const DOG_BIO_TEXT_AREA = document.createElement('textarea')
+  DOG_BIO_TEXT_AREA.setAttribute('rows', '5')
+  DOG_BIO_TEXT_AREA.setAttribute('id', 'bio')
+  DOG_BIO_TEXT_AREA.setAttribute('name', 'bio')
+
+  return DOG_BIO_TEXT_AREA
+}
+
+function createSubmitButton() {
+  const SUBMIT_BUTTON = document.createElement('input')
+  SUBMIT_BUTTON.setAttribute('type', 'submit')
+  SUBMIT_BUTTON.setAttribute('id', 'submit')
+  SUBMIT_BUTTON.setAttribute('name', 'submit')
+  SUBMIT_BUTTON.setAttribute('value', "Let's add a dog!")
+  SUBMIT_BUTTON.setAttribute('class', "form__button")
+
+  return SUBMIT_BUTTON
+}
