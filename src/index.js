@@ -18,11 +18,13 @@ function generateMenu(dogId, dogName, prependOrAppend) {
   MENU_ITEM.setAttribute('class', 'dogs-list__button')
   MENU_ITEM.innerText = dogName
   DOGS_MENU.appendChild(MENU_ITEM)
+
   if ( prependOrAppend === 'append' ) {
     DOGS_MENU.appendChild(MENU_ITEM)
   } else if ( prependOrAppend === 'prepend' ) {
     ADD_DOG_BUTTON.after(MENU_ITEM, '')
   }
+
   addEventlistenersToMenuItem(`dogId#${dogId}`)
 }
 
@@ -305,9 +307,11 @@ function processFormInputs() {
 
   if (DOG_NAME_VALUE.length < 2) {
     document.getElementById('formErrorName').innerText = 'The entered dog name is either empty or too short'
+    return
   }
   if (DOG_IMAGE_VALUE.length < 5) {
     document.getElementById('formErrorImage').innerText = 'This does not look like it is long enough for a valid URL'
+    return
   }
 
   const NEW_DOG_ID = Object.keys(ALL_DOG_CARDS).length + 1
@@ -317,4 +321,5 @@ function processFormInputs() {
   
   generateMenu(NEW_DOG_ID, DOG_NAME_VALUE, 'prepend')
   replaceCard(PREPENDED_NEW_DOG_ID)
+  addEventListenerToNaughtyButtonOfThisCard(PREPENDED_NEW_DOG_ID)
 }
