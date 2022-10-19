@@ -13,17 +13,23 @@ for (let i = 0; i < data.length; i++) {
 
   // correct list is <ul class="dogs-list">
   // now add an event listener to listen for user clicks
-  //inside the eventListerner we want to call out function.
+  //inside the eventListerner we want to call out function
+  // and give the called function the index we are looping though (i)
   li.addEventListener("click", () => {
     selectCard(i);
   });
 }
+
+let cardHasBeenCreated = false
 
 function selectCard(index) {
   const dogsCard = document.querySelector(".main__dog-section");
   const h2 = document.querySelector("h2");
   h2.innerText = data[index].name;
 
+  if (cardHasBeenCreated === true) {
+    const img = document.querySelector("img")
+  }
   const img = document.createElement("img");
   img.src = data[index].image;
   dogsCard.appendChild(img);
@@ -52,6 +58,9 @@ function selectCard(index) {
   dogsCard.appendChild(isDogGoodLabel);
   dogsCard.appendChild(button);
 }
+
+
+
 
 //  <section class="main__dog-section">
 //         <h2>Mr. Bonkers</h2>
