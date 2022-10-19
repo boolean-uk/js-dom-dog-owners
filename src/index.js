@@ -19,7 +19,7 @@
 //   li.addEventListener('click', (event) => {
 //     console.log("This worked")
 //   })
- 
+
 //   return li;
 // };
 
@@ -27,23 +27,28 @@
 const dogsList = document.querySelector('.dogs-list')
 // console.log(dogsList);
 
-function dogListAddButton (index) {
+// generate this HTML template: <li class="dogs-list__button">Mr. Bonkers</li>
+function dogListButton(index) {
   const dogListButton = document.createElement('li')
   dogsList.appendChild(dogListButton)
   dogListButton.setAttribute('class', 'dogs-list__button')
   dogListButton.innerText = data[index].name
   console.log(data[index].name)
+  dogListButton.addEventListener('click', (event) => {
+    console.log(data[index].name)
+  })
 }
 
 // for each dog JS object in data, generate a li
 for (let i = 0; i < data.length; i++) {
+  // i = index that is used in line 30,34 and 37
+
   // console.log(dogJSData);
-  dogListAddButton(i)
-  // generate this HTML template: <li class="dogs-list__button">Mr. Bonkers</li>
-  
+  dogListButton(i)
+
   // append each generated <li> to the correct part of the page
   // correct list is <ul class="dogs-list">
 
   // now add an event listener to listen for user clicks
   // that event listener function, if defined here, will have access to the specific dogJSData for the current forEach iteration
-};
+}
