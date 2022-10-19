@@ -6,6 +6,9 @@
 const dogsList = document.querySelector('.dogs-list')
 const dogCard = document.querySelector('.main__dog-section')
 
+const body = document.querySelector('body')
+body.setAttribute('style', 'font-style: san-serif')
+
 function dogListButton(index) {
   // generate this HTML template: <li class="dogs-list__button">Mr. Bonkers</li>
   // append each generated <li> to the correct part of the page
@@ -15,6 +18,8 @@ function dogListButton(index) {
   dogListButton.setAttribute('class', 'dogs-list__button') // Give dogListButton the class dogs-list__button
 
   dogListButton.innerText = data[index].name // Set dogListButton's text to be the object key 'name' from within the data array, based on the idex given by the for loop on below
+
+  
 
   // now add an event listener to listen for user clicks
   dogListButton.addEventListener('click', (event) => {
@@ -44,18 +49,28 @@ const dogBio = document.createElement('p')
 
 function dogCardBio(index) {
   dogBio.innerText = data[index].bio
-  dogBio.setAttribute('style', 'font-style: san-serif')
   dogCard.appendChild(dogBio)
 }
 
+const isGoodBoy = document.createElement('div')
+const cardQuestion = document.createElement('p')
+
+
+const cardQuestionButton = document.createElement('button')
+
 function dogCardGood(index) {
   // div that will contain the prompt question and "Good or Bad dog button"
-  const isGoodBoy = document.createElement('div')
   isGoodBoy.setAttribute('style', 'display: inline-flex')
   dogCard.appendChild(isGoodBoy)
-  const cardQuestion = document.createElement('p')
-  cardQuestion.setAttribute('style', 'font-style: san-serif')
   isGoodBoy.appendChild(cardQuestion)
+  isGoodBoy.appendChild(cardQuestionButton)
+  let naughty = ""
+  if (data[index].isGoodDog === false) {
+    naughty = "yes"
+  } else if (data[index].isGoodDog === true) {
+    naughty = "no"
+  }
+  cardQuestion.innerText = `Is Naughty? ${naughty}`
 }
 
 // for each dog JS object in data, generate a li
