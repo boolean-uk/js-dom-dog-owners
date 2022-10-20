@@ -54,7 +54,10 @@ function newDog() {
 function newDogName(form) {
   // Create a div to contain the name input
   const wrapperDivName = document.createElement('div')
-  wrapperDivName.setAttribute('style', 'display:flex; flex-direction:column; margin-bottom: 20px')
+  wrapperDivName.setAttribute(
+    'style',
+    'display:flex; flex-direction:column; margin-bottom: 20px'
+  )
   // wrapperDivName.setAttribute('style', '')
   // wrapperDivName.setAttribute('style', '')
 
@@ -78,7 +81,10 @@ function newDogName(form) {
 function newDogImg(form) {
   // Create a div to contain the image input
   const wrapperDivImg = document.createElement('div')
-  wrapperDivImg.setAttribute('style', 'display:flex; flex-direction:column; margin-bottom: 20px')
+  wrapperDivImg.setAttribute(
+    'style',
+    'display:flex; flex-direction:column; margin-bottom: 20px'
+  )
 
   // Create a label element for the image
   const image = document.createElement('label')
@@ -100,7 +106,10 @@ function newDogImg(form) {
 function newDogBio(form) {
   // Create a div to contain the bio input
   const wrapperDivBio = document.createElement('div')
-  wrapperDivBio.setAttribute('style', 'display:flex; flex-direction:column; margin-bottom: 20px')
+  wrapperDivBio.setAttribute(
+    'style',
+    'display:flex; flex-direction:column; margin-bottom: 20px'
+  )
 
   // Create a label element for the bio
   const bio = document.createElement('label')
@@ -128,7 +137,16 @@ function newDogSubmit(form) {
   newDogFormSubmit.setAttribute('class', 'form__button')
   newDogFormSubmit.setAttribute('id', 'formSubmit')
   newDogFormSubmit.innerText = "Let's add a dog!"
+  // Create button that will added new dog profile to the exisiting list.
 
+  form__buttom.addEventListener('click', (event) => {
+    // Creat a nesw li element for the dogs-list ul
+    const newDogList.createElement('li')
+    newDogList.setAttribute('class','dogs-list__button')
+    dogsList.appendChild(newDogList)
+    // Give new profile the name of the name submitted
+    // give it the dog-list__button class name
+  })
   // Append the label/element into the div
   form.appendChild(wrapperDivSubmit)
   wrapperDivSubmit.appendChild(newDogFormSubmit)
