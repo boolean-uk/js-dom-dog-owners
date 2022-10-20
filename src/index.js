@@ -39,56 +39,99 @@ dogsListAdd.addEventListener('click', (event) => {
 })
 
 function newDog() {
-  // create innerHTML = "" to clear the main area
   // Create the submission form
-
   const newDogForm = document.createElement('form')
 
   // Append the form into dogCard
   dogCard.appendChild(newDogForm)
-  // newDogForm.setAttribute('style', 'display: inline-block')
 
-  // Create input text box for the dog's name
-  const wrapperDiv = document.createElement('div')
+  newDogName(newDogForm)
+  newDogImg(newDogForm)
+  newDogBio(newDogForm)
+  newDogSubmit(newDogForm)
+}
 
+function newDogName(form) {
+  // Create a div to contain the name input
+  const wrapperDivName = document.createElement('div')
+  wrapperDivName.setAttribute('style', 'display:flex; flex-direction:column; margin-bottom: 20px')
+  // wrapperDivName.setAttribute('style', '')
+  // wrapperDivName.setAttribute('style', '')
+
+  // Create label element for the dog's name
   const name = document.createElement('label')
   name.setAttribute('for', 'name')
-  name.innerText = 'Dogs name.'
+  name.innerText = 'Dogs name:'
+
+  // Create input element for the dog's name
   const newDogFormName = document.createElement('input')
   newDogFormName.setAttribute('type', 'text')
-  newDogFormName.setAttribute('id', 'formName')
+  newDogFormName.setAttribute('id', 'name')
+  newDogFormName.setAttribute('style', 'width: 250px')
 
-  // create an element and set attributes and append area to input an image via url
+  // Append label/input element into div
+  form.appendChild(wrapperDivName)
+  wrapperDivName.appendChild(name)
+  wrapperDivName.appendChild(newDogFormName)
+}
+
+function newDogImg(form) {
+  // Create a div to contain the image input
+  const wrapperDivImg = document.createElement('div')
+  wrapperDivImg.setAttribute('style', 'display:flex; flex-direction:column; margin-bottom: 20px')
+
+  // Create a label element for the image
   const image = document.createElement('label')
   image.setAttribute('for', 'image')
-  image.innerText = 'Dogs image.'
+  image.innerText = 'Dogs image URL:'
+
+  // Create an input element for the image
   const newDogFormImg = document.createElement('input')
   newDogFormImg.setAttribute('type', 'url')
   newDogFormImg.setAttribute('id', 'formImg')
+  newDogFormImg.setAttribute('style', 'width: 250px')
 
-  // To add text area for the Bio.
+  // Append the label/input element into the div
+  form.appendChild(wrapperDivImg)
+  wrapperDivImg.appendChild(image)
+  wrapperDivImg.appendChild(newDogFormImg)
+}
+
+function newDogBio(form) {
+  // Create a div to contain the bio input
+  const wrapperDivBio = document.createElement('div')
+  wrapperDivBio.setAttribute('style', 'display:flex; flex-direction:column; margin-bottom: 20px')
+
+  // Create a label element for the bio
   const bio = document.createElement('label')
   bio.setAttribute('for', 'bio')
-  bio.innerText = 'Dogs bio.'
+  bio.innerText = 'Dogs bio:'
+
+  // Create an input element for the bio
   const newDogFormBio = document.createElement('textarea')
   newDogFormBio.setAttribute('rows', '5')
   newDogFormBio.setAttribute('id', 'formBio')
 
-  // Create a submit button to add the dog's name as a dogListButton
+  // Append the label/input element into the div
+  form.appendChild(wrapperDivBio)
+  wrapperDivBio.appendChild(bio)
+  wrapperDivBio.appendChild(newDogFormBio)
+}
+
+function newDogSubmit(form) {
+  // Create a div to contain the bio input
+  const wrapperDivSubmit = document.createElement('div')
+  wrapperDivSubmit.setAttribute('style', 'display:grid')
+
+  // Create an input element for the bio
   const newDogFormSubmit = document.createElement('button')
   newDogFormSubmit.setAttribute('class', 'form__button')
   newDogFormSubmit.setAttribute('id', 'formSubmit')
   newDogFormSubmit.innerText = "Let's add a dog!"
 
-  // Append the text box/sumbit button into the form
-  newDogForm.appendChild(wrapperDiv)
-  wrapperDiv.appendChild(name)
-  wrapperDiv.appendChild(newDogFormName)
-  newDogForm.appendChild(image)
-  newDogForm.appendChild(newDogFormImg)
-  newDogForm.appendChild(bio)
-  newDogForm.appendChild(newDogFormBio)
-  newDogForm.appendChild(newDogFormSubmit)
+  // Append the label/element into the div
+  form.appendChild(wrapperDivSubmit)
+  wrapperDivSubmit.appendChild(newDogFormSubmit)
 }
 
 // Create a variable that alters the h2 based on the data array and index number
