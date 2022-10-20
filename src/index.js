@@ -46,30 +46,37 @@ function newDog() {
   // Create the submission form
 
   const newDogForm = document.createElement('form')
-  // Create input text box for the dog's name
+  
 
-  const newDogFormName = document.createElement('input')
-  newDogFormName.setAttribute('type', 'text')
-
-  // Create a submit button to add the dog's name as a dogListButton
-  const newDogFormSubmit = document.createElement('button')
-  newDogFormSubmit.setAttribute('class', 'form__button')
   // Append the form into dogCard
   dogCard.appendChild(newDogForm)
   // newDogForm.setAttribute('style', 'display: inline-block')
 
+  // Create input text box for the dog's name
+  const newDogFormName = document.createElement('input')
+  newDogFormName.setAttribute('type', 'text') 
+  newDogFormName.setAttribute('id', 'formName')
+
   // create an element and set attributes and append area to input an image via url
   const newDogFormImg = document.createElement('input')
   newDogFormImg.setAttribute('type', 'url')
+  newDogFormImg.setAttribute('id', 'formImg')
 
   // To add text area for the Bio.
-  const newDogBio = document.createElement('textarea')
-  newDogBio.setAttribute('rows', '5')
+  const newDogFormBio = document.createElement('textarea')
+  newDogFormBio.setAttribute('rows', '5')
+  newDogFormBio.setAttribute('id', 'formBio')
+
+  // Create a submit button to add the dog's name as a dogListButton
+  const newDogFormSubmit = document.createElement('button')
+  newDogFormSubmit.setAttribute('class', 'form__button')
+  newDogFormSubmit.setAttribute('id', 'formSubmit')
+  newDogFormSubmit.innerText = "Let's add a dog!"
 
   // Append the text box/sumbit button into the form
   newDogForm.appendChild(newDogFormName)
   newDogForm.appendChild(newDogFormImg)
-  newDogForm.appendChild(newDogBio)
+  newDogForm.appendChild(newDogFormBio)
   newDogForm.appendChild(newDogFormSubmit)
 }
 
