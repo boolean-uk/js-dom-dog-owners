@@ -79,7 +79,7 @@ function newDogName(form) {
   wrapperDivName.appendChild(name)
   wrapperDivName.appendChild(newDogFormName)
   
-  return dogName
+  return data.push(newDogFormName.value)
 }
 
 function newDogImg(form) {
@@ -155,7 +155,7 @@ function newDogSubmit(form) {
     // give it the dog-list__button class name
     newDogList.setAttribute('class','dogs-list__button')
     // Give new profile the name of the name submitted
-    newDogList.innerText = newDogName.value
+    newDogList.innerText = data[data.length-1].name
     dogsList.appendChild(newDogList)
   })
   
