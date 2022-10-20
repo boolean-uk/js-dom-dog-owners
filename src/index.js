@@ -39,6 +39,8 @@ dogsListAdd.addEventListener('click', (event) => {
 })
 
 function newDog() {
+  // h2.innerText = 'Add a new Dog'
+  // dogCard.appendChild(h2)
   // Create the submission form
   const newDogForm = document.createElement('form')
 
@@ -49,6 +51,8 @@ function newDog() {
   newDogImg(newDogForm)
   newDogBio(newDogForm)
   newDogSubmit(newDogForm)
+
+  
 }
 
 function newDogName(form) {
@@ -58,8 +62,6 @@ function newDogName(form) {
     'style',
     'display:flex; flex-direction:column; margin-bottom: 20px'
   )
-  // wrapperDivName.setAttribute('style', '')
-  // wrapperDivName.setAttribute('style', '')
 
   // Create label element for the dog's name
   const name = document.createElement('label')
@@ -69,13 +71,15 @@ function newDogName(form) {
   // Create input element for the dog's name
   const newDogFormName = document.createElement('input')
   newDogFormName.setAttribute('type', 'text')
-  newDogFormName.setAttribute('id', 'name')
+  newDogFormName.setAttribute('name', 'dogName')
   newDogFormName.setAttribute('style', 'width: 250px')
 
   // Append label/input element into div
   form.appendChild(wrapperDivName)
   wrapperDivName.appendChild(name)
   wrapperDivName.appendChild(newDogFormName)
+  
+  return dogName
 }
 
 function newDogImg(form) {
@@ -139,17 +143,22 @@ function newDogSubmit(form) {
   newDogFormSubmit.innerText = "Let's add a dog!"
   // Create button that will added new dog profile to the exisiting list.
 
-  form__buttom.addEventListener('click', (event) => {
-    // Creat a nesw li element for the dogs-list ul
-    const newDogList.createElement('li')
-    newDogList.setAttribute('class','dogs-list__button')
-    dogsList.appendChild(newDogList)
-    // Give new profile the name of the name submitted
-    // give it the dog-list__button class name
-  })
+  
   // Append the label/element into the div
   form.appendChild(wrapperDivSubmit)
   wrapperDivSubmit.appendChild(newDogFormSubmit)
+
+  newDogFormSubmit.addEventListener('click', (event) => {
+    event.preventDefault()
+    // Create a new li element for the dogs-list ul
+    const newDogList = document.createElement('li')
+    // give it the dog-list__button class name
+    newDogList.setAttribute('class','dogs-list__button')
+    // Give new profile the name of the name submitted
+    newDogList.innerText = newDogName.value
+    dogsList.appendChild(newDogList)
+  })
+  
 }
 
 // Create a variable that alters the h2 based on the data array and index number
