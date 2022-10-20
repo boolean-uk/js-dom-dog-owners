@@ -96,9 +96,10 @@ createNewDog.addEventListener('click', () => {
   newForm.append(input2)
 
   const label3 = document.createElement('label')
-  label3.innerText('dog bio')
+  label3.innerText = ('dog bio')
   newForm.append(label3)
 
   const textarea = document.createElement('textarea')
+  textarea.setAttribute('rows', '5')
   newForm.append(textarea)
 })
