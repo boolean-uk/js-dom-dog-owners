@@ -22,6 +22,8 @@ function dog(index) {
 
   // now add an event listener to listen for user clicks
   dogListButton.addEventListener('click', (event) => {
+    dogCard.innerHTML = ""
+    
     // whenever there is a click on the dogListButton trigger the event function
     dogCardName(index)
     dogCardImg(index)
@@ -32,12 +34,15 @@ function dog(index) {
 
 // Create a submission form when the plus button is clicked
 dogsListAdd.addEventListener('click', (event) => {
+  dogCard.innerHTML = ""
   newDog()
 })
 
-// create innerHTML = "" to clear the main area
+
+
 
 function newDog() {
+  // create innerHTML = "" to clear the main area
   // Create the submission form
 
   const newDogForm = document.createElement('form')
@@ -51,10 +56,11 @@ function newDog() {
   newDogFormSubmit.setAttribute('class', 'form__button')
   // Append the form into dogCard
   dogCard.appendChild(newDogForm)
+  // newDogForm.setAttribute('style', 'display: inline-block')
 
   // create an element and set attributes and append area to input an image via url
-  const newDogImg = document.createElement('input')
-  newDogImg.setAttribute('type', 'url')
+  const newDogFormImg = document.createElement('input')
+  newDogFormImg.setAttribute('type', 'url')
 
   // To add text area for the Bio.
   const newDogBio = document.createElement('textarea')
@@ -62,7 +68,7 @@ function newDog() {
 
   // Append the text box/sumbit button into the form
   newDogForm.appendChild(newDogFormName)
-  newDogForm.appendChild(newDogImg)
+  newDogForm.appendChild(newDogFormImg)
   newDogForm.appendChild(newDogBio)
   newDogForm.appendChild(newDogFormSubmit)
 }
@@ -71,6 +77,7 @@ function newDog() {
 const dogName = document.querySelector('h2')
 dogName.setAttribute('class', 'dog-name')
 function dogCardName(index) {
+  dogCard.appendChild(dogName)
   dogName.innerText = data[index].name
 }
 
