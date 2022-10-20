@@ -12,6 +12,7 @@ function clearCard() {
   dogsCard.innerHTML = "<h2>No dogs ?!?</h2>";
 }
 
+// Add button listener inside
 function clearButtons() {
   dogsList.innerHTML = "<li class='dogs-list__button dogs-list__button--add'>+</li>"
 
@@ -91,10 +92,77 @@ function createForm() {
   submit.setAttribute("value", "Let's add a dog!");
   submit.innerText = "submit";
   
-  submit.addEventListener('click', (element) => {
-    // element.target returns the Dog's Data
-    console.log(element.target)
+  submit.addEventListener('click', () => {
     addNewDog(inputName.value, inputForImage.value, textarea.value)
+  })
+
+  form.appendChild(submit);
+}
+
+function editDogForm(index) {
+  const formCard = document.querySelector(".main__dog-section");
+  const h2 = document.querySelector("h2");
+  h2.innerText = `Edit dog ${data[index].name}`;
+
+  const form = document.createElement("form");
+  form.setAttribute("class", "form");
+  formCard.appendChild(form);
+
+  const labelForName = document.createElement("label");
+  labelForName.innerText = "Dog's name";
+  labelForName.setAttribute("for", "name");
+  form.appendChild(labelForName);
+
+  const inputName = document.createElement("input");
+  inputName.setAttribute("type", "text");
+  inputName.setAttribute("id", "name");
+  inputName.setAttribute("name", "name");
+  inputName.value = data[index].name
+  form.appendChild(inputName);
+
+  const labelForImage = document.createElement("label");
+  labelForImage.setAttribute("for", "image");
+  labelForImage.innerText = "Dog's picture";
+  form.appendChild(labelForImage);
+
+  const inputForImage = document.createElement("input");
+  inputForImage.setAttribute("type", "url");
+  inputForImage.setAttribute("id", "image");
+  inputForImage.setAttribute("name", "image");
+  inputForImage.value = data[index].image
+  form.appendChild(inputForImage);
+
+  const labelForBio = document.createElement("label");
+  labelForBio.setAttribute("for", "bio");
+  labelForBio.innerText = "Dog's bio";
+  form.appendChild(labelForBio);
+
+  const textarea = document.createElement("textarea");
+  textarea.setAttribute("rows", "5");
+  textarea.setAttribute("id", "bio");
+  textarea.setAttribute("name", "bio");
+  textarea.value = data[index].bio
+  form.appendChild(textarea);
+
+  // Submit Button
+  const submit = document.createElement("submit");
+  submit.setAttribute("class", "form__button");
+  submit.setAttribute("type", "submit");
+  submit.setAttribute("id", "submit");
+  submit.setAttribute("name", "submit");
+  submit.setAttribute("value", "Let's add a dog!");
+  submit.innerText = "Confirm Edit";
+  
+  submit.addEventListener('click', () => {
+    const newData = {
+      id: data[index].id,
+      name: inputName.value,
+      bio: textarea.value,
+      isGoodDog: data[index].isGoodDog,
+      image: inputForImage.value
+    } 
+    editDog(index, newData)
+    // addNewDog(inputName.value, inputForImage.value, textarea.value)
   })
 
   form.appendChild(submit);
@@ -134,6 +202,14 @@ function selectCard(index) {
     }
   });
 
+  const editButton = document.createElement("button");
+  editButton.innerText = "Edit"
+  editButton.addEventListener("click", () => {
+    clearCard();
+    editDogForm(index);
+  })
+  
+  
   if (data[index].isGoodDog === true) {
     isDogGoodLabel.innerHTML = "<em>Is naughty?</em> yes!";
     button.innerText = "Good dog!";
@@ -143,6 +219,7 @@ function selectCard(index) {
   }
   dogsCard.appendChild(isDogGoodLabel);
   dogsCard.appendChild(button);
+  dogsCard.appendChild(editButton)
 }
 
 function addNewDog(name, image, bio) {
@@ -170,6 +247,12 @@ function addNewDog(name, image, bio) {
   updateDogButtons() //Add the new button
 
   console.log("The data is: \n", data)
+}
+
+function editDog(index, newData) {
+  data[index] = newData
+  clearButtons();
+  updateDogButtons();
 }
 
 updateDogButtons()
