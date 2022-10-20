@@ -4,6 +4,7 @@
 
 // select the dogs-list UL
 const dogsList = document.querySelector('.dogs-list')
+const dogsListAdd = document.querySelector('.dogs-list__button--add')
 const dogCard = document.querySelector('.main__dog-section')
 
 const body = document.querySelector('body')
@@ -27,6 +28,28 @@ function dog(index) {
     dogCardBio(index)
     dogCardGood(index)
   })
+
+  
+}
+
+// Create a submission form when the plus button is clicked
+dogsListAdd.addEventListener('click', (event) => {
+  newDog()
+  
+})
+
+function newDog() {
+  // Create the submission form
+  const newDogForm = document.createElement('form')
+  // Create input text box for the dog's name
+  const newDogFormName = document.createElement('input')
+  // Create a submit button to add the dog's name as a dogListButton
+  const newDogFormSubmit = document.createElement('input')
+  // Append the form into dogCard
+  dogCard.appendChild(newDogForm)
+  // Append the text box/sumbit button into the form
+  newDogForm.appendChild(newDogFormName)
+  newDogForm.appendChild(newDogFormSubmit)
 }
 
 // Create a variable that alters the h2 based on the data array and index number
@@ -67,9 +90,11 @@ function dogCardGood(index) {
 
 // Create a function that changes whether the dog is naughty or nice based on the data
 function isNaughty(index) {
+  // Create a boolean that points to the data value, and allows us to alter that for the click event later
   let goodOrBadBoolean = data[index].isGoodDog
   let naughty = ''
   let goodOrBadDog = ''
+  // Create an if statement to assign values to the p/button based on the boolean
   if (goodOrBadBoolean === false) {
     naughty = 'Yes!'
     goodOrBadDog = 'Good Dog'
@@ -77,21 +102,26 @@ function isNaughty(index) {
     naughty = 'No!'
     goodOrBadDog = 'Bad Dog'
   }
+  // Assign the above values to the p/button elements
   cardQuestion.innerText = `Is Naughty? ${naughty}`
   cardQuestionButton.innerText = goodOrBadDog
 
+  // Create a click event that changes the value of the p/button when the buttoon is clicked
   cardQuestionButton.addEventListener('click', (event) => {
+    // Create an if statement to flip the previously defined values
     if (goodOrBadBoolean === true) {
       goodOrBadBoolean = false
-      cardQuestion.innerText = `Is Naughty? ${naughty}`
-      cardQuestionButton.innerText = goodOrBadDog
+      naughty = 'Yes!'
+      goodOrBadDog = 'Good Dog'
     } else if (goodOrBadBoolean === false) {
       goodOrBadBoolean = true
-      cardQuestion.innerText = `Is Naughty? ${naughty}`
-      cardQuestionButton.innerText = goodOrBadDog
+      naughty = 'No!'
+      goodOrBadDog = 'Bad Dog'
     }
-
-    console.log('click is working')
+    // Change the inner text once the values have been flipped
+    cardQuestion.innerText = `Is Naughty? ${naughty}`
+    cardQuestionButton.innerText = goodOrBadDog
+    
   })
 }
 
