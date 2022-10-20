@@ -119,6 +119,7 @@ img {
 }
 
 .main__dog-section__btn {
+  margin-left: 0;
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 3fr 2fr;

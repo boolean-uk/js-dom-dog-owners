@@ -15,19 +15,29 @@ data.forEach((dogJSData) => {
   li.innerText = dogJSData.name
 
   dogImg = document.createElement('img')
-  bio = document.createElement('h2')
+  bio = document.createElement('h3')
+
+  buttonDiv= document.createElement('div')
+  buttonDiv.setAttribute('class', 'main__dog-section__btn')
   desc = document.createElement('p')
   goodOrNot = document.createElement('p')
+  goodOrNot.setAttribute('style', 'font-style: italic')
+  goodDogButton = document.createElement('button')
+
   
   li.addEventListener('click', () => {
     
     const dogCard = document.querySelector('.main__dog-section')
-    
     const dogName = document.querySelector('h2')
     dogName.innerText = dogJSData.name
 
     dogImg.src = dogJSData.image
+
     dogCard.appendChild(dogImg)
+    dogImg.setAttribute('height', '300px')
+    dogImg.setAttribute('width', '500px')
+
+
 
     bio.innerText = 'Bio'
     dogCard.appendChild(bio)
@@ -35,8 +45,19 @@ data.forEach((dogJSData) => {
     desc.innerText = dogJSData.bio
     dogCard.appendChild(desc)
 
-    goodOrNot.innerText = 'Is naughty?'
-    dogCard.appendChild(goodOrNot)
+    dogCard.appendChild(buttonDiv)
+
+    if (dogJSData.isGoodDog === true){
+      goodOrNot.innerText = 'is Naughty?' + ' ' + 'yes!'
+      goodDogButton.innerText = 'Good'
+    }
+    else{
+      goodOrNot.innerText = 'is Naughty?' + ' ' + 'no!'
+      goodDogButton.innerText = 'Bad'
+    }
+
+    buttonDiv.appendChild(goodOrNot)
+    buttonDiv.appendChild(goodDogButton)
 
 
   })
