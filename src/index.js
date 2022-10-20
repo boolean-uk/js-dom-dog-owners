@@ -22,8 +22,8 @@ function dog(index) {
 
   // now add an event listener to listen for user clicks
   dogListButton.addEventListener('click', (event) => {
-    dogCard.innerHTML = ""
-    
+    dogCard.innerHTML = ''
+
     // whenever there is a click on the dogListButton trigger the event function
     dogCardName(index)
     dogCardImg(index)
@@ -34,35 +34,42 @@ function dog(index) {
 
 // Create a submission form when the plus button is clicked
 dogsListAdd.addEventListener('click', (event) => {
-  dogCard.innerHTML = ""
+  dogCard.innerHTML = ''
   newDog()
 })
-
-
-
 
 function newDog() {
   // create innerHTML = "" to clear the main area
   // Create the submission form
 
   const newDogForm = document.createElement('form')
-  
 
   // Append the form into dogCard
   dogCard.appendChild(newDogForm)
   // newDogForm.setAttribute('style', 'display: inline-block')
 
   // Create input text box for the dog's name
+  const wrapperDiv = document.createElement('div')
+
+  const name = document.createElement('label')
+  name.setAttribute('for', 'name')
+  name.innerText = 'Dogs name.'
   const newDogFormName = document.createElement('input')
-  newDogFormName.setAttribute('type', 'text') 
+  newDogFormName.setAttribute('type', 'text')
   newDogFormName.setAttribute('id', 'formName')
 
   // create an element and set attributes and append area to input an image via url
+  const image = document.createElement('label')
+  image.setAttribute('for', 'image')
+  image.innerText = 'Dogs image.'
   const newDogFormImg = document.createElement('input')
   newDogFormImg.setAttribute('type', 'url')
   newDogFormImg.setAttribute('id', 'formImg')
 
   // To add text area for the Bio.
+  const bio = document.createElement('label')
+  bio.setAttribute('for', 'bio')
+  bio.innerText = 'Dogs bio.'
   const newDogFormBio = document.createElement('textarea')
   newDogFormBio.setAttribute('rows', '5')
   newDogFormBio.setAttribute('id', 'formBio')
@@ -74,8 +81,12 @@ function newDog() {
   newDogFormSubmit.innerText = "Let's add a dog!"
 
   // Append the text box/sumbit button into the form
-  newDogForm.appendChild(newDogFormName)
+  newDogForm.appendChild(wrapperDiv)
+  wrapperDiv.appendChild(name)
+  wrapperDiv.appendChild(newDogFormName)
+  newDogForm.appendChild(image)
   newDogForm.appendChild(newDogFormImg)
+  newDogForm.appendChild(bio)
   newDogForm.appendChild(newDogFormBio)
   newDogForm.appendChild(newDogFormSubmit)
 }
