@@ -1,6 +1,8 @@
 
 const dogsList = document.querySelector('.dogs-list')
 
+
+
 data.forEach((dogJSData) => {
   
   const li = document.createElement('li')
@@ -78,7 +80,7 @@ createNewDog.addEventListener('click', () => {
   dogCard.innerHTML = ''
   const newForm = document.createElement('form')
   dogCard.appendChild(newForm)
-  newForm.setAttribute('height', '500px')
+  newForm.setAttribute('class', 'form')
 
   const label1 = document.createElement('label')
   label1.innerText = 'Dog name'
@@ -102,4 +104,27 @@ createNewDog.addEventListener('click', () => {
   const textarea = document.createElement('textarea')
   textarea.setAttribute('rows', '5')
   newForm.append(textarea)
+
+  const submit = document.createElement('input')
+  submit.setAttribute('type', 'submit')
+  submit.setAttribute('id', 'submit')
+  submit.setAttribute('value', "let's add a dog!")
+  submit.setAttribute('class', 'form__button')
+
+  newForm.append(submit)
+
+  submit.addEventListener('click', (event) => {
+    const newDog = {}
+    data.unshift(newDog)
+    console.log(data)
+    event.preventDefault()
+    const newli = document.createElement('li')
+    const plusButton = document.querySelector(".dogs-list__button")
+    plusButton.append(newli)
+    dogsList.appendChild(newli)
+    newli.setAttribute('class', 'dogs-list__button')
+
+  })
 })
+// data.unshift({})
+console.log(data)
