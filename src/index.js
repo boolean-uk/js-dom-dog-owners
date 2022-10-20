@@ -16,20 +16,76 @@ for (let i = 0; i < data.length; i++) {
   //inside the eventListerner we want to call out function
   // and give the called function the index we are looping though (i)
   li.addEventListener("click", () => {
+    const dogsCard = document.querySelector(".main__dog-section");
+    dogsCard.innerHTML = "<h2>No dogs ?!?</h2>";
     selectCard(i);
   });
 }
+const addButton = document.querySelector(".dogs-list__button--add");
+addButton.addEventListener("click", () => {
+  const dogsCard = document.querySelector(".main__dog-section");
+  dogsCard.innerHTML = "<h2>No dogs ?!?</h2>";
+  createForm();
+});
 
-let cardHasBeenCreated = false
+function createForm() {
+  const formCard = document.querySelector(".main__dog-section");
+  const h2 = document.querySelector("h2");
+  h2.innerText = "Add a new Dog";
+
+  const form = document.createElement("form");
+  form.setAttribute("class", "form");
+  formCard.appendChild(form);
+
+  const labelForName = document.createElement("label");
+  labelForName.innerText = "name";
+  labelForName.setAttribute("for", "name");
+  form.appendChild(labelForName);
+
+  const inputName = document.createElement("input");
+  inputName.setAttribute("type", "text");
+  inputName.setAttribute("id", "name");
+  inputName.setAttribute("name", "name");
+  form.appendChild(inputName);
+
+  const labelForImage = document.createElement("label");
+  labelForImage.setAttribute("for", "image");
+  labelForImage.innerText = "image";
+  form.appendChild(labelForImage);
+
+  const inputForImage = document.createElement("input");
+  inputForImage.setAttribute("type", "url");
+  inputForImage.setAttribute("id", "image");
+  inputForImage.setAttribute("name", "image");
+  form.appendChild(inputForImage);
+
+  const labelForBio = document.createElement("label");
+  labelForBio.setAttribute("for", "bio");
+  labelForBio.innerText = "bio";
+  form.appendChild(labelForBio);
+
+  const textarea = document.createElement("textarea");
+  textarea.setAttribute("rows", "5");
+  textarea.setAttribute("id", "bio");
+  textarea.setAttribute("name", "bio");
+  form.appendChild(textarea);
+
+  const submit = document.createElement("submit");
+  submit.setAttribute("class", "form__button");
+  submit.setAttribute("type", "submit");
+  submit.setAttribute("id", "submit");
+  submit.setAttribute("name", "submit");
+  submit.setAttribute("value", "Let's add a dog!");
+  submit.innerText = "submit";
+  form.appendChild(submit);
+  console.log("createForm has been called");
+}
 
 function selectCard(index) {
   const dogsCard = document.querySelector(".main__dog-section");
   const h2 = document.querySelector("h2");
   h2.innerText = data[index].name;
 
-  if (cardHasBeenCreated === true) {
-    const img = document.querySelector("img")
-  }
   const img = document.createElement("img");
   img.src = data[index].image;
   dogsCard.appendChild(img);
@@ -48,6 +104,17 @@ function selectCard(index) {
 
   const button = document.createElement("button");
   const isDogGoodLabel = document.createElement("p");
+  button.addEventListener("click", () => {
+    data[index].isGoodDog = !data[index].isGoodDog;
+    if (data[index].isGoodDog === true) {
+      isDogGoodLabel.innerHTML = "<em>Is naughty?</em> yes!";
+      button.innerText = "Good dog!";
+    } else {
+      isDogGoodLabel.innerHTML = "</em>Is naughty?</em> no!";
+      button.innerText = "Bad dog!";
+    }
+    console.log(data[index]);
+  });
   if (data[index].isGoodDog === true) {
     isDogGoodLabel.innerHTML = "<em>Is naughty?</em> yes!";
     button.innerText = "Good dog!";
@@ -58,25 +125,3 @@ function selectCard(index) {
   dogsCard.appendChild(isDogGoodLabel);
   dogsCard.appendChild(button);
 }
-
-
-
-
-//  <section class="main__dog-section">
-//         <h2>Mr. Bonkers</h2>
-//         <img
-//           src="https://curriculum-content.s3.amazonaws.com/js/woof-woof/dog_1.jpg"
-//           alt=""
-//         />
-//         <div class="main__dog-section__desc">
-//           <h3>Bio</h3>
-//           <p>
-//             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum,
-//             minima voluptates libero cumque rerum consequatur optio aliquid sint
-//             eum maxime illo laborum omnis quo ab rem cupiditate nulla
-//             perspiciatis ipsum!
-//           </p>
-//         </div class="main__dog-section__btn">
-//         <p><em>Is naughty?</em> yes!</p>
-//         <button>Good dog!</button>
-//   </section>
