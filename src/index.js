@@ -63,25 +63,37 @@ function dogCardGood(index) {
   isGoodBoy.appendChild(cardQuestion)
   isGoodBoy.appendChild(cardQuestionButton)
   isNaughty(index)
-
 }
 
 // Create a function that changes whether the dog is naughty or nice based on the data
 function isNaughty(index) {
+  let goodOrBadBoolean = data[index].isGoodDog
   let naughty = ''
   let goodOrBadDog = ''
-  if (data[index].isGoodDog === false) {
-    naughty = "Yes!"
+  if (goodOrBadBoolean === false) {
+    naughty = 'Yes!'
     goodOrBadDog = 'Good Dog'
-  } else if (data[index].isGoodDog === true) {
-    naughty = "No!"
+  } else if (goodOrBadBoolean === true) {
+    naughty = 'No!'
     goodOrBadDog = 'Bad Dog'
   }
   cardQuestion.innerText = `Is Naughty? ${naughty}`
   cardQuestionButton.innerText = goodOrBadDog
+
+  cardQuestionButton.addEventListener('click', (event) => {
+    if (goodOrBadBoolean === true) {
+      goodOrBadBoolean = false
+      cardQuestion.innerText = `Is Naughty? ${naughty}`
+      cardQuestionButton.innerText = goodOrBadDog
+    } else if (goodOrBadBoolean === false) {
+      goodOrBadBoolean = true
+      cardQuestion.innerText = `Is Naughty? ${naughty}`
+      cardQuestionButton.innerText = goodOrBadDog
+    }
+
+    console.log('click is working')
+  })
 }
-
-
 
 // for each dog JS object in data, generate a li
 for (let i = 0; i < data.length; i++) {
