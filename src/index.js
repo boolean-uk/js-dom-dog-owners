@@ -4,29 +4,19 @@ const dogsList = document.querySelector('.dogs-list')
 
 
 data.forEach((dogJSData) => {
-  
+  renderDogCard(dogJSData)
+})
+
+function renderDogCard (dogJSData){
   const li = document.createElement('li')
   dogsList.appendChild(li)
   li.setAttribute('class', 'dogs-list__button')
   li.innerText = dogJSData.name
 
-  // dogImg = document.createElement('img')
-  // bio = document.createElement('h3')
-  // desc = document.createElement('p')
-
-
-  // buttonDiv= document.createElement('div')
-  // buttonDiv.setAttribute('class', 'main__dog-section__btn')
-  // goodOrNot = document.createElement('p')
-  // goodOrNot.setAttribute('style', 'font-style: italic')
-  // goodDogButton = document.createElement('button')
-
   li.addEventListener('click', () => {
     
-    // delete section
     const dogCard = document.querySelector('.main__dog-section')
     dogCard.innerHTML = ''
-    // change to create and append instead of select and update
 
     const dogName = document.createElement('h2')
     dogName.innerText = dogJSData.name
@@ -66,8 +56,8 @@ data.forEach((dogJSData) => {
     buttonDiv.appendChild(goodOrNot)
     buttonDiv.appendChild(goodDogButton)
   })
-
-});
+}
+;
 
 // click on + button and empty form displays
 // new dog is created next to + 
@@ -84,9 +74,16 @@ createNewDog.addEventListener('click', () => {
 
   const label1 = document.createElement('label')
   label1.innerText = 'Dog name'
+  label1.setAttribute('for', 'name')
   newForm.append(label1)
 
   const input1 = document.createElement('input')
+  input1.setAttribute('type', 'text')
+  input1.setAttribute('id', 'name')
+  input1.setAttribute('name', 'name')
+
+  // input1.setAttribute('id,', 'name')
+
   newForm.append(input1)
 
   const label2 = document.createElement('label')
@@ -115,16 +112,18 @@ createNewDog.addEventListener('click', () => {
 
   submit.addEventListener('click', (event) => {
     const newDog = {}
+  
+    const name = document.querySelector('#name').value
+    newDog.name = name
+    newDog.image = input2.value
+    newDog.bio = textarea.value
+
     data.unshift(newDog)
-    console.log(data)
     event.preventDefault()
-    const newli = document.createElement('li')
-    const plusButton = document.querySelector(".dogs-list__button")
-    plusButton.append(newli)
-    dogsList.appendChild(newli)
-    newli.setAttribute('class', 'dogs-list__button')
+
+    renderDogCard(newDog)
+    dogsList.insertBefore(newDogItem, dogsList.children[1])
+
 
   })
 })
-// data.unshift({})
-console.log(data)
