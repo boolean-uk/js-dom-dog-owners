@@ -21,7 +21,9 @@ console.log(data);
     // dogCards.setAttribute('class', 'main')
       const dogH2 = document.querySelector('.main__dog-section > h2')
       dogH2.innerText = data[i].name
- 
+
+      
+
     //Adding an Image
     const dogImg = document.querySelector('.main__dog-section')
     const dogImage = document.createElement('img')
@@ -29,11 +31,31 @@ console.log(data);
     const dogProfilePic = new Image(256)
     dogProfilePic.src = data[i].image;
     dogImg.append(dogProfilePic )
-    break
+
+
 
     //Adding the Bio
+    const dogBioSection = document.querySelector('.main__dog-section__desc')
+
+    const dogBio = document.createElement('h3')
+    dogBio.innerText = 'Bio'
+    dogImg.append(dogBio)
+
+//Adding bioInfo
+const dogBioInfo = document.createElement('p')
+dogBioInfo.innerText = data[i].bio
+dogBio.append(dogBioInfo)
+
+//Is a good dog?
+
+//
+
+    break
+
 
     
+
+
 }
 
     // dogsUl.addEventlistener('click', function(){
