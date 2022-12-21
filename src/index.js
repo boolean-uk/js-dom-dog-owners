@@ -16,22 +16,22 @@ console.log(data);
 
 
     for (i = 0; i < data.length; i++) {
-    const dogCards = document.querySelector('.main')
+    const dogCards = document.querySelector('.main__dog-section')
     const dogImage = document.createElement('ul')
-    dogCards.setAttribute('class', 'main')
-    // h2.innerText = `${dog[i].name}`
+    // dogCards.setAttribute('class', 'main')
+    document.querySelector('.main__dog-section > h2').innerText = data[i].name
    
     dogCards.append(dogImage)
     }
 
 
-    // // dogsUl.addEventlistener('click', function(){
+    // dogsUl.addEventlistener('click', function(){
     //     for (i = 0; i < data.length; i++) {
-    //         // const dogTitle = data[i].name
-    //   
+    //         const dogTitle = data[i].name
+      
     //         const dogName= document.createElement('h2')
-    //         // const mainSection = main__dog-section
-    //         // h2.setAttribute('main__dog-section')
+    //         const mainSection = main__dog-section
+    //         h2.setAttribute('main__dog-section')
     //         h2.innerText = dog[i].name
             
 
