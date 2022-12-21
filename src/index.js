@@ -13,7 +13,7 @@ console.log(data);
         dogsUl.append(dogNameList)
 
     }
-
+// add the eventlistener to the all list items
 
     for (i = 0; i < data.length; i++) {
       const dogCards = document.querySelector('.main__dog-section')
@@ -46,8 +46,17 @@ const dogBioInfo = document.createElement('p')
 dogBioInfo.innerText = data[i].bio
 dogBio.append(dogBioInfo)
 
-//Is a good dog?
+//Is a good dog? 
+// creat the function for the true or false
+const goodDog = document.createElement('p')
+goodDog.innerText = `is naugthy? ${data[i].isGoodDog}`
+dogBio.append(goodDog)
 
+
+// try to make some space
+const newButton = document.createElement('button')
+newButton.innerText = `Good Dog`
+dogBio.append(newButton)
 //
 
     break
