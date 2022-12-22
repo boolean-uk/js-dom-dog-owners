@@ -1,7 +1,13 @@
-console.log(data);
+//create button li
 
-   
-// function listOfDogs(){ : Write this function  after the loop created 
+const dogButtonUL = document.querySelector(".dog-list");
+const main =document.querySelector('.main')
+
+//selecting relevant dog data
+for (let i=0; i < data.length; i++) {
+    const dogData = data[i]
+}
+
 for (let i = 0; i < data.length; i++) {
     const main = document.querySelector('.main')
     const dogsUl = document.querySelector('.dogs-list')
@@ -10,35 +16,33 @@ for (let i = 0; i < data.length; i++) {
     dogNameList.setAttribute('class', 'dogs-list__button')
     dogNameList.innerText = data[i].name
     dogsUl.append(dogNameList)
-
-     // reset main section on click
-     dogNameList.addEventListener('click', function () {
-        main.innerHTML = ''
-        const mainSection = document.createElement('section')
-        mainSection.setAttribute('class', 'main__dog-section')
-        const dogData = data[i]
-        const dogCard = createDogCard(dogData)
-        main.append(dogCard)
-        console.log(dogNameList)
-    });
     
+}
+
+function clearMainSection() {
+    main.innerText = ''
+}
+
+
+function appendDogCards() {
+    //create new section
+      const dogCards = document.querySelector('.main__dog-section')
+      const dogH2 = document.querySelector('.main__dog-section > h2')
+      dogH2.innerText = dogData.name
+      console.log(dogH2)
+    //write the content
+    //put new content inside the main section
 }
 
 function createDogCard(dogData) {
     for (i = 0; i < data.length; i++) {
-        //select area
-        const dogCards = document.querySelector('.main__dog-section')
-        const dogH2 = document.querySelector('.main__dog-section > h2')
-        dogH2.innerText = data[i].name
-        console.log(dogH2)
-
 
         //Adding an Image
         const dogImg = document.querySelector('.main__dog-section')
         const dogImage = document.createElement('img')
         dogImage.setAttribute('type', 'url')
         const dogProfilePic = new Image(256)
-        dogProfilePic.src = data[i].image;
+        dogProfilePic.src = dogData.image;
         dogImg.append(dogProfilePic)
 
         //Adding the Bio
@@ -50,13 +54,13 @@ function createDogCard(dogData) {
 
         //Adding bioInfo
         const dogBioInfo = document.createElement('p')
-        dogBioInfo.innerText = data[i].bio
+        dogBioInfo.innerText = dogData.bio
         dogBio.append(dogBioInfo)
 
         //Is a good dog? 
         // create the function for the true or false
         const goodDog = document.createElement('p')
-        goodDog.innerText = `is naugthy? ${data[i].isGoodDog}`
+        goodDog.innerText = `is naugthy? ${dogData.isGoodDog}`
         dogBio.append(goodDog)
 
 
@@ -69,12 +73,3 @@ function createDogCard(dogData) {
         break
     }
 }
-
-// createDogCard(dogData)
-
-
-
-   
-
-
-
