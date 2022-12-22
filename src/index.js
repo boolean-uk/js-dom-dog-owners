@@ -4,44 +4,42 @@ console.log(data);
 
 const dogListUL = document.querySelector(".dogs-list")
 const dogMain = document.querySelector(".main")
-const addButton = document.querySelector(".dogs-list__button--add")
 const dogSection = document.querySelector(".main__dog-section")
 
-// Creating Top Buttons from Data
 
-for (let i = 0; i < data.length; i++) {
-    const dogLI = document.createElement("li")
-    dogLI.innerText = data[i].name
-    dogLI.setAttribute('class', 'dogs-list__button')
-    dogLI.setAttribute('id', i)
-    dogListUL.append(dogLI)
 
-    dogLI.addEventListener('click', function (eventOBJ) {
-        dogCard(eventOBJ.target.id)
+// clear top buttons
+
+function clearTopButts() {
+    dogListUL.innerHTML = '<li class="dogs-list__button dogs-list__button--add">+</li>';
+
+    const addButton = document.querySelector(".dogs-list__button--add")
+
+    addButton.addEventListener('click', function (eventOBJ) {
+        newForm()
     })
 }
 
-// function goodOrBad(value) {
+// Creating Top Buttons from Data
+function renderDogButtons() {
 
-//     const goodButton = document.createElement("button")
-//     const naughty = document.createElement("p")
-//     goodButton.addEventListener("click", function (eventOBJ) {
-//         data[value].isGoodDog = !data[value].isGoodDog
-//         console.log(data[value].isGoodDog)
-//         if (data[value].isGoodDog === true) {
-//             naughty.innerHTML = "<em>Is naughty?</em> yes!"
-//             goodButton.innerText = "Good Dog!"
-//         } else {
-//             naughty.innerHTML = "<em>Is naughty?</em> no!"
-//             goodButton.innerText = "Bad Dog!"
-//         }
-//     })
-    
-//     dogSection.append(naughty)
-//     dogSection.append(goodButton)
-// }
+    clearTopButts()
+
+    for (let i = 0; i < data.length; i++) {
+        const dogLI = document.createElement("li")
+        dogLI.innerText = data[i].name
+        dogLI.setAttribute('class', 'dogs-list__button')
+        dogLI.setAttribute('id', i)
+        dogListUL.append(dogLI)
+
+        dogLI.addEventListener('click', function (eventOBJ) {
+            dogCard(eventOBJ.target.id)
+        })
+    }
+}
 
 // Dog Cards
+
 function dogCard(value) {
 
     dogMain.innerHTML = "";
@@ -72,24 +70,10 @@ function dogCard(value) {
     dogP.innerText = currentDog.bio
     dogDiv.append(dogP)
 
-    // const naughty = document.createElement("p")
-    // dogSection.append(naughty)
-    // const emphasis = document.createElement("em")
-    // emphasis.innerText = "Is naughty?"
-    // naughty.append(emphasis)
-    // naughty.append(" yes!")
-
-    // const goodButton = document.createElement("button")
-    // goodButton.setAttribute("class", value)
-    // goodButton.innerText = "Good dog!"
-    // dogSection.append(goodButton)
-
-    // goodOrBad(value)
-
     const goodButton = document.createElement("button")
     const naughty = document.createElement("p")
     
-    if (data[value].isGoodDog === !true) {
+    if (data[value].isGoodDog === false) {
         naughty.innerHTML = "<em>Is naughty?</em> yes!"
         goodButton.innerText = "Good Dog!"
     } else {
@@ -100,8 +84,7 @@ function dogCard(value) {
 
     goodButton.addEventListener("click", function (eventOBJ) {
         data[value].isGoodDog = !data[value].isGoodDog
-        console.log(data[value].isGoodDog)
-        if (data[value].isGoodDog === !true) {
+        if (data[value].isGoodDog === false) {
             naughty.innerHTML = "<em>Is naughty?</em> yes!"
             goodButton.innerText = "Good Dog!"
         } else {
@@ -174,8 +157,37 @@ function newForm() {
     doggoSubmit.setAttribute("class", "form__button")
     newDoggoForm.append(doggoSubmit)
 
+    const dogNameInput = document.querySelector("#name")
+    const dogImgInput = document.querySelector("#image")
+    const bioInput = document.querySelector("#bio")
+    const dogForm = document.querySelector(".form")
+
+    dogForm.addEventListener('submit', (eventOBJ) => {
+        eventOBJ.preventDefault();
+        
+        const dogOBJ = {
+            id: data.length + 1,
+            name: nameInput.value,
+            image: imgInput.value,
+            isGoodDog: true,
+            bio: bioTextArea.value,
+        }
+        
+        data.unshift(dogOBJ)
+
+        renderDogButtons()
+        dogSection.innerHTML= '<h2>No dogs ?!?</h2>';
+    })
+
 }
 
-addButton.addEventListener('click', function (eventOBJ) {
-    newForm()
-})
+
+
+
+
+
+
+renderDogButtons()
+
+
+
