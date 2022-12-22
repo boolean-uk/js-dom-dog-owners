@@ -1,13 +1,15 @@
 //create button li
 
 const dogButtonUL = document.querySelector(".dog-list");
-const main =document.querySelector('.main')
+const main =document.querySelector('.main__dog-section')
 
 //selecting relevant dog data
 for (let i=0; i < data.length; i++) {
     const dogData = data[i]
 }
 
+//Create clickable Dog tabs
+//make tabs
 for (let i = 0; i < data.length; i++) {
     const main = document.querySelector('.main')
     const dogsUl = document.querySelector('.dogs-list')
@@ -16,9 +18,9 @@ for (let i = 0; i < data.length; i++) {
     dogNameList.setAttribute('class', 'dogs-list__button')
     dogNameList.innerText = data[i].name
     dogsUl.append(dogNameList)
-    
 }
 
+//click-events
 function clearMainSection() {
     main.innerText = ''
 }
@@ -68,8 +70,5 @@ function createDogCard(dogData) {
         const newButton = document.createElement('button')
         newButton.innerText = `Good Dog`
         dogBio.append(newButton)
-        //
-
-        break
     }
 }
