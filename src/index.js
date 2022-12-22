@@ -6,7 +6,6 @@ let currentid = 0
 const list = document.querySelector('.dogs-list')
 const main = document.querySelector('main')
 const add = document.querySelector('.dogs-list__button--add')
-const lorem = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum, minima voluptates libero cumque rerum consequatur optio aliquid sint eum maxime illo laborum omnis quo ab rem cupiditate nulla perspiciatis ipsum!'
 
 const isNaughty = (dog) => {
     return dog.isGoodDog ? 'No!' : 'Yes!'
@@ -58,7 +57,7 @@ const createDogSection = (dog) => {
     desc.append(h3)
 
     const pdesc = document.createElement('p')
-    pdesc.innerHTML = lorem
+    pdesc.innerHTML = dog.bio
     desc.append(pdesc)
 
     const em = document.createElement('em')
@@ -79,13 +78,22 @@ const createDogSection = (dog) => {
 }
 
 const addDogsToList = (data) => {
+    list.innerText = ''
+    const addli = document.createElement('li')
+    addli.setAttribute('class', 'dogs-list__button dogs-list__button--add')
+    addli.innerText = '+'
+    addli.addEventListener('click', () => {
+        addNewDog()
+    })
+    list.append(addli)
+
     let i = 0
     data.forEach(element => {
         const li = document.createElement('li')
         li.setAttribute('class', 'dogs-list__button')
         li.setAttribute('id', i)
         li.addEventListener('click', (e) => {
-            displayDog(e)
+            displayDog(e.target.id)
         })
         li.innerText = element.name
         list.append(li)
@@ -93,14 +101,82 @@ const addDogsToList = (data) => {
     });
 }
 
-const displayDog = (e) => {
+const displayDog = (id) => {
     const section = document.querySelector('section')
     section.remove()
-    console.log(e.target.id)
-    createDogSection(data[e.target.id])
-    currentid = e.target.id
+    console.log(id)
+    createDogSection(data[id])
+    currentid = id
+}
+
+const addNewDog = () => {
+    // Clear section 
+    const section = document.querySelector('section')
+    section.innerText = ''
+
+    // Build new section
+    const h2 = document.createElement('h2')
+    h2.innerText = 'Add a new Dog'
+    section.append(h2)
+
+    const form = document.createElement('form')
+    form.setAttribute('class', 'form')
+    section.append(form)
+
+    const namelable = document.createElement('label')
+    namelable.setAttribute('for', 'name')
+    namelable.innerText = `Dog's name`
+    form.append(namelable)
+    const nameinput = document.createElement('input')
+    nameinput.setAttribute('type', 'text')
+    nameinput.setAttribute('id', 'name')
+    nameinput.setAttribute('name', 'name')
+    nameinput.setAttribute('required', '')
+    form.append(nameinput)
+
+    const imagelable = document.createElement('label')
+    imagelable.setAttribute('for', 'image')
+    imagelable.innerText = `Dog's picture`
+    form.append(imagelable)
+    const imageinput = document.createElement('input')
+    imageinput.setAttribute('type', 'url')
+    imageinput.setAttribute('id', 'image')
+    imageinput.setAttribute('name', 'image')
+    imageinput.setAttribute('required', '')
+    form.append(imageinput)
+
+    const biolabel = document.createElement('label')
+    biolabel.setAttribute('for', 'bio')
+    biolabel.innerText = `Dog's bio`
+    form.append(biolabel)
+    const bioinput = document.createElement('textarea')
+    bioinput.setAttribute('rows', '5')
+    bioinput.setAttribute('id', 'bio')
+    bioinput.setAttribute('name', 'bio')
+    bioinput.setAttribute('required', '')
+    form.append(bioinput)
+
+    const submit = document.createElement('input')
+    submit.setAttribute('type', 'submit')
+    submit.setAttribute('id', 'submit')
+    submit.setAttribute('name', 'submit')
+    submit.setAttribute('value', `Let's add a dog!`)
+    submit.setAttribute('class', 'form__button')
+    form.append(submit)
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const pushObj = {
+            id: data.length + 1,
+            name: nameinput.value,
+            bio: bioinput.value,
+            isGoodDog: true,
+            image: imageinput.value
+        }
+        data.push(pushObj)
+        addDogsToList(data)
+        displayDog(data.length-1)
+    })
 }
 
 addDogsToList(data)
-
-console.log(add)
