@@ -97,8 +97,7 @@ function dogCard(value) {
     dogSection.append(goodButton)
 }
 
-
-
+ // CREATE NEW FORM ON CLICK
 
 function newForm() {
 
@@ -157,9 +156,8 @@ function newForm() {
     doggoSubmit.setAttribute("class", "form__button")
     newDoggoForm.append(doggoSubmit)
 
-    const dogNameInput = document.querySelector("#name")
-    const dogImgInput = document.querySelector("#image")
-    const bioInput = document.querySelector("#bio")
+    // LISTENER AND SUBMITTER
+
     const dogForm = document.querySelector(".form")
 
     dogForm.addEventListener('submit', (eventOBJ) => {
@@ -180,12 +178,6 @@ function newForm() {
     })
 
 }
-
-
-
-
-
-
 
 renderDogButtons()
 
