@@ -1,7 +1,5 @@
 console.log(data);
 
-// const main = document.querySelector('main__dog-section')
-
 const dogsUl = document.querySelector(".dogs-list");
 const dogNameList = document.createElement("li");
 
@@ -18,15 +16,13 @@ function creatingHeaderList() {
 
     dogNameList.addEventListener("click", function (eventObj) {
       console.log(eventObj.target.id);
-      // const mainSection = document.createElement('section')
-      // mainSection.setAttribute('class', 'main__dog-section')
-
       const dogCard = createDogCard(eventObj.target.id);
     });
   }
 }
 creatingHeaderList();
 // this is the new section we created now
+
 function creatingRenderNewDog(name, bio, image) {
   const addedDogObject = {
     id: data.length + 1,
@@ -101,8 +97,7 @@ function addNewDogForm() {
   const mainSection = document.querySelector(".main__dog-section");
   const formForm = document.createElement("form");
   formForm.className = "form";
-  // formForm.setAttribute('class', 'form')
-  // addDogFormSection.append(formForm)
+  
 
   const formLabelName = document.createElement("label");
   formLabelName.innerText = "dogName";
