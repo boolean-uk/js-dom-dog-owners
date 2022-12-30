@@ -3,16 +3,15 @@ console.log(data);
 // QUERY SELECTORS FOR EXISTING ELEMENTS
 const listUL = document.querySelector(".dogs-list");
 const mainArea = document.querySelector(".main");
-// const mainDescription = document.querySelector(".main__dog-section");
 const headerArea = document.querySelector(".header");
-const plusButton = document.querySelector(
-  ".dogs-list__button.dogs-list__button--add"
-);
 
 const listItems = data;
 
 // CREATE & DISPLAY THE LIST ITEMS W/ EVENT LISTENERS
 function displayListItems() {
+  const plusButton = document.querySelector(
+    ".dogs-list__button.dogs-list__button--add"
+  );
   for (let i = 0; i < listItems.length; i++) {
     const dogToShow = listItems[i];
     const listItem = document.createElement("li");
