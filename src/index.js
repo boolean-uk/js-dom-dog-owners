@@ -4,33 +4,40 @@ console.log(data);
 const listUL = document.querySelector(".dogs-list");
 const mainArea = document.querySelector(".main");
 // const mainDescription = document.querySelector(".main__dog-section");
+const headerArea = document.querySelector(".header");
 const plusButton = document.querySelector(
   ".dogs-list__button.dogs-list__button--add"
 );
 
-// CREATE & DISPLAY THE LIST ITEMS W/ EVENT LISTENERS
-for (let i = 0; i < data.length; i++) {
-  const dogToShow = data[i];
-  const listItem = document.createElement("li");
-  listItem.setAttribute("class", "dogs-list__button");
-  listItem.innerText = dogToShow.name;
-  listUL.append(listItem);
+const listItems = data;
 
-  listItem.addEventListener("click", function () {
-    console.log("Clicked dog", dogToShow.name);
-    // Throw away main section content, replace <section> in <main>
-    // with the template <section> for a dog profile
-    // Call function here to create & append the data.
+// CREATE & DISPLAY THE LIST ITEMS W/ EVENT LISTENERS
+function displayListItems() {
+  for (let i = 0; i < listItems.length; i++) {
+    const dogToShow = listItems[i];
+    const listItem = document.createElement("li");
+    listItem.setAttribute("class", "dogs-list__button");
+    listItem.innerText = dogToShow.name;
+    listUL.append(listItem);
+
+    listItem.addEventListener("click", function () {
+      console.log("Clicked dog", dogToShow.name);
+      // Throw away main section content, replace <section> in <main>
+      // with the template <section> for a dog profile
+      // Call function here to create & append the data.
+      mainArea.innerHTML = "";
+      showDogCard(dogToShow);
+    });
+  }
+  plusButton.addEventListener("click", function () {
+    console.log("Clicked on plus button");
     mainArea.innerHTML = "";
-    showDogCard(dogToShow);
+    newForm();
   });
 }
 
 // Create and append the form contents
-plusButton.addEventListener("click", function () {
-  console.log("Clicked on plus button");
-  mainArea.innerHTML = "";
-
+function newForm() {
   const header = document.createElement("h2");
   header.innerText = "Add a new Dog";
 
@@ -89,7 +96,25 @@ plusButton.addEventListener("click", function () {
   form.append(bioLabel);
   form.append(bioTextArea);
   form.append(submitButton);
-});
+
+  const submitEvent = document.querySelector("form");
+  submitEvent.addEventListener("submit", function (event) {
+    event.preventDefault();
+    console.log("SUBMITTED");
+
+    const dogCreatedFromForm = {
+      id: data.length + 1,
+      name: nameInput.value,
+      image: imageInput.value,
+      isGoodDog: true,
+      bio: bioTextArea.value,
+    };
+
+    listItems.unshift(dogCreatedFromForm);
+    listUL.innerHTML = `<li class="dogs-list__button dogs-list__button--add">+</li>`;
+    displayListItems();
+  });
+}
 
 // Create and append the dog card contents - Called from listItem event listener
 function showDogCard(dogToShow) {
@@ -131,3 +156,4 @@ function showDogCard(dogToShow) {
   }
   description.append(isNaughty);
 }
+displayListItems();
