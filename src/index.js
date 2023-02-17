@@ -1,5 +1,4 @@
 // WRITE YOUR CODE BELOW!
-
 const dogsList = document.querySelector('.dogs-list')
 const formButton = document.querySelector('.dogs-list__button--add')
 const main = document.querySelector('.main')
@@ -12,7 +11,7 @@ function createDog(dog) {
 
   return li
 }
-// Renders all dogs
+// generates all the dogs on the page
 function generateDogs() {
   data.forEach((dog) => {
     const li = createDog(dog)
