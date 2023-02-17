@@ -1,241 +1,116 @@
-// console.log(data);
-
 // WRITE YOUR CODE BELOW!
 
-// select the dogs-list UL
 const dogsList = document.querySelector('.dogs-list')
-const dogsListAdd = document.querySelector('.dogs-list__button--add')
-const dogCard = document.querySelector('.main__dog-section')
+const formButton = document.querySelector('.dogs-list__button--add')
+const main = document.querySelector('.main')
 
-const body = document.querySelector('body')
-body.setAttribute('style', 'font-style: san-serif')
+function createDog(dog) {
+  const li = document.createElement('li')
+  li.classList.add('dogs-list__button')
+  li.innerText = dog.name
+  dogsList.append(li)
 
-function dog(index) {
-  // generate this HTML template: <li class="dogs-list__button">Mr. Bonkers</li>
-  // append each generated <li> to the correct part of the page
-  const dogListButton = document.createElement('li') // create a list item called dogListButton
-  // correct list is <ul class="dogs-list">
-  dogsList.appendChild(dogListButton) // Add dogListButton to dogsList
-  dogListButton.setAttribute('class', 'dogs-list__button') // Give dogListButton the class dogs-list__button
+  return li
+}
+// Renders all dogs
+function generateDogs() {
+  data.forEach((dog) => {
+    const li = createDog(dog)
 
-  dogListButton.innerText = data[index].name // Set dogListButton's text to be the object key 'name' from within the data array, based on the idex given by the for loop on below
+    li.addEventListener('click', () => {
+      const dogHtml = dogCard(dog)
+      main.innerHTML = dogHtml
 
-  // now add an event listener to listen for user clicks
-  dogListButton.addEventListener('click', (event) => {
-    dogCard.innerHTML = ''
+      const button = document.querySelector('.btn')
 
-    // whenever there is a click on the dogListButton trigger the event function
-    dogCardName(index)
-    dogCardImg(index)
-    dogCardBio(index)
-    dogCardGood(index)
+      button.addEventListener('click', (e) => {
+        const p = document.querySelector('.good-dog')
+        const text = button.innerText
+        if (text === 'Good dog!') {
+          p.innerHTML = `<p><em>Is naughty?</em> yes</p>`
+          button.innerText = 'Bad dog!'
+        }
+        if (text === 'Bad dog!') {
+          p.innerHTML = `<p><em>Is naughty?</em> no</p>`
+          button.innerText = 'Good dog!'
+        }
+      })
+    })
   })
 }
 
-// Create a submission form when the plus button is clicked
-dogsListAdd.addEventListener('click', (event) => {
-  dogCard.innerHTML = ''
-  newDog()
+generateDogs()
+
+formButton.addEventListener('click', () => {
+  const dogForm = addForm()
+  main.innerHTML = dogForm
+
+  const form = document.querySelector('.form')
+  const dogNameInput = document.querySelector('#name')
+  const dogImageInput = document.querySelector('#image')
+  const dogBioInput = document.querySelector('#bio')
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    const dogName = dogNameInput.value
+    const dogImage = dogImageInput.value
+    const dogBio = dogBioInput.value
+
+    const dogObject = {
+      name: dogName,
+      image: dogImage,
+      bio: dogBio
+    }
+
+    const li = createDog(dogObject)
+
+    li.addEventListener('click', () => {
+      const dogHtml = dogCard(dogObject)
+      main.innerHTML = dogHtml
+    })
+  })
 })
 
-function newDog() {
-  // h2.innerText = 'Add a new Dog'
-  // dogCard.appendChild(h2)
-  // Create the submission form
-  const newDogForm = document.createElement('form')
-
-  // Append the form into dogCard
-  dogCard.appendChild(newDogForm)
-
-  newDogName(newDogForm)
-  newDogImg(newDogForm)
-  newDogBio(newDogForm)
-  newDogSubmit(newDogForm)
-
-  
+function dogCard(dog) {
+  return `
+        <section class="main__dog-section">
+            <h2>${dog.name}</h2>
+            <img
+                src=${dog.image}
+                alt=${dog.name}
+            />
+            <div class="main__dog-section__desc">
+                <h3>Bio</h3>
+                <p>
+                    ${dog.bio}
+                </p>
+            </div>
+            <p class='good-dog'><em>Is naughty?</em> ${
+              dog.isGoodDog ? 'yes' : 'no'
+            }</p>
+            ${buttonToggle(dog.isGoodDog)} 
+        </section>
+    `
 }
 
-function newDogName(form) {
-  // Create a div to contain the name input
-  const wrapperDivName = document.createElement('div')
-  wrapperDivName.setAttribute(
-    'style',
-    'display:flex; flex-direction:column; margin-bottom: 20px'
-  )
-
-  // Create label element for the dog's name
-  const name = document.createElement('label')
-  name.setAttribute('for', 'name')
-  name.innerText = 'Dogs name:'
-
-  // Create input element for the dog's name
-  const newDogFormName = document.createElement('input')
-  newDogFormName.setAttribute('type', 'text')
-  newDogFormName.setAttribute('name', 'dogName')
-  newDogFormName.setAttribute('style', 'width: 250px')
-
-  // Append label/input element into div
-  form.appendChild(wrapperDivName)
-  wrapperDivName.appendChild(name)
-  wrapperDivName.appendChild(newDogFormName)
-  
-  return dogName
+function addForm() {
+  return ` 
+  <section class="main__dog-section">
+    <h2>Add a new Dog</h2>
+    <form class="form">
+      <label for="name">Dog's name</label>
+      <input type="text" id="name" name="name">
+      <label for="image">Dog's picture</label>
+      <input type="url" id="image" name="image">
+       <label for="bio">Dog's bio</label>
+       <textarea rows="5" id="bio" name="bio"></textarea>
+       <input type="submit" id="submit" name="submit" value="Let's add a dog!" class="form__button">
+    </form>
+  </section>`
 }
 
-function newDogImg(form) {
-  // Create a div to contain the image input
-  const wrapperDivImg = document.createElement('div')
-  wrapperDivImg.setAttribute(
-    'style',
-    'display:flex; flex-direction:column; margin-bottom: 20px'
-  )
-
-  // Create a label element for the image
-  const image = document.createElement('label')
-  image.setAttribute('for', 'image')
-  image.innerText = 'Dogs image URL:'
-
-  // Create an input element for the image
-  const newDogFormImg = document.createElement('input')
-  newDogFormImg.setAttribute('type', 'url')
-  newDogFormImg.setAttribute('id', 'formImg')
-  newDogFormImg.setAttribute('style', 'width: 250px')
-
-  // Append the label/input element into the div
-  form.appendChild(wrapperDivImg)
-  wrapperDivImg.appendChild(image)
-  wrapperDivImg.appendChild(newDogFormImg)
-}
-
-function newDogBio(form) {
-  // Create a div to contain the bio input
-  const wrapperDivBio = document.createElement('div')
-  wrapperDivBio.setAttribute(
-    'style',
-    'display:flex; flex-direction:column; margin-bottom: 20px'
-  )
-
-  // Create a label element for the bio
-  const bio = document.createElement('label')
-  bio.setAttribute('for', 'bio')
-  bio.innerText = 'Dogs bio:'
-
-  // Create an input element for the bio
-  const newDogFormBio = document.createElement('textarea')
-  newDogFormBio.setAttribute('rows', '5')
-  newDogFormBio.setAttribute('id', 'formBio')
-
-  // Append the label/input element into the div
-  form.appendChild(wrapperDivBio)
-  wrapperDivBio.appendChild(bio)
-  wrapperDivBio.appendChild(newDogFormBio)
-}
-
-function newDogSubmit(form) {
-  // Create a div to contain the bio input
-  const wrapperDivSubmit = document.createElement('div')
-  wrapperDivSubmit.setAttribute('style', 'display:grid')
-
-  // Create an input element for the bio
-  const newDogFormSubmit = document.createElement('button')
-  newDogFormSubmit.setAttribute('class', 'form__button')
-  newDogFormSubmit.setAttribute('id', 'formSubmit')
-  newDogFormSubmit.innerText = "Let's add a dog!"
-  // Create button that will added new dog profile to the exisiting list.
-
-  
-  // Append the label/element into the div
-  form.appendChild(wrapperDivSubmit)
-  wrapperDivSubmit.appendChild(newDogFormSubmit)
-
-  newDogFormSubmit.addEventListener('click', (event) => {
-    event.preventDefault()
-    // Create a new li element for the dogs-list ul
-    const newDogList = document.createElement('li')
-    // give it the dog-list__button class name
-    newDogList.setAttribute('class','dogs-list__button')
-    // Give new profile the name of the name submitted
-    newDogList.innerText = newDogName.value
-    dogsList.appendChild(newDogList)
-  })
-  
-}
-
-// Create a variable that alters the h2 based on the data array and index number
-const dogName = document.querySelector('h2')
-dogName.setAttribute('class', 'dog-name')
-function dogCardName(index) {
-  dogCard.appendChild(dogName)
-  dogName.innerText = data[index].name
-}
-
-// Create a variable that creates and alters an img element based on the data array and index number
-const dogImg = document.createElement('img')
-function dogCardImg(index) {
-  dogImg.setAttribute('src', data[index].image)
-  dogImg.setAttribute('style', 'height: 300px')
-  dogCard.appendChild(dogImg)
-}
-
-// Create a variable that creates and alters a p element based on the data array and index number
-const dogBio = document.createElement('p')
-function dogCardBio(index) {
-  dogBio.innerText = data[index].bio
-  dogCard.appendChild(dogBio)
-}
-
-// Create a div that will contain the prompt question and "Good or Bad dog button"
-// Create a p element and a button element that allows user input to change whether the dog is naughty or nice
-const isGoodBoy = document.createElement('div')
-const cardQuestion = document.createElement('p')
-const cardQuestionButton = document.createElement('button')
-
-function dogCardGood(index) {
-  isGoodBoy.setAttribute('style', 'display: inline-flex')
-  dogCard.appendChild(isGoodBoy)
-  isGoodBoy.appendChild(cardQuestion)
-  isGoodBoy.appendChild(cardQuestionButton)
-  isNaughty(index)
-}
-
-// Create a function that changes whether the dog is naughty or nice based on the data
-function isNaughty(index) {
-  // Create a boolean that points to the data value, and allows us to alter that for the click event later
-  let goodOrBadBoolean = data[index].isGoodDog
-  let naughty = ''
-  let goodOrBadDog = ''
-  // Create an if statement to assign values to the p/button based on the boolean
-  if (goodOrBadBoolean === false) {
-    naughty = 'Yes!'
-    goodOrBadDog = 'Good Dog'
-  } else if (goodOrBadBoolean === true) {
-    naughty = 'No!'
-    goodOrBadDog = 'Bad Dog'
-  }
-  // Assign the above values to the p/button elements
-  cardQuestion.innerText = `Is Naughty? ${naughty}`
-  cardQuestionButton.innerText = goodOrBadDog
-
-  // Create a click event that changes the value of the p/button when the buttoon is clicked
-  cardQuestionButton.addEventListener('click', (event) => {
-    // Create an if statement to flip the previously defined values
-    if (goodOrBadBoolean === true) {
-      goodOrBadBoolean = false
-      naughty = 'Yes!'
-      goodOrBadDog = 'Good Dog'
-    } else if (goodOrBadBoolean === false) {
-      goodOrBadBoolean = true
-      naughty = 'No!'
-      goodOrBadDog = 'Bad Dog'
-    }
-    // Change the inner text once the values have been flipped
-    cardQuestion.innerText = `Is Naughty? ${naughty}`
-    cardQuestionButton.innerText = goodOrBadDog
-  })
-}
-
-// for each dog JS object in data, generate a li
-for (let i = 0; i < data.length; i++) {
-  // i = index that is used in line 10, 14 and 16
-  dog(i)
+function buttonToggle(isGoodDog) {
+  if (!isGoodDog) return "<button class='btn'>Good dog!</button>"
+  if (isGoodDog) return "<button class='btn'>Bad dog!</button>"
 }
