@@ -11,7 +11,7 @@ function createDog(dog) {
 
   return li
 }
-// generates all the dogs on the page
+// renders all the dogs on the page
 function generateDogs() {
   data.forEach((dog) => {
     const li = createDog(dog)
@@ -37,7 +37,7 @@ function generateDogs() {
     })
   })
 }
-
+// calling the function that generates the dogs
 generateDogs()
 
 formButton.addEventListener('click', () => {
@@ -92,7 +92,7 @@ function dogCard(dog) {
         </section>
     `
 }
-
+// form that renders the form for adding a new dog
 function addForm() {
   return ` 
   <section class="main__dog-section">
