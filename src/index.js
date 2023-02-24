@@ -1,6 +1,6 @@
 // WRITE YOUR CODE BELOW!
 const dogsList = document.querySelector('.dogs-list')
-const formButton = document.querySelector('.dogs-list__button--add')
+let formButton = document.querySelector('.dogs-list__button--add')
 const main = document.querySelector('.main')
 
 function createDog(dog) {
@@ -13,6 +13,12 @@ function createDog(dog) {
 }
 // renders all the dogs on the page
 function generateDogs() {
+  console.log('data for dogs', data)
+
+  dogsList.innerHTML =
+    '<li class="dogs-list__button dogs-list__button--add">+</li>'
+  formButton = document.querySelector('.dogs-list__button--add')
+  setUpAddButton()
   data.forEach((dog) => {
     const li = createDog(dog)
 
@@ -40,36 +46,33 @@ function generateDogs() {
 // calling the function that generates the dogs
 generateDogs()
 
-formButton.addEventListener('click', () => {
-  const dogForm = addForm()
-  main.innerHTML = dogForm
+function setUpAddButton() {
+  formButton.addEventListener('click', () => {
+    const dogForm = addForm()
+    main.innerHTML = dogForm
 
-  const form = document.querySelector('.form')
-  const dogNameInput = document.querySelector('#name')
-  const dogImageInput = document.querySelector('#image')
-  const dogBioInput = document.querySelector('#bio')
+    const form = document.querySelector('.form')
+    const dogNameInput = document.querySelector('#name')
+    const dogImageInput = document.querySelector('#image')
+    const dogBioInput = document.querySelector('#bio')
 
-  form.addEventListener('submit', (e) => {
-    e.preventDefault()
+    form.addEventListener('submit', (e) => {
+      e.preventDefault()
 
-    const dogName = dogNameInput.value
-    const dogImage = dogImageInput.value
-    const dogBio = dogBioInput.value
+      const dogName = dogNameInput.value
+      const dogImage = dogImageInput.value
+      const dogBio = dogBioInput.value
 
-    const dogObject = {
-      name: dogName,
-      image: dogImage,
-      bio: dogBio
-    }
-
-    const li = createDog(dogObject)
-
-    li.addEventListener('click', () => {
-      const dogHtml = dogCard(dogObject)
-      main.innerHTML = dogHtml
+      const dogObject = {
+        name: dogName,
+        image: dogImage,
+        bio: dogBio
+      }
+      data.unshift(dogObject)
+      generateDogs()
     })
   })
-})
+}
 
 function dogCard(dog) {
   return `
