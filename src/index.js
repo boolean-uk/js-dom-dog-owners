@@ -6,19 +6,36 @@ const main = document.querySelector(".main");
 const dogsList = document.querySelector(".dogs-list");
 const mainDogSection = document.querySelector(".main__dog-section");
 
+// Loading the new form on + button click
+
+
+function newDogFormButton() {
+    const newDogButton = document.querySelector(`.dogs-list__button--add`)
+    newDogButton.addEventListener("click", function() {
+        newDog();
+      });
+}
+
 // Main
 
 function createButton() {
-  for (let i = 0; i < data.length; i++) {
-    const dogLi = document.createElement("li");
-    dogLi.setAttribute("class", "dogs-list__button");
-    dogLi.setAttribute("id", i);
-    dogLi.innerText = data[i].name;
-    dogsList.append(dogLi);
+    for (let i = 0; i < data.length; i++) {
+      const dogLi = document.createElement("li");
+      dogLi.setAttribute("class", "dogs-list__button");
+      dogLi.setAttribute("id", i);
+      dogLi.innerText = data[i].name;
+      dogsList.append(dogLi);
+  
+      // Add event listener to dogLi element
+      dogLi.addEventListener("click", function() {
+        createCard(i);
+      });
+    }
+    newDogFormButton()
+    createCard(0)
 
-    // dogid
+
   }
-}
 
 // Dog Cards
 
@@ -131,7 +148,6 @@ function newDog() {
     main.append(newDogForm)
 }
 
-
 createButton();
-createCard(0);
+// createCard(0);
 // newDog()
