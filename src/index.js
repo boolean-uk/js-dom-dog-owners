@@ -39,8 +39,36 @@ function createCard(dogID) {
     dogImage.setAttribute(`alt`, ``)
     dogSection.append(dogImage)
 
-    
+    const dogDiv = document.createElement(`div`)
+    dogDiv.setAttribute(`class`, `main__dog-section__desc`)
 
+    const dogH3 = document.createElement(`h3`);
+    dogH3.innerText = `Bio`
+    dogDiv.append(dogH3)
+    
+    const dogDivP = document.createElement(`p`);
+    dogDivP.innerText = currentDog.bio
+    dogDiv.append(dogDivP)
+    
+    dogSection.append(dogDiv)
+
+    const dogP = document.createElement(`p`);
+    const dogButton = document.createElement('button')
+
+    if (currentDog.isGoodDog) {
+        dogP.innerHTML = `<em>Is naughty?</em> no!`
+        dogButton.innerText = `Good dog!`
+    }
+        else {
+        dogP.innerHTML = `<em>Is naughty?</em> yes!`
+        dogButton.innerText = `Bad dog!`
+        }
+
+        dogSection.append(dogP)
+        dogSection.append(dogButton)
+    
+// if currentDog.isGoodDog = true
+// else
     main.append(dogSection)
 
 
@@ -58,4 +86,4 @@ function createCard(dogID) {
 // append in to the "ul" constant
 
 createButton()
-createCard(0)
+createCard(1)
