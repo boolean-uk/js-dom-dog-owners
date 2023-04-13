@@ -94,28 +94,32 @@ plusButton.addEventListener('click', event => {
 
 
   function renderDogList(dogs) {
-
     dogsList.innerHTML = '';
-  
+    
     const newPlusButton = plusButton.cloneNode(true);
     dogsList.appendChild(newPlusButton);
-  
+    
     dogs.forEach(dog => {
       const listItem = document.createElement('li');
       listItem.classList.add('dogs-list__button');
       listItem.textContent = dog.name;
       listItem.dataset.id = dog.id;
-  
+    
       listItem.addEventListener('click', event => {
         const selectedDog = data.find(dog => dog.id === parseInt(event.target.dataset.id));
         renderDog(data.indexOf(selectedDog));
       });
-      
-      
+        
       dogsList.appendChild(listItem);
     });
-  }
   
+    // add event listener to new dog list item
+    const newDogListItem = dogsList.querySelector(`[data-id="${dogs[0].id}"]`);
+    newDogListItem.addEventListener('click', event => {
+      const selectedDog = data.find(dog => dog.id === parseInt(event.target.dataset.id));
+      renderDog(data.indexOf(selectedDog));
+    });
+  }
   
   const form = document.querySelector('.form');
   form.addEventListener('submit', event => {
@@ -144,14 +148,14 @@ plusButton.addEventListener('click', event => {
 
 
     // create a new list item for the new dog
-    const newDogListItem = document.createElement('li');
-    newDogListItem.classList.add('dogs-list__button');
-    newDogListItem.textContent = newDog.name;
-    newDogListItem.dataset.id = newDog.id;
+     const newDogListItem = document.createElement('li');
+  newDogListItem.classList.add('dogs-list__button');
+  newDogListItem.textContent = newDog.name;
+  newDogListItem.dataset.id = newDog.id;
     
     newDogListItem.addEventListener('click', event => {
       const selectedDog = data.find(dog => dog.id === parseInt(event.target.dataset.id));
-      renderDogIndex(selectedDog);
+      renderDog(data.indexOf(selectedDog));
     });
     
     dogsList.insertBefore(newDogListItem, plusButton.nextSibling);
