@@ -42,6 +42,26 @@ for (let i = 0; i < data.length; i++) {
     const bioP = document.createElement('p')
     bioP.innerText = data[i].bio
     bioDiv.append(bioP)
+    //Naughty Dog Text
+    const pTag = document.createElement('p')
+    const emTag = document.createElement('em')
+    const button = document.createElement('button')
+    pTag.innerText = "Is naughty?"
+    
+    if (data[i].isGoodDog === true) {
+        emTag.innerText = " Yes!"
+        button.innerText = "Good dog!"
+        
+    } else if (data[i].isGoodDog === false) {
+        emTag.innerText = " No!"
+        button.innerText = "Bad Dog!"
+    }
+    
+    pTag.append(emTag)
+    section.append(pTag)
+    section.append(button)
+   
+    
     
 
 }
