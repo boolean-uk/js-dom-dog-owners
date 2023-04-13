@@ -27,8 +27,9 @@ for (let i = 0; i < data.length; i++) {
   dogSelectButton.addEventListener('click', () => renderDog(i))
   // dogSelectButton.onclick = `renderDog(${i})`
 }
-
 function renderDog(dogIndex) {
+  mainDogSection.querySelector('.add-dog__section')?.remove();
+  
   const dogName = data[dogIndex]['name']
   const dogBio = data[dogIndex]['bio']
   const dogImage = data[dogIndex]['image']
@@ -67,7 +68,7 @@ data.forEach(dog => {
 
 // Shows selected dog detials (event listener)
 listItem.addEventListener('click', event => {
-  renderDogIndex(selectedDog);
+  renderDogIndex(selectDog);
   });
   
   });
@@ -105,9 +106,10 @@ plusButton.addEventListener('click', event => {
   
       listItem.addEventListener('click', event => {
         const selectedDog = data.find(dog => dog.id === parseInt(event.target.dataset.id));
-        renderDogIndex(selectedDog);
+        renderDog(data.indexOf(selectedDog));
       });
-  
+      
+      
       dogsList.appendChild(listItem);
     });
   }
@@ -144,14 +146,14 @@ plusButton.addEventListener('click', event => {
     newDogListItem.classList.add('dogs-list__button');
     newDogListItem.textContent = newDog.name;
     newDogListItem.dataset.id = newDog.id;
-
+    
     newDogListItem.addEventListener('click', event => {
       const selectedDog = data.find(dog => dog.id === parseInt(event.target.dataset.id));
       renderDogIndex(selectedDog);
     });
-
+    
     dogsList.insertBefore(newDogListItem, plusButton.nextSibling);
-
+    
     renderDogList(data);
     form.reset();
     
