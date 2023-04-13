@@ -18,7 +18,9 @@ for (i = 0; i < data.length; i++) {
         const li = document.createElement('li');
         li.innerText = dogInfo.name;
         li.setAttribute("class", "dogs-list__button");
-        ul.append(li);
+    ul.append(li);
+    const id = dogInfo.id;
+    li.setAttribute("id", id)
 
     // create the main card
         // find the section
@@ -28,7 +30,6 @@ for (i = 0; i < data.length; i++) {
         // change the inner text to the dog's name
         const dogName = dogInfo.name
         h2.innerText = dogName
-}
 
 
 
@@ -41,8 +42,28 @@ for (i = 0; i < data.length; i++) {
 
 // clear the data in the card
 
+    
+//    this function should display the correct dog
+    // clear out the card information displayed - refresh the main content
+    // match the header list
+    // find the correct dog
+    // display new content using the same card
+    
+    li.addEventListener('click', function() {
+        console.log('How dare you click me!?')
+        h2.innerText = "Did you click on me????"
+    })
+    
+       
+    
+
 // inputing the info to the card
 // generate a click event that displays the card with all the info for the dog that is being clicked
+
+
+
+}
+
 
 
 
