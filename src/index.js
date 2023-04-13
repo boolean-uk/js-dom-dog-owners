@@ -4,12 +4,37 @@ console.log(data);
 
 // for each dog, create a button
 const list = document.querySelector('.dogs-list')
-function createListItem(currentDogName) {
+function createListItem(currentDog) {
   const newListItem = document.createElement('li')
-  newListItem.innerText = currentDogName
+  newListItem.innerText = currentDog.name
+  newListItem.setAttribute('id', currentDog.id)
   newListItem.setAttribute('class', 'dogs-list__button')
+  newListItem.addEventListener('click', buttonClick)
   list.append(newListItem)
   return newListItem
+}
+
+function buttonClick(event) {
+  const id = event.currentTarget.id
+  console.log(id)
+  toggleCard(id)
+}
+
+function toggleCard(id) {
+  const currentDog = `#dog${id}`
+  const currentCard = document.getElementById(currentDog)
+
+  for (let i = 0; i <= data.length; i++) {
+    if (i === id) {}
+    else {
+      let otherDog = `#dog${i}`
+      let current = document.getElementById(otherDog)
+      current.style.display = 'none'
+    }
+  }
+  console.log(...data)
+  currentCard.style.display = 'block'
+  console.log(currentCard)
 }
 
 function createDogCard(currentDog) {
@@ -17,6 +42,8 @@ function createDogCard(currentDog) {
 
   const newCard = document.createElement('section')
   newCard.setAttribute('class', 'main__dog-section')
+  newCard.setAttribute('id', `#dog${currentDog.id}`)
+  newCard.style.display = 'none'
 
   const newTitle = document.createElement('h2')
   newTitle.innerText = currentDog.name
@@ -46,7 +73,7 @@ function createDogCard(currentDog) {
 }
 function iterateDogArray() {
   data.forEach(dog => {
-    createListItem(dog.name)
+    createListItem(dog)
     createDogCard(dog)
   });
 }
