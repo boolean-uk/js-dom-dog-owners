@@ -35,6 +35,8 @@ function renderDog(dogIndex) {
   const dogImage = data[dogIndex]['image']
   const dogIsGoodDog = data[dogIndex]['isGoodDog']
 
+  dogTitle.remove()
+  mainDogSection.append(dogTitle)
   dogTitle.innerText = dogName
 
   dogImgEl.src = dogImage
