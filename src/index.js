@@ -11,10 +11,9 @@ console.log(data);
     // give it a class "dogs-list__button" to get some CSS
     // append the li to the ul
 
-
 const makeDogList = () => {    
-for (i = 0; i < data.length; i++) {
-    // making the dog list buttons
+    for (i = 0; i < data.length; i++) {
+        // making the dog list buttons
         const dogInfo = data[i];
         const ul = document.querySelector('ul')
         const li = document.createElement('li');
@@ -24,21 +23,21 @@ for (i = 0; i < data.length; i++) {
         const id = dogInfo.id;
         li.setAttribute("id", id)
         
-// listen for click
+        // listen for click
         li.addEventListener('click', function () {
 
-// --- MAIN CARD ---
+            // --- MAIN CARD ---
 
-// find the right section
-        const main = document.querySelector('main');
-// clear the card
-        main.innerHTML = "";
-// make the section
-        const section = document.createElement('section');
-        section.setAttribute("class", "main__dog-section")
-        main.append(section)
+            // find the right section
+            const main = document.querySelector('main');
+            // clear the card
+            main.innerHTML = "";
+            // make the section
+            const section = document.createElement('section');
+            section.setAttribute("class", "main__dog-section")
+            main.append(section)
         
-        // make the h2
+            // make the h2
             const h2 = document.createElement('h2')
             // change the h2 inner text to the dog's name
             const dogName = dogInfo.name
@@ -46,37 +45,71 @@ for (i = 0; i < data.length; i++) {
             // append h2
             section.append(h2);
 
-        // make the dog img
+            // make the dog img
             const img = document.createElement('img')
             img.src = dogInfo.image
             img.setAttribute("alt", "")
             // img styling size
-            img.style.height = "400px"; 
+            img.style.height = "400px";
             img.style.width = "450px";
             // append to the card
             section.append(img)
 
-        // make div
+            // make div
             const div = document.createElement('div')
             div.setAttribute('class', 'main__dog-section__desc')
             section.append(div)
             // make h3
-                const h3 = document.createElement('h3')
-                h3.innerText = 'Bio'
-                div.append(h3)
+            const h3 = document.createElement('h3')
+            h3.innerText = 'Bio'
+            div.append(h3)
             // make p
-                const p = document.createElement('p')
-                p.innerText = dogInfo.bio
-                div.append(p)
-    })
-}
-}
+            const p = document.createElement('p')
+            p.innerText = dogInfo.bio
+            div.append(p)
+               
+
+            const goodDogP = document.createElement('p')
+               
+            goodDogP.innerText = "Is naughty?! No"
+        
+            section.append(goodDogP)
+
+            const goodDogButton = document.createElement('button')
+            goodDogButton.innerText = "Good dog!"
+            goodDogButton.setAttribute("id", "switch-color")
+            // goodDogButton.style.backgroundColor = "green"
+            section.append(goodDogButton)
+
+
+            let toggle = true;
+            const findButton = document.querySelector('#switch-color')
+            findButton.addEventListener("click", function event() {
+  
+                if (toggle) {
+                    goodDogButton.style.backgroundColor = "red"
+                    goodDogButton.innerText = "Bad dog";
+
+                } else {
+                    goodDogButton.style.backgroundColor = "green"
+                    goodDogButton.innerText = "Good dog!"
+                }
+                toggle = !toggle
+  
+            })
+        }
+        )
+    }
+        
+    
+    }
+
 // when page loads - run this
 // when submit refreshes the list, don't run
 makeDogList(data)
 
 
-
+    
 // 1 - When the plus button is clicked, it should replace the main card 
 // with a form to add a new dog to the list. You'll find a template for 
 // the form on the HTML page. 
@@ -159,7 +192,6 @@ function addingDogs() {
         // 3 - put info from form into object
         // 4 - put object into array
 
-
         // create a click event targeting the submit button
         // prevent the browser refreshing on submit
         form.addEventListener('submit', (event) => {
@@ -208,15 +240,17 @@ function addingDogs() {
 addingDogs()
 
 
+// ## Extended
+// - The dog card should have a button that toggles for the selected dog between good dog/ bad dog
+
+// create a p tag
+// add innerText "<em>Is naughty?</em> no!"
+// create a button 
+// add innerText to button "Good dog!"
+// append both to the list
 
 
 
 
-
-// check where the info is being stored in the browser
-    // click event that when submit is clicked add the new object to the array
-// find a way to push use that information
-// create a new object with that
-// push that new object into our existing array - data
 
 
