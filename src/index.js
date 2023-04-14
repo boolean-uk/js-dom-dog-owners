@@ -25,6 +25,7 @@ for (let i = 0; i < data.length; i++) {
   dogSelectButton.addEventListener("click", () => renderDog(i));
   // dogSelectButton.onclick = `renderDog(${i})`
 }
+
 function renderDog(dogIndex) {
   mainDogSection.querySelector(".add-dog__section")?.remove();
 
@@ -42,15 +43,26 @@ function renderDog(dogIndex) {
   dogImgEl.remove();
   mainDogSection.append(dogImgEl);
 
+  dogDescEl.innerHTML = "";
   dogDescEl.append(bioH3);
 
   dogBioEl.innerText = dogBio;
   dogBioEl.remove();
-  mainDogSection.append(dogBioEl);
-
-  dogBioEl.innerText = dogBio;
-  dogBioEl.remove();
   dogDescEl.append(dogBioEl);
+
+  const isGoodDogEl = document.createElement("p");
+  isGoodDogEl.innerHTML = `<em>Is naughty?</em> ${dogIsGoodDog ? "no" : "yes"}!`;
+
+  const goodDogButton = document.createElement("button");
+  goodDogButton.innerText = dogIsGoodDog ? "Bad dog!" : "Good dog!";
+  goodDogButton.addEventListener("click", () => {
+    data[dogIndex]["isGoodDog"] = !data[dogIndex]["isGoodDog"];
+    goodDogButton.innerText = data[dogIndex]["isGoodDog"] ? "Bad dog!" : "Good dog!";
+    isGoodDogEl.innerHTML = `<em>Is naughty?</em> ${data[dogIndex]["isGoodDog"] ? "no" : "yes"}!`;
+  });
+
+  dogDescEl.append(isGoodDogEl);
+  dogDescEl.append(goodDogButton);
 
   mainDogSection.append(dogDescEl);
 }
