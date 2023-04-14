@@ -79,7 +79,7 @@ for (i = 0; i < data.length; i++) {
     const plusButton = document.querySelector('.dogs-list__button--add')
 // click event for + button    
     plusButton.addEventListener('click', function() {
-        console.log('hello')
+
 // when clicked
     // find main
         const main = document.querySelector('main');
@@ -143,8 +143,30 @@ for (i = 0; i < data.length; i++) {
             newDogSubmit.setAttribute('value',"Let's add a dog!")
             newDogSubmit.setAttribute('class',"form__button")
             newDogSubmit.innerText = "Let's add a dog!"
-            form.append(newDogSubmit)
+        form.append(newDogSubmit);
+       
+        const formTop = document.querySelector('.form');
+        const formName = document.querySelector('#name');
+        const formPicure = document.querySelector('#image');
+        
+        function handleForm(event) {
+            console.log('this is the name', document.forms[name])
+        }
+        inputName.addEventListener("input", handleForm)
+        // create a click event targeting the submit button
+        newDogSubmit.addEventListener('click', handleForm);            // check where the info is being stored in the browser
+           
+
+        
+            
+            // create a new object with that
+            // push that new object into our existing array - data
+
+        
     })
+
+
+
 
 
 
@@ -153,6 +175,16 @@ for (i = 0; i < data.length; i++) {
 
 2 - Once the form is submitted, add the new dog to the beginning of 
 the list, right next to the plus button.
+// create a click event targeting the submit button
+
+
+
+
+// check where the info is being stored in the browser
+    // click event that when submit is clicked add the new object to the array
+// find a way to push use that information
+// create a new object with that
+// push that new object into our existing array - data
 
 
 
