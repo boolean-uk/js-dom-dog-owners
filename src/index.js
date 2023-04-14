@@ -8,11 +8,11 @@ const mainDogSection = document.querySelector(".main__dog-section");
 
 // Loading the new form on + button click
 
-
 function newDogFormButton() {
     const newDogButton = document.querySelector(`.dogs-list__button--add`)
     newDogButton.addEventListener("click", function() {
-        newDog();
+      refreshMenu();
+      newDog();
       });
 }
 
@@ -22,27 +22,30 @@ function createButton() {
     for (let i = 0; i < data.length; i++) {
       const dogLi = document.createElement("li");
       dogLi.setAttribute("class", "dogs-list__button");
-      dogLi.setAttribute("id", i);
+      dogLi.classList.add(`refresh`);
+      dogLi.setAttribute("id", data[i].id);
       dogLi.innerText = data[i].name;
       dogsList.append(dogLi);
   
-      // Add event listener to dogLi element
       dogLi.addEventListener("click", function() {
+        refreshMenu();
         createCard(i);
       });
     }
     newDogFormButton()
-    createCard(0)
-
-
   }
 
 // Dog Cards
 
 function createCard(dogID) {
+ 
   main.innerHTML = ``;
-
   const currentDog = data[dogID];
+
+  const buttonNumber = currentDog.id
+  const currentButton = document.getElementById(buttonNumber)
+  currentButton.style.backgroundColor = "var(--green)"
+
   const dogSection = document.createElement(`section`);
   dogSection.setAttribute(`class`, `main__dog-section`);
 
@@ -83,6 +86,7 @@ function createCard(dogID) {
   dogSection.append(dogButton);
 
   main.append(dogSection);
+
 }
 
 // New Dog Form
@@ -90,6 +94,9 @@ function createCard(dogID) {
 function newDog() {
 
     main.innerHTML = ``;
+
+    const currentButton = document.querySelector(`.dogs-list__button--add`)
+    currentButton.style.backgroundColor = "var(--green)"
 
     const newDogForm = document.createElement(`section`)
     newDogForm.setAttribute(`class`, `main__dog-section`)
@@ -129,9 +136,9 @@ function newDog() {
     newDogTextArea.setAttribute(`name`, `bio`)
 
     const newDogInput = document.createElement(`input`)
-    newDogInput.setAttribute(`type`, `input`)
-    newDogInput.setAttribute(`id`, `input`)
-    newDogInput.setAttribute(`name`, `input`)
+    newDogInput.setAttribute(`type`, `submit`)
+    newDogInput.setAttribute(`id`, `submit`)
+    newDogInput.setAttribute(`name`, `submit`)
     newDogInput.setAttribute(`value`, `Let's add a dog!`)
     newDogInput.setAttribute(`class`, `form__button`)
 
@@ -146,8 +153,47 @@ function newDog() {
     newDogForm.append(newDogInnerForm)
 
     main.append(newDogForm)
+
+    newDogForm.addEventListener(`submit`, function(event) {
+      event.preventDefault();
+      addNewDog(newDogNameInput.value, newDogImageInput.value, newDogTextArea.value)
+      newDogNameInput.value = ``
+      newDogImageInput.value = ``
+      newDogTextArea.value = ``
+      const originalValue = newDogInput.value
+      newDogInput.value = `Thank you :)`
+      newDogInput.style.backgroundColor = "var(--green)"
+      setTimeout(() => {
+        createCard(0)
+      }, 2000);
+    })
+}
+
+// Add New Dog To Data Array
+
+function addNewDog(name, image, bio) {
+  const newDogObject = {
+    id: data.length+1,
+    name: name,
+    bio: bio,
+    isGoodDog: true,
+    image: image,
+  }
+  data.unshift(newDogObject)
+  refreshMenu()
+}
+
+function refreshMenu() {
+  dogsList.innerHTML = ``
+
+  const plusButton = document.createElement(`li`)
+  plusButton.classList.add(`dogs-list__button`, `dogs-list__button--add`)
+  plusButton.innerText = `+`
+  dogsList.append(plusButton)
+
+  createButton()
 }
 
 createButton();
-// createCard(0);
-// newDog()
+newDog()
+
