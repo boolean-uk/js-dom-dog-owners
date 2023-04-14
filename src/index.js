@@ -26,6 +26,8 @@ for (let i = 0; i < data.length; i++) {
     const img = document.createElement("img");
     section.append(img);
     img.src = data[i].image;
+    img.setAttribute('width', '400');
+    img.setAttribute('height', '300')
 
     const div = document.createElement("div");
     section.append(div);
@@ -52,6 +54,40 @@ for (let i = 0; i < data.length; i++) {
 
     const em = document.createElement("em");
     pTwo.insertAdjacentElement("afterbegin", em);
-    em.innerText = "Is naughty?";
+    em.innerText = "Is naughty?  ";
+  
+
+  const button = document.createElement('button');
+  section.append(button);
+
+  if(data[i].isGoodDog === true){
+    button.innerText = 'Bad Dog';
+  } else {
+    button.innerText = 'Good Dog';
+  }
+
+button.addEventListener('click', function(){
+  if(data[i].isGoodDog === true){
+    button.innerText = 'Good Dog';
+    naughty = " Yes!";
+    pTwo.innerText = naughty;
+    const em = document.createElement("em");
+    pTwo.insertAdjacentElement("afterbegin", em);
+    em.innerText = "Is naughty?  ";
+  } else {
+    button.innerText = 'Bad Dog';
+    naughty = " No!";
+    pTwo.innerText = naughty;
+    const em = document.createElement("em");
+    pTwo.insertAdjacentElement("afterbegin", em);
+    em.innerText = "Is naughty?  ";
+  }
+})
   });
 }
+
+// 6. Add eventListener and main card to the plus button.
+// 7. Add empty .innerHTML for removing the section.
+// 8. Create a new form
+// 9. How to store the information in data.js
+// 10.Display the new dog in to the new 'li' right next to the plus button.
