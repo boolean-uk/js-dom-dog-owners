@@ -106,16 +106,16 @@ function createForm() {
 
 function formSubmit(event) {
   event.preventDefault();
-    const myFormData = new FormData(event.target);
-    console.log('myformdata', myFormData)
-    console.log('event.target', event.target)
-    console.log('event', event)
+  const myFormData = new FormData(event.target);
+  console.log('myformdata', myFormData)
+  console.log('event.target', event.target)
+  console.log('event', event)
 
-    const formDataObj = {};
-    myFormData.forEach((value, key) => (formDataObj[key] = value));
-    console.log(formDataObj);
-    createListItem(formDataObj)
-    createDogCard(formDataObj)
+  const formDataObj = {};
+  myFormData.forEach((value, key) => (formDataObj[key] = value));
+  console.log(formDataObj);
+  createListItem(formDataObj)
+  createDogCard(formDataObj)
   
 }
 function buttonClick(event) {
@@ -132,7 +132,8 @@ function toggleCard(id) {
     else {
       let otherDog = `#dog${i}`
       let current = document.getElementById(otherDog)
-      let form = document.querySelector('.form')
+      let form = document.querySelector('.form-section')
+      console.log(form)
       current.style.display = 'none'
       form.style.display = 'none'
     }
