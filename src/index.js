@@ -85,6 +85,22 @@ function createCard(dogID) {
   dogSection.append(dogP);
   dogSection.append(dogButton);
 
+  const goodBadToggle = document.createElement(`button`)
+  goodBadToggle.innerText = `Good/Bad Toggle`
+  dogSection.append(goodBadToggle)
+
+  const goodBadText = document.createElement(`p`)
+
+  goodBadToggle.addEventListener("click", function() {
+    if (currentDog.isGoodDog === true) {
+      goodBadText.innerText = `There is no such thing as a bad dog`
+      dogSection.append(goodBadText)
+    } else {
+      currentDog.isGoodDog = true
+      createCard(dogID)
+    }
+  })
+
   main.append(dogSection);
 
 }
