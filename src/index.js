@@ -170,7 +170,7 @@ function reRender() {
     const section = renderMainForm();
     dogContainer.append(section);
   });
- -}
+ }
 
 function createInput(idName, type = "text", value) {
   let input = null;
