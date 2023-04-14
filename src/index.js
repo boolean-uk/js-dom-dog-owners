@@ -15,10 +15,10 @@ for (let i = 0; i < data.length; i++) {
   const dogName = data[i].name
   listItem.innerText = dogName
 
-  
-  const dogCard = document.querySelector('section')
+  const main = document.querySelector('.main')
   function removeCard() {
-    dogCard.remove()
+    main.innerHTML = ''
+
   }
   listItem.addEventListener('click', () => {
     removeCard()
