@@ -26,6 +26,38 @@ for (i = 0; i < data.length; i++) {
     
 
 
+
+
+
+
+    // render the name 
+    // create h2 for each dog
+    // append the created h2 into the section
+
+    
+    //    this function should display the correct dog
+    // clear out the card information displayed - refresh the main content
+    // match the header list
+    // find the correct dog
+    // display new content using the same card
+    
+  
+    
+    // dogSelectButton.addEventListener('click', function() {
+    //     renderDog(i)
+    //   })
+
+    li.addEventListener('click', function (event) {
+        console.log('How dare you click me!?')
+        // h2.innerText = "Did you click on me????"
+        console.log('this is event', event);
+
+        console.log('target', event.target);
+        
+        console.log('value', event.target.id);
+        test(event.target.id)
+
+
     // function dogFinder() {
    
     // create the main card
@@ -64,36 +96,6 @@ for (i = 0; i < data.length; i++) {
     p.innerText = dogInfo.bio
     div.append(p)
         
-
-
-
-
-    // render the name 
-    // create h2 for each dog
-    // append the created h2 into the section
-
-    
-    //    this function should display the correct dog
-    // clear out the card information displayed - refresh the main content
-    // match the header list
-    // find the correct dog
-    // display new content using the same card
-    
-  
-    
-    // dogSelectButton.addEventListener('click', function() {
-    //     renderDog(i)
-    //   })
-
-    li.addEventListener('click', function (event) {
-        console.log('How dare you click me!?')
-        // h2.innerText = "Did you click on me????"
-        console.log('this is event', event);
-
-        console.log('target', event.target);
-        
-        console.log('value', event.target.id);
-        test(event.target.id)
 
     })
 
