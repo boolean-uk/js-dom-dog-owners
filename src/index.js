@@ -57,19 +57,26 @@ for (i = 0; i < data.length; i++) {
         console.log('value', event.target.id);
         test(event.target.id)
 
+       
+
 
     // function dogFinder() {
    
     // create the main card
     // find the section
-    const section = document.querySelector('.main__dog-section')
+        const main = document.querySelector('main');
+        main.innerHTML = "";
+        const section = document.createElement('section');
+   
+        section.setAttribute("class", "main__dog-section")
+        main.append(section)
         
     // find the h2
-    const h2 = document.querySelector('h2')
+    const h2 = document.createElement('h2')
     // change the inner text to the dog's name
     const dogName = dogInfo.name
     h2.innerText = dogName
-       
+        section.append(h2);
 
 
     // add in dog img
@@ -78,14 +85,18 @@ for (i = 0; i < data.length; i++) {
     const img = document.createElement('img')
     // have the path to img from top data
         
-    img.src = dogInfo.image
+        img.src = dogInfo.image
+        img.setAttribute("alt", "")
+        img.style.height = "400px"; 
+        img.style.width = "450px";
     // append to the card
-    h2.append(img)
+    section.append(img)
 
     // make div
     const div = document.createElement('div')
-    div.setAttribute('class', 'main__dog-section__desc')
-    h2.append(div)
+        div.setAttribute('class', 'main__dog-section__desc')
+    
+    section.append(div)
 
     // make h3
     const h3 = document.createElement('h3')
@@ -96,6 +107,8 @@ for (i = 0; i < data.length; i++) {
     p.innerText = dogInfo.bio
     div.append(p)
         
+        
+    
 
     })
 
