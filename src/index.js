@@ -1,52 +1,72 @@
-// console.log(data);
+// create the list items for every dog
+// create a function to update card with currentDog's data
+// call updateDog(currentDog) when that dog's button is clicked
 
-// WRITE YOUR CODE BELOW!
 
-// for each dog, create a button
-const list = document.querySelector('.dogs-list')
 
-function createListItem(currentDog) {
-  const newListItem = document.createElement('li')
-  newListItem.innerText = currentDog.name
-  newListItem.setAttribute('id', currentDog.id)
-  newListItem.setAttribute('class', 'dogs-list__button')
-  newListItem.addEventListener('click', buttonClick)
-  list.append(newListItem)
-  return newListItem
+function createListItems(data) {
+  const list = document.querySelector('.dogs-list')
+  const addDog = document.querySelector('.dogs-list__button--add')
+
+
+  data.forEach(dog => {
+    const newListItem = document.createElement('li')
+    newListItem.innerText = dog.name
+    newListItem.setAttribute('id', dog.id)
+    newListItem.setAttribute('class', 'dogs-list__button')
+    newListItem.addEventListener('click', () => {
+      updateCard(dog)
+    })
+    list.append(newListItem)
+  });
+
+  addDog.addEventListener('click', updateForm)
 }
 
-function createDogCard(currentDog) {
+function updateListItems(dog) {
+  const list = document.querySelector('.dogs-list')
+  const newListItem = document.createElement('li')
+  newListItem.innerText = dog.name
+  newListItem.setAttribute('id', dog.id)
+  newListItem.setAttribute('class', 'dogs-list__button')
+  newListItem.addEventListener('click', () => {
+    updateCard(dog)
+  })
+  list.append(newListItem)
+}
+
+function createCard() {
   const main = document.querySelector('.main')
 
   const newCard = document.createElement('section')
   newCard.setAttribute('class', 'main__dog-section')
-  newCard.setAttribute('id', `#dog${currentDog.id}`)
-  newCard.style.display = 'none'
 
-  const newTitle = document.createElement('h2')
-  newTitle.innerText = currentDog.name
+  const dogName = document.createElement('h2')
 
-  const newImage = document.createElement('img')
-  newImage.setAttribute('src', currentDog.image)
-  newImage.setAttribute('alt', '')
+  const dogImage = document.createElement('img')
+  dogImage.setAttribute('src', '')
+  dogImage.setAttribute('alt', '')
+  dogImage.setAttribute('height', '256')
+  dogImage.setAttribute('width', '256')
+  dogImage.style.objectFit = 'cover'
 
-  const newSection = document.createElement('div')
-  newSection.setAttribute('class', 'main__dog-section__desc')
+  const div = document.createElement('div')
+  div.setAttribute('class', 'main__dog-section__desc')
 
-  const newSubTitle = document.createElement('h3')
-  newSubTitle.innerText = 'Bio'
+  const dogSubTitle = document.createElement('h3')
+  dogSubTitle.innerText = 'Bio'
 
-  const newParagraph = document.createElement('p')
-  newParagraph.innerText = currentDog.bio
+  const dogBio = document.createElement('p')
 
-  const newParagraph2 = document.createElement('p')
-  newParagraph2.innerHTML = '<em>Is naughty?</em> yes!'
+  const dogIsNaughty = document.createElement('p')
+  dogIsNaughty.innerHTML = '<em>Is naughty?</em> yes!'
 
-  const newButton = document.createElement('button')
-  newButton.innerText = 'Good dog!'
+  const dogIsGood = document.createElement('button')
+  dogIsGood.innerText = 'Good dog!'
+  dogIsGood.addEventListener('click', goodDogButton)
 
-  newSection.append(newParagraph, newSubTitle)
-  newCard.append(newTitle, newImage, newSection, newParagraph2, newButton)
+  div.append(dogBio, dogSubTitle)
+  newCard.append(dogName, dogImage, div, dogIsNaughty, dogIsGood)
   main.append(newCard)
 }
 
@@ -55,7 +75,6 @@ function createForm() {
 
   const newSection = document.createElement('section')
   newSection.setAttribute('class', 'main__dog-section form-section')
-  newSection.style.display = 'none'
 
   const newTitle = document.createElement('h2')
   newTitle.innerText = 'Add a new Dog'
@@ -96,72 +115,70 @@ function createForm() {
   newSubmit.setAttribute('name', 'submit')
   newSubmit.setAttribute('value', "Let's add a dog!")
   newSubmit.setAttribute('class', 'form__button')
-  newForm.addEventListener('submit', formSubmit)
+  newForm.addEventListener('submit', submitForm)
 
   newForm.append(newLabel, newInput, newLabel1, newInput1, newLabel2, newTextarea, newSubmit)
   newSection.append(newTitle, newForm)
   main.append(newSection)
-  formButtonListen()
 }
 
-function formSubmit(event) {
+function submitForm(event) {
   event.preventDefault();
   const myFormData = new FormData(event.target);
-  console.log('myformdata', myFormData)
-  console.log('event.target', event.target)
-  console.log('event', event)
-
+  
   const formDataObj = {};
   myFormData.forEach((value, key) => (formDataObj[key] = value));
-  console.log(formDataObj);
-  createListItem(formDataObj)
-  createDogCard(formDataObj)
-  
-}
-function buttonClick(event) {
-  const id = event.currentTarget.id
-  toggleCard(id)
+  updateListItems(formDataObj)
 }
 
-function toggleCard(id) {
-  const currentDog = `#dog${id}`
-  const currentCard = document.getElementById(currentDog)
-
-  for (let i = 0; i <= data.length; i++) {
-    if (i === id) {}
-    else {
-      let otherDog = `#dog${i}`
-      let current = document.getElementById(otherDog)
-      let form = document.querySelector('.form-section')
-      console.log(form)
-      current.style.display = 'none'
-      form.style.display = 'none'
-    }
+function updateCard(currentDog) {
+  const baseCard = document.querySelector('.main__dog-section')
+  if(baseCard) {
+    baseCard.remove()
+    createCard()
   }
-  currentCard.style.display = 'block'
-}
 
-function formButtonListen() {
-  const formButton = document.querySelector('.dogs-list__button--add')
-  formButton.addEventListener('click', formButtonClicked)
-}
+  const dogName = document.querySelector('.main__dog-section > h2')
+  dogName.innerText = currentDog.name
 
-function formButtonClicked() {
-  const form = document.querySelector('.form-section')
-  for (let i = 0; i <= data.length; i++) {
-    let otherDog = `#dog${i}`
-    let current = document.getElementById(otherDog)
-    current.style.display = 'none'
+  const dogImage = document.querySelector('.main__dog-section > img')
+  dogImage.setAttribute('src', currentDog.image)
+
+  const dogBio = document.querySelector('.main__dog-section__desc > p')
+  dogBio.innerText = currentDog.bio
+
+  const isGoodDogParagraph = document.querySelector('.main__dog-section > p')
+  const isGoodDogButton = document.querySelector('.main__dog-section > button')
+  if(currentDog.isGoodDog === true) {
+    isGoodDogButton.innerText = 'Good Dog!'
+    isGoodDogParagraph.innerHTML = '<em>Is naughty?</em> no!'
+  } else {
+    isGoodDogButton.innerText = 'Bad Dog!'
+    isGoodDogParagraph.innerHTML = '<em>Is naughty?</em> yes!'
+
   }
-  form.style.display = 'block'
-  
-}
-function createDogs() {
-  data.forEach(dog => {
-    createListItem(dog)
-    createDogCard(dog)
-  });
-  createForm()
 }
 
-createDogs()
+function updateForm() {
+  const baseCard = document.querySelector('.main__dog-section')
+  if(baseCard) {
+    baseCard.remove()
+    createForm()
+  }
+}
+function goodDogButton() {
+  const isGoodDogParagraph = document.querySelector('.main__dog-section > p')
+  const button = document.querySelector('.main__dog-section > button')
+ 
+  if(button.innerText === 'Good Dog!') {
+    button.innerText = 'Bad Dog!'
+    isGoodDogParagraph.innerHTML = '<em>Is naughty?</em> yes!'
+  } 
+  
+  else if(button.innerText === 'Bad Dog!') {
+    button.innerText = 'Good Dog!'
+    isGoodDogParagraph.innerHTML = '<em>Is naughty?</em> no!'
+  }
+}
+
+createListItems(data)
