@@ -69,39 +69,71 @@ const makeDogList = () => {
             div.append(p)
                
 
-            const goodDogP = document.createElement('p')
-               
-            goodDogP.innerText = "Is naughty?! No"
-        
+// ## Extended
+// - The dog card should have a button that toggles for the selected dog between good dog/ bad dog
+
+// create a p tag
+// add innerText "<em>Is naughty?</em> no!"
+// create a button 
+// add innerText to button "Good dog!"
+// append both to the list
+
+
+        // make the p for good dog question and answer
+            const goodDogP = document.createElement('p')  
+            goodDogP.setAttribute('class','goodness')
+
+        // em tag to go in p
+            const goodDogEm = document.createElement('em')
+            goodDogEm.innerText = "Is naughty?!"
+            goodDogP.append(goodDogEm)  
+        // add the yes or no after em, within p
+            let goodDogPMessage = "No!"
+            goodDogP.append(`${goodDogPMessage}`)
             section.append(goodDogP)
 
+        // make the button for good or bad dog
             const goodDogButton = document.createElement('button')
             goodDogButton.innerText = "Good dog!"
             goodDogButton.setAttribute("id", "switch-color")
-            // goodDogButton.style.backgroundColor = "green"
             section.append(goodDogButton)
 
-
+        // toggle between good and bad status
             let toggle = true;
             const findButton = document.querySelector('#switch-color')
             findButton.addEventListener("click", function event() {
-  
+                    const bad = document.querySelector('.goodness')
+                    bad.innerText = ''
+
                 if (toggle) {
+                    const goodDogEm = document.createElement('em')
+                    goodDogEm.innerText = "Is naughty?!"
+                    goodDogP.append(goodDogEm)
+                    let goodDogPMessage = "Yes!"
+                    goodDogP.append(`${goodDogPMessage}`)
+                    section.append(goodDogP)
+
                     goodDogButton.style.backgroundColor = "red"
                     goodDogButton.innerText = "Bad dog";
+                    section.append(goodDogButton)
 
                 } else {
+                    const goodDogEm = document.createElement('em')
+                    goodDogEm.innerText = "Is naughty?!"
+                    goodDogP.append(goodDogEm)
+                    let goodDogPMessage = "No!"
+                    goodDogP.append(`${goodDogPMessage}`)
+                    section.append(goodDogP)
+
                     goodDogButton.style.backgroundColor = "green"
                     goodDogButton.innerText = "Good dog!"
+                    section.append(goodDogButton)
                 }
                 toggle = !toggle
-  
             })
         }
         )
     }
-        
-    
     }
 
 // when page loads - run this
@@ -238,19 +270,3 @@ function addingDogs() {
 }
 
 addingDogs()
-
-
-// ## Extended
-// - The dog card should have a button that toggles for the selected dog between good dog/ bad dog
-
-// create a p tag
-// add innerText "<em>Is naughty?</em> no!"
-// create a button 
-// add innerText to button "Good dog!"
-// append both to the list
-
-
-
-
-
-
