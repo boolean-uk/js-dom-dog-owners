@@ -136,31 +136,64 @@ for (i = 0; i < data.length; i++) {
             newDogBioTextArea.setAttribute('name', 'bio')
             form.append(newDogBioTextArea)
         //input - submit
-            const newDogSubmit = document.createElement('submit')
+            const newDogSubmit = document.createElement('input')
             newDogSubmit.setAttribute('type','submit')
             newDogSubmit.setAttribute('id','submit')
             newDogSubmit.setAttribute('name','submit')
             newDogSubmit.setAttribute('value',"Let's add a dog!")
             newDogSubmit.setAttribute('class',"form__button")
             newDogSubmit.innerText = "Let's add a dog!"
-        form.append(newDogSubmit);
+            form.append(newDogSubmit);
        
-        const formTop = document.querySelector('.form');
-        const formName = document.querySelector('#name');
-        const formPicure = document.querySelector('#image');
-        
-        function handleForm(event) {
-            console.log('this is the name', document.forms[name])
-        }
-        inputName.addEventListener("input", handleForm)
-        // create a click event targeting the submit button
-        newDogSubmit.addEventListener('click', handleForm);            // check where the info is being stored in the browser
-           
+// when submit is clicked:
+// 1 - read the info from form
+// 2 - make an new object
+// 3 - put info from form into object
+// 4 - put object into array
 
-        
-            
-            // create a new object with that
-            // push that new object into our existing array - data
+
+// create a click event targeting the submit button
+// prevent the browser refreshing on submit
+            form.addEventListener('submit', (event) => {
+                event.preventDefault()
+            })
+            // create var for form - queryselector
+            const newForm = document.querySelector('form')
+            // create vars for each form element - queryselector
+
+// check where the info is being stored in the browser
+            function handleSubmit(event) {
+                // this targets the dog's name input value
+                console.log('name:', event.target.name.value)
+                console.log('image:', event.target.image.value)
+                console.log('bio:', event.target.bio.value)
+// create a new object 
+    // template of data array objects
+                const newDogData = {
+                    id: '',
+                    name: event.target.name.value,
+                    bio: event.target.bio.value,
+                    isGoodDog: true,
+                    image: event.target.image.value,
+                }
+                console.log('new dog', newDogData)
+                data.unshift(newDogData)
+                console.log('data after unshift', data)
+
+            }
+            newForm.addEventListener('submit', handleSubmit)
+
+
+
+
+
+                
+
+            // unshift that new object into our existing array - data
+
+
+
+
 
         
     })
