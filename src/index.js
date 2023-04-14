@@ -96,7 +96,11 @@ function setUpPlusButton(button) {
           <input type="url" id="image" name="image">
           <label for="bio">Dog's bio</label>
           <textarea rows="5" id="bio" name="bio"></textarea>
-          <input type="submit" id="submit" name="submit" value="Let's add a dog!" class="form__button">
+          <div class="checkbox-container">
+          <label for="isGoodDog">Is dog a good dog?</label>
+          <input type="checkbox" id="isGoodDog" name="isGoodDog" checked>
+          </div>
+          <input type="submit" id="submit" name="submit" value="Add a new dog!" class="form__button">
         </form>
       </section>
     `;
@@ -107,41 +111,37 @@ function setUpPlusButton(button) {
       const name = document.querySelector("#name").value;
       const image = document.querySelector("#image").value;
       const bio = document.querySelector("#bio").value;
-
-      // warning message if all fields not eneterd
-      if (!name || !image || !bio) {
-        alert("Fill out all fields before submitting the form.");
-        return;
-      }
-
+      const isGoodDog = document.querySelector("#isGoodDog").checked;
+    
       const newDog = {
         id: data.length + 1,
         name: name,
         image: image,
         bio: bio,
-        isGoodDog: true,
+        isGoodDog: isGoodDog,
       };
-
+    
       data.unshift(newDog);
-
+    
       // create a new list item for the new dog
       const newDogListItem = document.createElement("li");
       newDogListItem.classList.add("dogs-list__button");
       newDogListItem.textContent = newDog.name;
       newDogListItem.dataset.id = newDog.id;
-
+    
       newDogListItem.addEventListener("click", (event) => {
         const selectedDog = data.find(
           (dog) => dog.id === parseInt(event.target.dataset.id)
         );
         renderDog(data.indexOf(selectedDog));
       });
-
+    
       dogsList.insertBefore(newDogListItem, plusButton.nextSibling);
       form.reset();
-
+    
       renderDogList(data);
     });
+    
   });
 }
 
