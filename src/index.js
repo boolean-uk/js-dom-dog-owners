@@ -10,7 +10,9 @@ console.log(data);
     // no need to create ul since we have that in the html
     // give it a class "dogs-list__button" to get some CSS
     // append the li to the ul
-    
+
+
+const makeDogList = () => {    
 for (i = 0; i < data.length; i++) {
     // making the dog list buttons
         const dogInfo = data[i];
@@ -68,6 +70,12 @@ for (i = 0; i < data.length; i++) {
                 div.append(p)
     })
 }
+}
+// when page loads - run this
+// when submit refreshes the list, don't run
+makeDogList(data)
+
+
 
 // 1 - When the plus button is clicked, it should replace the main card 
 // with a form to add a new dog to the list. You'll find a template for 
@@ -177,25 +185,21 @@ for (i = 0; i < data.length; i++) {
                     image: event.target.image.value,
                 }
                 console.log('new dog', newDogData)
+                // unshift that new object into our existing array - data
                 data.unshift(newDogData)
                 console.log('data after unshift', data)
-
-            }
-            newForm.addEventListener('submit', handleSubmit)
-
-
-
-
-
                 
+                // clear the list 
+                const ul = document.querySelector('ul')
+                ul.innerHTML= ''
+                const refreshPlusButton = document.createElement('li')
+                refreshPlusButton.setAttribute('class', 'dogs-list__button dogs-list__button--add')
+                refreshPlusButton.innerText= '+'
+                ul.append(refreshPlusButton)
 
-            // unshift that new object into our existing array - data
-
-
-
-
-
-        
+                makeDogList(data)
+            }
+            newForm.addEventListener('submit', handleSubmit)   
     })
 
 
