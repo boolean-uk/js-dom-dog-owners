@@ -17,7 +17,7 @@ body {
   font-family: sans-serif;
   color: var(--dark-text);
   background-color: var(--white);
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 img {
@@ -132,6 +132,7 @@ img {
 .main__dog-section button {
   padding: 1rem;
   font-size: 1.2rem;
+  margin: 0 2px;
 
   background-color: var(--blue);
   color: var(--white);
