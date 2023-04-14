@@ -132,6 +132,7 @@ function newDog() {
     newDogNameInput.setAttribute(`type`, `text`)
     newDogNameInput.setAttribute(`id`, `name`)
     newDogNameInput.setAttribute(`name`, `name`)
+    newDogNameInput.setAttribute(`required`, ``)
 
     const newDogImageLabel = document.createElement(`label`)
     newDogImageLabel.setAttribute(`for`, `image`)
@@ -150,6 +151,7 @@ function newDog() {
     newDogTextArea.setAttribute(`rows`, `5`)
     newDogTextArea.setAttribute(`id`, `bio`)
     newDogTextArea.setAttribute(`name`, `bio`)
+    newDogTextArea.setAttribute(`required`, ``)
 
     const newDogInput = document.createElement(`input`)
     newDogInput.setAttribute(`type`, `submit`)
@@ -180,6 +182,7 @@ function newDog() {
       newDogInput.value = `Thank you :)`
       newDogInput.style.backgroundColor = "var(--green)"
       setTimeout(() => {
+        refreshMenu()
         createCard(0)
       }, 2000);
     })
@@ -196,7 +199,6 @@ function addNewDog(name, image, bio) {
     image: image,
   }
   data.unshift(newDogObject)
-  refreshMenu()
 }
 
 function refreshMenu() {
