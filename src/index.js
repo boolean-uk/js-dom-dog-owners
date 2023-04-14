@@ -54,10 +54,10 @@ function renderDog(dogIndex) {
   isGoodDogEl.innerHTML = `<em>Is naughty?</em> ${dogIsGoodDog ? "no" : "yes"}!`;
 
   const goodDogButton = document.createElement("button");
-  goodDogButton.innerText = dogIsGoodDog ? "Bad dog!" : "Good dog!";
+  goodDogButton.innerText = dogIsGoodDog ? "Good dog!" : "Bad dog!";
   goodDogButton.addEventListener("click", () => {
     data[dogIndex]["isGoodDog"] = !data[dogIndex]["isGoodDog"];
-    goodDogButton.innerText = data[dogIndex]["isGoodDog"] ? "Bad dog!" : "Good dog!";
+    goodDogButton.innerText = data[dogIndex]["isGoodDog"] ? "Good dog!" : "Bad dog!";
     isGoodDogEl.innerHTML = `<em>Is naughty?</em> ${data[dogIndex]["isGoodDog"] ? "no" : "yes"}!`;
   });
 
@@ -66,6 +66,7 @@ function renderDog(dogIndex) {
 
   mainDogSection.append(dogDescEl);
 }
+
 
 const plusButton = document.querySelector(".dogs-list__button--add");
 
