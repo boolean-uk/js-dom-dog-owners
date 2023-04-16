@@ -30,11 +30,6 @@ function renderList(){
     })
   
     function dogCards() {
-      // Create a section
-      // const main = document.querySelector('.main')
-      // const section = document.querySelector('section')
-      // section.setAttribute('class', 'main__dog-section')
-      // main.append(section)
       // create H2
       formsSection.innerHTML = ''
       const cardName = document.createElement('h2')
@@ -122,7 +117,7 @@ function addNewDog(){
 
 
 plusButton.addEventListener('click', () => {
-  // const formslist = document.querySelector('.dogs-list__button--add')
+
   formsSection.innerHTML = ''
   const formsTitle = document.createElement('h2')
   formsTitle.innerText = 'Add a new Dog'
@@ -174,20 +169,6 @@ plusButton.addEventListener('click', () => {
   form.append(formSubmitButton)
 
   
-  // formSubmitButton.addEventListener('submit', () => {
-    //   //event.defaultPrevented();
-    
-    //   //newDogObj.addEventListener("click", () =>{
-  //       newDogObj ={
-    //           id: data.length + 1,
-    //           name: formInputName.value,
-    //           image: formInputImage.value,
-    //           isGoodDog: true,
-    //           bio: formInputBio.value
-    //       }
-    //       //cards(i)
-    //       data.unshift(newDogObj)
-    // })
 
     function addNewDog(){
       data.unshift({
@@ -203,7 +184,6 @@ plusButton.addEventListener('click', () => {
 
     formSubmitButton.addEventListener('click', (event) => {
       
-      // listItem.remove()
       for (let i = 0; i <= data.length; i++){
         document.querySelector('.dogs-list__button').remove()
       }
