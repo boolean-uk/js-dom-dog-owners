@@ -17,7 +17,7 @@ body {
   font-family: sans-serif;
   color: var(--dark-text);
   background-color: var(--white);
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 img {
@@ -25,6 +25,7 @@ img {
   max-width: 100%;
   object-fit: cover;
   margin: 0 auto;
+  height: 349.67px
 }
 
 /* Layout */
