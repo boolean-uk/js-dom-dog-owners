@@ -26,8 +26,8 @@ for (let i = 0; i < data.length; i++) {
     const img = document.createElement("img");
     section.append(img);
     img.src = data[i].image;
-    img.setAttribute('width', '400');
-    img.setAttribute('height', '300')
+    img.setAttribute("width", "400");
+    img.setAttribute("height", "300");
 
     const div = document.createElement("div");
     section.append(div);
@@ -55,39 +55,97 @@ for (let i = 0; i < data.length; i++) {
     const em = document.createElement("em");
     pTwo.insertAdjacentElement("afterbegin", em);
     em.innerText = "Is naughty?  ";
-  
 
-  const button = document.createElement('button');
-  section.append(button);
+    const button = document.createElement("button");
+    section.append(button);
 
-  if(data[i].isGoodDog === true){
-    button.innerText = 'Bad Dog';
-  } else {
-    button.innerText = 'Good Dog';
-  }
+    if (data[i].isGoodDog === true) {
+      button.innerText = "Bad Dog";
+    } else {
+      button.innerText = "Good Dog";
+    }
 
-button.addEventListener('click', function(){
-  if(data[i].isGoodDog === true){
-    button.innerText = 'Good Dog';
-    naughty = " Yes!";
-    pTwo.innerText = naughty;
-    const em = document.createElement("em");
-    pTwo.insertAdjacentElement("afterbegin", em);
-    em.innerText = "Is naughty?  ";
-  } else {
-    button.innerText = 'Bad Dog';
-    naughty = " No!";
-    pTwo.innerText = naughty;
-    const em = document.createElement("em");
-    pTwo.insertAdjacentElement("afterbegin", em);
-    em.innerText = "Is naughty?  ";
-  }
-})
+    button.addEventListener("click", function () {
+      if (data[i].isGoodDog === true) {
+        button.innerText = "Good Dog";
+        naughty = " Yes!";
+        pTwo.innerText = naughty;
+        const em = document.createElement("em");
+        pTwo.insertAdjacentElement("afterbegin", em);
+        em.innerText = "Is naughty?  ";
+      } else {
+        button.innerText = "Bad Dog";
+        naughty = " No!";
+        pTwo.innerText = naughty;
+        const em = document.createElement("em");
+        pTwo.insertAdjacentElement("afterbegin", em);
+        em.innerText = "Is naughty?  ";
+      }
+    });
   });
 }
 
-// 6. Add eventListener and main card to the plus button.
-// 7. Add empty .innerHTML for removing the section.
-// 8. Create a new form
+// select "+" button
+const plus = document.querySelector(".dogs-list__button");
+// add eventlistener to plus button
+plus.addEventListener("click", function () {
+  // Add empty .innerHTML for removing the section.
+  const main = document.querySelector("main");
+  main.innerText = "";
+  // Add section
+  const section = document.createElement("section");
+  section.setAttribute("class", "main__dog-section");
+  main.append(section);
+  // add h2
+  const h2 = document.createElement("h2");
+  section.append(h2);
+  h2.innerText = "Add a new Dog";
+  // add form
+  const form = document.createElement("form");
+  form.setAttribute("class", "form");
+  section.append(form);
+  // add first label
+  const label = document.createElement("label");
+  label.setAttribute("for", "name");
+  label.innerText = "Dog's name";
+  form.append(label);
+  // add first input
+  const input = document.createElement("input");
+  input.setAttribute("type", "text");
+  input.setAttribute("id", "name");
+  input.setAttribute("name", "name");
+  form.append(input);
+  // add second label
+  const label2 = document.createElement("label");
+  label2.setAttribute("for", "image");
+  label2.innerText = "Dog's picture";
+  form.append(label2);
+  // add second input
+  const input2 = document.createElement("input");
+  input2.setAttribute("type", "url");
+  input2.setAttribute("id", "image");
+  input2.setAttribute("name", "image");
+  form.append(input2);
+  // add third label
+  const label3 = document.createElement("label");
+  label3.setAttribute("for", "bio");
+  label3.innerText = "Dog's Bio";
+  form.append(label3);
+  // add textarea
+  const textarea = document.createElement("textarea");
+  textarea.setAttribute("rows", "5");
+  textarea.setAttribute("id", "bio");
+  textarea.setAttribute("name", "bio");
+  form.append(textarea);
+  // add last input
+  const input3 = document.createElement("input");
+  input3.setAttribute("type", "submit");
+  input3.setAttribute("id", "submit");
+  input3.setAttribute("name", "submit");
+  input3.setAttribute("value", "Let's add a dog!");
+  input3.setAttribute("class", "form__button");
+  form.append(input3);
+});
+
 // 9. How to store the information in data.js
 // 10.Display the new dog in to the new 'li' right next to the plus button.
