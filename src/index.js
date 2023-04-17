@@ -145,6 +145,14 @@ plus.addEventListener("click", function () {
   input3.setAttribute("value", "Let's add a dog!");
   input3.setAttribute("class", "form__button");
   form.append(input3);
+  // add eventlistener to submit button
+  input3.addEventListener("submit", function (event) {
+    event.preventDefault();
+    const addnewdogList = document.querySelector(".dogs-list");
+    const newli = document.createElement("li");
+    li.innerText = "New Dog test";
+    addnewdogList.appendChild(newli);
+  });
 });
 
 // 9. How to store the information in data.js
