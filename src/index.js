@@ -3,33 +3,23 @@ console.log(data);
 // WRITE YOUR CODE BELOW!
 // Query Selectors
 
-const dogListUL = document.querySelector(".dogs-list");
 const dogMainSection = document.querySelector(".main");
 const dogSection = document.querySelector(".main__dog-section");
-
-function clearTopButton() {
-  dogListUL.innerHTML =
-    '<li class="dogs-list__button dogs-list__button--add">+</li>';
-
-  const addButton = document.querySelector(".dogs-list__button--add");
-
-  addButton.addEventListener("click", function (eventOBJ) {
-    newForm();
-  });
-}
+const dogListUL = document.querySelector(".dogs-list");
+const plusButton = document.querySelector(".dogs-list__button--add");
 
 // Creating Top Buttons from Data
+// Creating for Loop for Data
+
 function renderDogButtons() {
-  clearTopButton();
-
   for (let i = 0; i < data.length; i++) {
-    const dogLI = document.createElement("li");
-    dogLI.innerText = data[i].name;
-    dogLI.setAttribute("class", "dogs-list__button");
-    dogLI.setAttribute("id", i);
-    dogListUL.append(dogLI);
+    const dogList = document.createElement("li");
+    dogList.innerText = data[i].name;
+    dogList.setAttribute("class", "dogs-list__button");
+    dogList.setAttribute("id", i);
+    dogListUL.append(dogList);
 
-    dogLI.addEventListener("click", function (eventOBJ) {
+    dogList.addEventListener("click", function (eventOBJ) {
       dogCard(eventOBJ.target.id);
     });
   }
@@ -40,6 +30,7 @@ function dogCard(value) {
 
   const selectedCurrentDog = data[value];
   const dogSection = document.createElement("section");
+
   dogSection.setAttribute("class", "main__dog-section");
   dogMain.append(dogSection);
 
@@ -61,8 +52,40 @@ function dogCard(value) {
   dogDiv.append(dogH3);
 
   const dogP = document.createElement("p");
-  dogP.innerText = selectedCurrentDog.bio;
+  dogP.innerText = currentDog.bio;
   dogDiv.append(dogP);
+
+  // Naughty Dog Text
+  const p = document.createElement("p");
+  const em = document.createElement("em");
+  const button = document.createElement("button");
+  p.innerText = "Is naughty?";
+
+  function changeButton() {
+    if (data[i].isGoodDog === true) {
+      em.innerText = " No!";
+      button.innerText = "Bad dog!";
+      data[i].isGoodDog = false;
+    } else if (data[i].isGoodDog === false) {
+      em.innerText = " Yes!";
+      button.innerText = "Good dog!";
+      data[i].isGoodDog = true;
+    }
+  }
+
+  button.addEventListener("click", changeButton);
+
+  if (data[i].isGoodDog === true) {
+    em.innerText = " Yes!";
+    button.innerText = "Good dog!";
+  } else if (data[i].isGoodDog === false) {
+    em.innerText = " No!";
+    button.innerText = "Bad dog!";
+  }
+
+  p.append(em);
+  dogSection.append(p);
+  dogSection.append(button);
 }
 
 function dogCard(value) {
@@ -93,85 +116,70 @@ function dogCard(value) {
   const dogP = document.createElement("p");
   dogP.innerText = selectedCurrentDog.bio;
   dogDiv.append(dogP);
-}
 
-function dogForm() {
-  dogMainSection.innerHTML = "";
+  function dogForm() {}
 
-  const dogSection = document.createElement("section");
-  dogSection.setAttribute("class", "main__dog-section");
-  dogMainSection.append(dogSection);
+  plusButton.addEventListener("click", () => {
+    dogMainSection.innerHTML = "";
 
-  const newCardH2 = document.createElement("h2");
-  newCardH2.innerText = "Add a new Dog";
-  dogSection.append(newCardH2);
+    const dogSection = document.createElement("section");
+    dogSection.setAttribute("class", "main__dog-section");
+    dogMainSection.append(dogSection);
 
-  const doggyForm = document.createElement("form");
-  doggyForm.setAttribute("class", "form");
-  dogSection.append(doggyForm);
+    const newCardH2 = document.createElement("h2");
+    newCardH2.innerText = "Add a new Dog";
+    dogSection.append(newCardH2);
 
-  const dogLabel = document.createElement("label");
-  dogLabel.setAttribute = ("form", "name");
-  dogForm.append(dogLabel);
+    const newDogForm = document.createElement("form");
+    newDogForm.setAttribute("class", "form");
+    dogSection.append(doggyForm);
 
-  const dogLabelName = document.createElement("input");
-  dogInputName.setAttribute("form", "name");
-  dogInputName.innerText = "Dog's name";
-  dogForm.append(dogInputName);
+    const dogLabel = document.createElement("label");
+    dogLabel.setAttribute = ("form", "name");
+    newDogdogForm.append(dogLabel);
 
-  const dogInputName = document.createElement("label");
-  dogInputName.setAttribute("type", "text");
-  dogInputName.setAttribute("id", "name");
-  dogInputName.setAttribute("name", "name");
-  dogForm.append(dogInputName);
+    const dogLabelName = document.createElement("input");
+    dogInputName.setAttribute("form", "name");
+    dogInputName.innerText = "Dog's name";
+    newDogForm.append(dogInputName);
 
-  const dogImgLabel = document.createElement("label");
-  dogBioLabel.setAttribute("for", "image");
-  dogBioLabel.innerText("Dog's picture");
-  dogForm.append(dogImgLabel);
+    const dogInputName = document.createElement("label");
+    dogInputName.setAttribute("type", "text");
+    dogInputName.setAttribute("id", "name");
+    dogInputName.setAttribute("name", "name");
+    newDogForm.append(dogInputName);
 
-  const dogImgInput = document.createElement("input");
-  dogImgInput.setAttribute("type", "url");
-  dogImgInput.setAttribute("id", "image");
-  dogImgInput.setAttribute("name", "image");
-  dogForm.append(dogImgInput);
+    const dogImgLabel = document.createElement("label");
+    dogBioLabel.setAttribute("for", "image");
+    dogBioLabel.innerText("Dog's picture");
+    newDogForm.append(dogImgLabel);
 
-  const dogLabelBio = document.createElement("label");
-  dogLabelBio.setAttribute("for", "bio");
-  dogLabelBio.innerText = "Dog's Bio";
-  dogForm.append(dogLabelBio);
+    const dogImgInput = document.createElement("input");
+    dogImgInput.setAttribute("type", "url");
+    dogImgInput.setAttribute("id", "image");
+    dogImgInput.setAttribute("name", "image");
+    newDogForm.append(dogImgInput);
 
-  const dogTextArea = document.createElement("textarea");
-  dogTextArea.setAttribute("rows", "5");
-  dogTextArea.setAttribute("id", "bio");
-  dogTextArea.setAttribute("name", "bio");
-  dogForm.append(dogTextArea);
+    const dogLabelBio = document.createElement("label");
+    dogLabelBio.setAttribute("for", "bio");
+    dogLabelBio.innerText = "Dog's Bio";
+    newDogForm.append(dogLabelBio);
 
-  const dogInputSubmit = document.createElement("input");
-  dogInputSubmit.setAttribute("type", "submit");
-  dogInputSubmit.setAttribute("id", "submit");
-  dogInputSubmit.setAttribute("name", "submit");
-  dogInputSubmit.setAttribute("value", "Let's add a dog!");
-  dogInputSubmit.setAttribute("class", "form__button");
-  dogForm.append(dogInputSubmit);
+    const dogTextArea = document.createElement("textarea");
+    dogTextArea.setAttribute("rows", "5");
+    dogTextArea.setAttribute("id", "bio");
+    dogTextArea.setAttribute("name", "bio");
+    newDogForm.append(dogTextArea);
 
-  const dogForm = document.querySelector(".form");
+    const dogInputSubmit = document.createElement("input");
+    dogInputSubmit.setAttribute("type", "submit");
+    dogInputSubmit.setAttribute("id", "submit");
+    dogInputSubmit.setAttribute("name", "submit");
+    dogInputSubmit.setAttribute("value", "Let's add a dog!");
+    dogInputSubmit.setAttribute("class", "form__button");
+    newDogForm.append(dogInputSubmit);
 
-  dogForm.addEventListener("submit", (eventOBJ) => {
-    eventOBJ.preventDefault();
-
-    const dogOBJ = {
-      id: data.length + 1,
-      name: nameInput.value,
-      image: imgInput.value,
-      isGoodDog: true,
-      bio: bioTextArea.value,
-    };
-
-    data.unshift(dogOBJ);
-
-    renderDogButtons();
-    dogSection.innerHTML = "<h2>No dogs ?!?</h2>";
+    const dogForm = document.querySelector(".form");
   });
 }
 renderDogButtons();
