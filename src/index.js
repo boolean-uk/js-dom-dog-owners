@@ -4,18 +4,19 @@ const main = document.querySelector('.main')
 const add = document.querySelector('.dogs-list__button--add')
 const oldUl = document.querySelector('ul')
 
-for (let i = 0; i < data.length; i++) {
-    // Creates new li
-    const newDogButt = document.createElement('li')
+// DELETED AND INSTEAD RAN THE 'renderDogs FUNCTION AT START'
+// for (let i = 0; i < data.length; i++) {
+//     // Creates new li
+//     const newDogButt = document.createElement('li')
     
-    // Stores each dog in dog var then adds class and name
-    const dog = data[i]
-    newDogButt.classList.add('dogs-list__button')
-    newDogButt.innerText = dog.name
+//     // Stores each dog in dog var then adds class and name
+//     const dog = data[i]
+//     newDogButt.classList.add('dogs-list__button')
+//     newDogButt.innerText = dog.name
     
-    // appends new li into our Ul
-    dogButts.append(newDogButt)
-}
+//     // appends new li into our Ul
+//     dogButts.append(newDogButt)
+// }
 
 add.addEventListener('click', () => {
     // First i will clear the main section
@@ -97,6 +98,9 @@ function renderDogs () {
     add.remove();
     oldUl.innerHTML = ''
     oldUl.insertAdjacentElement('afterbegin', add)
+    // add.remove();
+    // oldUl.innerHTML = ''
+    // oldUl.append(add)
     for (let i = 0; i < data.length; i++) {
         // Creates new li
         const newDogButt = document.createElement('li')
@@ -192,3 +196,4 @@ function renderDogs () {
         })
     }
 }
+renderDogs()
