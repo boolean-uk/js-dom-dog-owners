@@ -50,7 +50,7 @@ add.addEventListener('click', () => {
     imageLabel.setAttribute('for', 'image')
     imageLabel.innerText = "Dog's picture"
     const imageInput = document.createElement('input')
-    imageInput.setAttribute('placeholder', 'This is hardcoded')
+    imageInput.setAttribute('placeholder', 'Enter image Url')
     imageInput.setAttribute('type', 'url')
     imageInput.setAttribute('id', 'image')
     imageInput.setAttribute('name', 'image')
@@ -82,7 +82,7 @@ add.addEventListener('click', () => {
         let newDog = {
             name: `${nameInput.value}`,
             isGoodDog: true,
-            image: "https://curriculum-content.s3.amazonaws.com/js/woof-woof/dog_1.jpg",
+            image: `${imageInput.value}`,
             bio: `${bioInput.value}`
         }
         data.unshift(newDog)
