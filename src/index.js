@@ -9,9 +9,17 @@ const dogsData = data
     //append li item with class "dogs-list__button"
 
 
-const navListItem = document.createElement("li")
-navListItem.innerText = "Hello"
 
-const dogsList = document.querySelector(".dogs-list")
 
-dogsList.append(navListItem)
+
+data.forEach(dog => {
+  const navListItem = document.createElement("li")
+  const dogName=dog.name
+  navListItem.innerText=dogName
+  navListItem.className= "dogs-list__button"
+  const dogsList = document.querySelector(".dogs-list")
+  dogsList.append(navListItem)
+
+});
+
+
