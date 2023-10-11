@@ -15,6 +15,8 @@ function makeDogNavBar() {
     navListItem.innerText = dogName;
     navListItem.className = "dogs-list__button";
     const dogsList = document.querySelector(".dogs-list");
+
+    navListItem.addEventListener('click', () => makeDogCard(dog))
     dogsList.append(navListItem);
   });
 }
@@ -123,4 +125,3 @@ makeDogNavBar();
 
 const dog = dogs[5];
 makeDogCard(dog);
-
