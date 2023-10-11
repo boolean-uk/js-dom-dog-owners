@@ -1,6 +1,18 @@
 console.log(data);
 
 // WRITE YOUR CODE BELOW!
+function dog(name, bio, image) {
+  this.id = data.length:
+  this.name = name;
+  this.image = image;
+  this.bio = bio;
+}
+
+const addDog = (name, bio, image) => {
+  data.unshift(new dog(name, bio, image))
+  fillNav()
+}
+
 const findDogObj = (name) => {
   const foundDog = data.find(val => val.name === name)
   console.log(foundDog)
