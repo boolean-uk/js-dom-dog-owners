@@ -76,11 +76,19 @@ const render = (res) => {
                 </p>
             </div>
             <p><em>Is naughty?</em> ${res.isGoodDog ? "No!" : "Yes!"}</p>
-            <button>${res.isGoodDog ? "Good dog!" : "Bad Dog!"}</button>
+            <button onClick=toggleDogStatus(${res.id + "," + res.isGoodDog})>${
+        res.isGoodDog ? "Good dog!" : "Bad Dog!"
+    }</button>
         </section> 
     `;
 
     main.innerHTML = element;
+};
+
+const toggleDogStatus = (id, status) => {
+    const dog = newData.find((dog) => dog.id === id);
+    dog.isGoodDog = !status;
+    render(dog);
 };
 
 renderNavigation();
