@@ -1,13 +1,17 @@
-console.log(data);
-const dogsList = document.querySelector('.dogs-list')
+//TODO: render the navbar (dog list) : DONE
+//TODO: break down the problem: DONE
+//TODO: draft overal code structure, name functions: DONE
+//TODO: write the functions to render the image and info for dog[0] on click
+//TODO: figure out how to make this apply to all other dogs and their corresponding buttons
 
-//create the mainCard section 
-const mainSection = document.querySelector('.main__dog-section')
-const mainCard = document.createElement('section')
-mainSection.append(mainCard)
+
+
+//access the mainCard section 
+const mainCard= document.querySelector('.main__dog-section')
 
 
 // render and append a dog button
+const dogsList = document.querySelector('.dogs-list')
 let dogsListElement
 
 const makeDogButton = (dog) => {
@@ -22,25 +26,53 @@ data.forEach(dog => makeDogButton(dog))
 
 
 
-//core
-
 //rendering each element inside the main card
-const renderDogName = () => {}
-const renderDogImage = () => {} 
-const createDogInfoSection = () => {}
-const createDogBioH3 = () => {}
-const renderBio = () => {}
-const renderIsDogNaughty = () => {}
+const renderDogName = () => {
+    const dogName = document.querySelector('h2')
+    dogName.innerText = `${data[0].name}`
+}
+const renderDogImage = () => {
+    const dogPic = document.createElement('img')
+    mainCard.append(dogPic)
+    dogPic.setAttribute('src', `${data[0].image}`)
+    
+} 
+
+let infoSection
+const createDogInfoSection = () => {
+    infoSection = document.createElement('div')
+    mainCard.append(infoSection)
+    infoSection.setAttribute('class', "main__dog-section__desc")
+}
+const createDogBioH3 = () => {
+    const dogBioTitle = document.createElement('h3')
+    infoSection.append(dogBioTitle)
+    dogBioTitle.innerText = 'Bio'
+}
+const renderBio = () => {
+    const dogBio  = document.createElement('p')
+    infoSection.append(dogBio)
+    dogBio.innerText = `${data[0].bio}`
+}
+const renderIsDogNaughty = () => {
+    const isDogNaughty = document.createElement('p')
+    mainCard.append(isDogNaughty)
+    isDogNaughty.innerText = `Is naughty? ${
+        data[0].isGoodDog === true ? "No!" : "Yes!"
+    }`
+}
 
 //render the main card
 const renderDogCard = () => {
-    renderDogName = () => {}
-    renderDogImage = () => {}
-    createDogInfoSection = () => {}
-    createDogBioH3 = () => {}
-    renderBio = () => {}
-    renderIsDogNaughty = () => {}
+    renderDogName()
+    renderDogImage()
+    createDogInfoSection()
+    createDogBioH3()
+    renderBio()
+    renderIsDogNaughty()
 }
+
+
 
 dogsListElement.addEventListener('click', renderDogCard())
 
