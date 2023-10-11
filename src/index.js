@@ -2,6 +2,10 @@ console.log(data);
 
 // WRITE YOUR CODE BELOW!
 
+const goodBadDog = () => {
+    data.isGoodDog = !data.isGoodDog;
+}
+
 const yesOrNo = (data) => {
     let answer = "";
     if (data.isGoodDog === true) {
@@ -22,31 +26,14 @@ const goodBad = (data) => {
     return answer;
 };
 
-
 const dogButtonList = document.querySelector(".dogs-list");
 const main = document.querySelector(".main");
 
 
 const removeDogs = () => {
-    const allContent = document.querySelectorAll(".main > *")
-    allContent.forEach((val) => val.remove())
-}
-
-
-
-// MAKE THIS ITS OWN FUNCTION//
-data.forEach((dogName) => {
-    const dogButton = document.createElement("li");
-    dogButton.innerText = `${dogName.name}`;
-    dogButton.setAttribute("class", "dogs-list__button");
-    dogButton.setAttribute("Id", `${dogName.name}`);
-    dogButtonList.append(dogButton);
-
-    dogButton.addEventListener("click", () => {
-        removeDogs()
-        createDog(dogName)
-    });
-});
+    const allContent = document.querySelectorAll(".main > *");
+    allContent.forEach((val) => val.remove());
+};
 
 const createDog = (dogCard) => {
     const mainDogSection = document.createElement("section");
@@ -75,14 +62,38 @@ const createDog = (dogCard) => {
     dogBioSection.append(p);
 
     const pOne = document.createElement("p");
-    // MAKE THS A FUNCTION//
     pOne.innerHTML = `<em> Is naughty? <em> ${yesOrNo(dogCard)}`;
     mainDogSection.append(pOne);
 
+
+    // NEED HELP SORTING THIS ONE OUT//
     const button = document.createElement("button");
     button.innerText = `${goodBad(dogCard)}`;
     mainDogSection.append(button);
     button.addEventListener("click", () => {
-        dogCard.isGoodDog = !dogCard.isGoodDog;
+        goodBadDog();
+        console.log(data.isGoodDog)
+        pOne.innerHTML = `<em> Is naughty? <em> ${yesOrNo(dogCard)}`;
+        button.innerText = `${goodBad(dogCard)}`;
+        mainDogSection.append(pOne);
+        mainDogSection.append(button);
     });
 };
+
+const createDogNav = (dogName) => {
+    const dogButton = document.createElement("li");
+    dogButton.innerText = `${dogName.name}`;
+    dogButton.setAttribute("class", "dogs-list__button");
+    dogButton.setAttribute("Id", `${dogName.name}`);
+    dogButtonList.append(dogButton);
+
+    dogButton.addEventListener("click", () => {
+        removeDogs();
+        createDog(dogName);
+    });
+};
+
+
+data.forEach((value) => {
+    createDogNav(value);
+});
