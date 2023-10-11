@@ -12,6 +12,72 @@ const clearMain = () => {
   content.forEach((val) => val.remove())
 }
 
+const addForm = () => {
+  const addForm = document.querySelector(".dogs-list__button--add")
+  addForm.addEventListener("click", () => createForm())
+}
+
+const createForm = () => {
+  clearMain()
+  const section = document.createElement("section")
+  section.setAttribute("class", "main__dog-section")
+
+  const h2 = document.createElement("h2")
+  h2.innerText = "Add a new Doge"
+  section.appendChild(h2)
+
+  const form = document.createElement("form")
+  form.setAttribute("class", "form")
+
+  const formName = document.createElement("label")
+  formName.setAttribute("for", "name")
+  formName.innerText = "Dog's name"
+
+  const inputFieldName = document.createElement("input")
+  inputFieldName.setAttribute("type", "text")
+  inputFieldName.setAttribute("id", "name")
+  inputFieldName.setAttribute("name", "name")
+
+  const formIMG = document.createElement("label")
+  formIMG.setAttribute("for", "image")
+  formIMG.innerText = "Dog's picture"
+
+  const inputIMG = document.createElement("input")
+  inputIMG.setAttribute("type", "url")
+  inputIMG.setAttribute("id", "image")
+  inputIMG.setAttribute("name", "image")
+
+  const formBio = document.createElement("label")
+  formBio.setAttribute("for", "bio")
+  formBio.innerText = "Dog's bio"
+
+  const inputBio = document.createElement("textarea")
+  inputBio.setAttribute("rows", "5")
+  inputBio.setAttribute("id", "bio")
+  inputBio.setAttribute("name", "bio")
+
+  form.appendChild(formName)
+  form.appendChild(inputFieldName)
+  form.appendChild(formIMG)
+  form.appendChild(inputIMG)
+  form.appendChild(formBio)
+  form.appendChild(inputBio)
+
+  const submit = document.createElement("input")
+  submit.setAttribute("type", "submit")
+  submit.setAttribute("id", "submit")
+  submit.setAttribute("name", "submit")
+  submit.setAttribute("value", "Let's add a doge!")
+  submit.setAttribute("class", "form_button")
+
+  form.appendChild(submit)
+
+  section.appendChild(form)
+
+  const main = document.querySelector("main")
+  main.appendChild(section)
+}
+
 const fillNav = () => {
   const nav = document.querySelector("header > ul")
   console.log(nav)
@@ -70,3 +136,4 @@ const renderDogCard = (dog) => {
 }
 
 fillNav()
+addForm()
