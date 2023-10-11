@@ -18,7 +18,8 @@ const fillNav = () => {
   data.forEach(dog => {
     const li = document.createElement("li")
     li.setAttribute("class", "dogs-list__button")
-    li.innerText = dog. name
+    li.innerText = dog.name
+    li.addEventListener('click', () => renderDogCard(dog))
     nav.append(li)
   })
 }
@@ -27,7 +28,11 @@ const fillMain = (element) => {
   const main = document.querySelector("main")
 }
 
+const test = (input) => console.log(input)
+
 const renderDogCard = (dog) => {
+  clearMain()
+
   const main = document.querySelector("main")
 
   const card = document.createElement("section")
@@ -64,7 +69,4 @@ const renderDogCard = (dog) => {
   main.appendChild(card)
 }
 
-clearMain()
 fillNav()
-
-fillMain(renderDogCard(data[0]))
