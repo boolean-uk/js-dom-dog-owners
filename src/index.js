@@ -69,6 +69,8 @@ function createDogCard(dog) {
     (button.innerText = "Good Dog!", p.innerHTML = "<em>Is naughty?</em> no!")
     : (button.innerText = "Bad Dog!", p.innerHTML = "<em>Is naughty?</em> yes!");
 
+    button.addEventListener("click", goodDogBadDog);
+
     const desc = createDogCardDesc(dog);
 
     //Append Changes
@@ -80,6 +82,15 @@ function renderDogCard(dog) {
     const noDogs = document.querySelector(".main__dog-section");
 
     noDogs ? (noDogs.remove(), createDogCard(dog)): noDogs;
+};
+
+function goodDogBadDog() {
+    const button = document.querySelector(".main__dog-section > button");
+    const p = document.querySelector(".main__dog-section > p");
+
+    button.innerText === "Good Dog!" ?
+    (button.innerText = "Bad Dog!", p.innerHTML = "<em>Is naughty?</em> yes!")
+    : (button.innerText = "Good Dog!", p.innerHTML = "<em>Is naughty?</em> no!");
 };
 
 //Form
@@ -119,7 +130,7 @@ function createForm() {
     submit.setAttribute("value", "Let's add a dog!");
     submit.setAttribute("class", "form__button");
 
-    form.addEventListener("submit", submitForm)
+    form.addEventListener("submit", submitForm);
 
     form.append(
         labelName, 
