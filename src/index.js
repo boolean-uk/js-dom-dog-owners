@@ -1,13 +1,17 @@
 console.log(data);
 const dogsList = document.querySelector('.dogs-list')
 
+const makeDogButton = (dog) => {
 
-data.forEach(dog => {
     const dogsListElement = document.createElement('li')
     dogsList.append(dogsListElement)
     dogsListElement.innerText = `${dog.name}`
     dogsListElement.setAttribute('class', 'dogs-list__button')
-})
+
+}
+
+
+data.forEach(dog => makeDogButton(dog))
 
 
 
@@ -16,8 +20,7 @@ data.forEach(dog => {
 
 
 
-// - Render the top list of dogs as:
-// <li class="dogs-list__button">Mr. Bonkers</li> 
+
 
 
 // - Make each list item clickable. 
