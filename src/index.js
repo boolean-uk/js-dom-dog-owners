@@ -1,20 +1,51 @@
 console.log(data);
 const dogsList = document.querySelector('.dogs-list')
 
-const makeDogButton = (dog) => {
+//create the mainCard section 
+const mainSection = document.querySelector('.main__dog-section')
+const mainCard = document.createElement('section')
+mainSection.append(mainCard)
 
-    const dogsListElement = document.createElement('li')
+
+// render and append a dog button
+let dogsListElement
+
+const makeDogButton = (dog) => {
+    dogsListElement = document.createElement('li')
     dogsList.append(dogsListElement)
     dogsListElement.innerText = `${dog.name}`
     dogsListElement.setAttribute('class', 'dogs-list__button')
-
 }
 
-
+// render and append EACH dog button
 data.forEach(dog => makeDogButton(dog))
 
 
 
+//core
+
+//rendering each element inside the main card
+const renderDogName = () => {}
+const renderDogImage = () => {} 
+const createDogInfoSection = () => {}
+const createDogBioH3 = () => {}
+const renderBio = () => {}
+const renderIsDogNaughty = () => {}
+
+//render the main card
+const renderDogCard = () => {
+    renderDogName = () => {}
+    renderDogImage = () => {}
+    createDogInfoSection = () => {}
+    createDogBioH3 = () => {}
+    renderBio = () => {}
+    renderIsDogNaughty = () => {}
+}
+
+dogsListElement.addEventListener('click', renderDogCard())
+
+//extension
+const createIsGoodOrBad = () => {}
 
 
 
