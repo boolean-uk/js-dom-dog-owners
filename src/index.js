@@ -2,10 +2,10 @@
 //TODO: break down the problem: DONE
 //TODO: draft overal code structure, name functions: DONE
 //TODO: write the functions to render the image and info for dog[0]: DONE
-//TODO: Make dog[0] main card render only on click
-//TODO: figure out how to make this apply to all other dogs and their corresponding buttons
-
-
+//TODO: Make dog[0] main card render only on click: DONE
+//TODO: figure out how to make this apply to all other dogs and their corresponding buttons : DONE
+//TODO: find out how to reset things after each click so that only the card for the last selected dog is displayed: DONE
+//TODO: refactor, so that the forEach() loop only apply to the assignement of certain content or attributes (eg. img src, innerText, ...) and NOT to the creation of the elements containing those: DONE
 
 //access the mainCard section 
 const mainCard= document.querySelector('.main__dog-section')
@@ -22,98 +22,70 @@ const makeDogButton = (dog) => {
     dogsListElement.setAttribute('class', 'dogs-list__button')
 }
 
+//CARD LAYOUT - creates all elements (empty)
+
+// - img element
+const dogPic = document.createElement('img')
+mainCard.append(dogPic)
+
+// - info section
+const infoSection = document.createElement('div')
+mainCard.append(infoSection)
+infoSection.setAttribute('class', "main__dog-section__desc")
+
+    const dogBioTitle = document.createElement('h3')
+    infoSection.append(dogBioTitle)
+
+    const dogBio  = document.createElement('p')
+    infoSection.append(dogBio)
+
+// - nice doggo? 
+const isDogNaughty = document.createElement('p')
+mainCard.append(isDogNaughty)
 
 
-//render each element inside the main card
+
+//CONTENTS - render the contents of each element inside the main card
 const renderDogName = (dog) => {
     const dogName = document.querySelector('h2')
     dogName.innerText = `${dog.name}`
 }
 const renderDogImage = (dog) => {
-    const dogPic = document.createElement('img')
-    mainCard.append(dogPic)
+
     dogPic.setAttribute('src', `${dog.image}`)
     
 } 
-
-//render the info section
-let infoSection
-const createDogInfoSection = () => {
-    infoSection = document.createElement('div')
-    mainCard.append(infoSection)
-    infoSection.setAttribute('class', "main__dog-section__desc")
-}
 const createDogBioH3 = () => {
-    const dogBioTitle = document.createElement('h3')
-    infoSection.append(dogBioTitle)
     dogBioTitle.innerText = 'Bio'
 }
+
 const renderBio = (dog) => {
-    const dogBio  = document.createElement('p')
-    infoSection.append(dogBio)
     dogBio.innerText = `${dog.bio}`
 }
+
 const renderIsDogNaughty = (dog) => {
-    const isDogNaughty = document.createElement('p')
-    mainCard.append(isDogNaughty)
     isDogNaughty.innerText = `Is naughty? ${
         dog.isGoodDog === true ? "No!" : "Yes!"
     }`
 }
 
 //render the main card
-const renderDogCard = (dog) => {
+const renderDogCardLayout = (dog) => {
     renderDogName(dog)
     renderDogImage(dog)
-    createDogInfoSection()
     createDogBioH3()
     renderBio(dog)
     renderIsDogNaughty(dog)
 }
 
 
-
-
-
-// render and append EACH dog button
+// render and append EACH dog button + on click, render the card matching the select dog
 data.forEach(dog => {
 
     makeDogButton(dog)
-    dogsListElement.addEventListener('click', event => renderDogCard(dog))
+    dogsListElement.addEventListener('click', event => renderDogCardLayout(dog))
 
 })
 
 //extension
 const createIsGoodOrBad = () => {}
-
-
-
-
-
-
-
-
-// - Make each list item clickable. 
-// - on click: display dog on main card.
-// - render all info from the selected dog on the main card.
-// - There should be only **one card at the time** on the screen, showing as 
-
-
-//<section class="main__dog-section">
-//      <h2>Mr. Bonkers</h2>
-//      <img
-//           src="https://curriculum-content.s3.amazonaws.com/js/woof-woof/dog_1.jpg"
-//           alt=""
-//         />
-//         <div class="main__dog-section__desc">
-//           <h3>Bio</h3>
-//           <p>
-//             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum,
-//             minima voluptates libero cumque rerum consequatur optio aliquid sint
-//             eum maxime illo laborum omnis quo ab rem cupiditate nulla
-//             perspiciatis ipsum!
-//           </p>
-//         </div>
-//         <p><em>Is naughty?</em> yes!</p>
-//         <button>Good dog!</button>
-//   </section>  
