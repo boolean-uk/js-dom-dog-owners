@@ -33,6 +33,8 @@ const removeDogs = () => {
 }
 
 
+
+// MAKE THIS ITS OWN FUNCTION//
 data.forEach((dogName) => {
     const dogButton = document.createElement("li");
     dogButton.innerText = `${dogName.name}`;
@@ -73,6 +75,7 @@ const createDog = (dogCard) => {
     dogBioSection.append(p);
 
     const pOne = document.createElement("p");
+    // MAKE THS A FUNCTION//
     pOne.innerHTML = `<em> Is naughty? <em> ${yesOrNo(dogCard)}`;
     mainDogSection.append(pOne);
 
@@ -81,6 +84,5 @@ const createDog = (dogCard) => {
     mainDogSection.append(button);
     button.addEventListener("click", () => {
         dogCard.isGoodDog = !dogCard.isGoodDog;
-        console.log(data);
     });
 };
