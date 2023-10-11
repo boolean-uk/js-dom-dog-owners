@@ -67,7 +67,7 @@ const render = (res) => {
             <h2>${res.name}</h2>
             <img
             src="${res.image}"
-            alt="dog"
+            alt="dog" style="width: 350px; height: 300px;"
             />
             <div class="main__dog-section__desc">
                 <h3>Bio</h3>
