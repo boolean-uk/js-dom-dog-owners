@@ -1,30 +1,20 @@
-const dogs = data;
-
-// WRITE YOUR CODE BELOW!
-
-// populate .dogs-list with dog buttons
-//access dogs = data
-//do a forEach((dog) => {}):
-//for each dog we want dog.name
-//append li item with class "dogs-list__button"
-
-function makeDogNavBar() {
-  data.forEach((dog) => {
+function makeDogNavBar(dogs) {
+  dogs.forEach((dog) => {
     const navListItem = document.createElement("li");
     const dogName = dog.name;
     navListItem.innerText = dogName;
     navListItem.className = "dogs-list__button";
     const dogsList = document.querySelector(".dogs-list");
 
-    navListItem.addEventListener('click', () => makeDogCard(dog))
+    navListItem.addEventListener("click", () => makeDogCard(dog));
     dogsList.append(navListItem);
   });
 }
 
 function makeDogCard(dog) {
-  const main = selectMain()
-  removeMainChildren()
-  
+  const main = selectMain();
+  removeMainChildren();
+
   const section = makeSection();
 
   const h2 = makeH2(dog);
@@ -51,10 +41,10 @@ function selectMain() {
 }
 
 function removeMainChildren() {
-  const main = selectMain()
-  Array.from(main.children).forEach(child => {
-  child.remove()
-})
+  const main = selectMain();
+  Array.from(main.children).forEach((child) => {
+    child.remove();
+  });
 }
 
 function makeSection() {
@@ -96,32 +86,50 @@ function makeP(dog) {
   const p = document.createElement("p");
   const em = document.createElement("em");
 
-  em.innerText = "Is naughty?"
+  em.innerText = "Is naughty?";
 
-  p.append(em)
-  
+  p.append(em);
+
   if (dog.isGoodDog) {
-    p.innerHTML = `${em.outerHTML} yes!`
+    p.innerHTML = `${em.outerHTML} yes!`;
   } else {
-    p.innerHTML = `${em.outerHTML} no!`
+    p.innerHTML = `${em.outerHTML} no!`;
   }
 
-  return p
+  return p;
 }
 
 function makeButton(dog) {
   const button = document.createElement("button");
+  button.addEventListener("click", (e) => flipIsGoodDog(e, dog));
 
   if (dog.isGoodDog) {
-    button.innerText = `Good dog!`
+    button.innerText = `Good dog!`;
   } else {
-    button.innerText = `Bad dog!`
+    button.innerText = `Bad dog!`;
   }
 
-  return button
+  return button;
 }
 
-makeDogNavBar();
+function flipIsGoodDog(e, dog) {
+  dog.isGoodDog = !dog.isGoodDog;
+
+  e.target = makeButton(dog); // TODO: I thought this would work but not sure why :(
+
+  const parent = e.target.parentElement;
+  const p = parent.children[3];
+
+  e.target.remove();
+  p.remove();
+
+  parent.append(makeP(dog));
+  parent.append(makeButton(dog));
+}
+
+const dogs = data;
+
+makeDogNavBar(dogs);
 
 const dog = dogs[5];
 makeDogCard(dog);
