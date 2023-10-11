@@ -1,7 +1,8 @@
 //TODO: render the navbar (dog list) : DONE
 //TODO: break down the problem: DONE
 //TODO: draft overal code structure, name functions: DONE
-//TODO: write the functions to render the image and info for dog[0] on click
+//TODO: write the functions to render the image and info for dog[0]: DONE
+//TODO: Make dog[0] main card render only on click
 //TODO: figure out how to make this apply to all other dogs and their corresponding buttons
 
 
@@ -21,23 +22,21 @@ const makeDogButton = (dog) => {
     dogsListElement.setAttribute('class', 'dogs-list__button')
 }
 
-// render and append EACH dog button
-data.forEach(dog => makeDogButton(dog))
 
 
-
-//rendering each element inside the main card
-const renderDogName = () => {
+//render each element inside the main card
+const renderDogName = (dog) => {
     const dogName = document.querySelector('h2')
-    dogName.innerText = `${data[0].name}`
+    dogName.innerText = `${dog.name}`
 }
-const renderDogImage = () => {
+const renderDogImage = (dog) => {
     const dogPic = document.createElement('img')
     mainCard.append(dogPic)
-    dogPic.setAttribute('src', `${data[0].image}`)
+    dogPic.setAttribute('src', `${dog.image}`)
     
 } 
 
+//render the info section
 let infoSection
 const createDogInfoSection = () => {
     infoSection = document.createElement('div')
@@ -49,32 +48,40 @@ const createDogBioH3 = () => {
     infoSection.append(dogBioTitle)
     dogBioTitle.innerText = 'Bio'
 }
-const renderBio = () => {
+const renderBio = (dog) => {
     const dogBio  = document.createElement('p')
     infoSection.append(dogBio)
-    dogBio.innerText = `${data[0].bio}`
+    dogBio.innerText = `${dog.bio}`
 }
-const renderIsDogNaughty = () => {
+const renderIsDogNaughty = (dog) => {
     const isDogNaughty = document.createElement('p')
     mainCard.append(isDogNaughty)
     isDogNaughty.innerText = `Is naughty? ${
-        data[0].isGoodDog === true ? "No!" : "Yes!"
+        dog.isGoodDog === true ? "No!" : "Yes!"
     }`
 }
 
 //render the main card
-const renderDogCard = () => {
-    renderDogName()
-    renderDogImage()
+const renderDogCard = (dog) => {
+    renderDogName(dog)
+    renderDogImage(dog)
     createDogInfoSection()
     createDogBioH3()
-    renderBio()
-    renderIsDogNaughty()
+    renderBio(dog)
+    renderIsDogNaughty(dog)
 }
 
 
 
-dogsListElement.addEventListener('click', renderDogCard())
+
+
+// render and append EACH dog button
+data.forEach(dog => {
+
+    makeDogButton(dog)
+    dogsListElement.addEventListener('click', event => renderDogCard(dog))
+
+})
 
 //extension
 const createIsGoodOrBad = () => {}
