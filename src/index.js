@@ -2,7 +2,7 @@ console.log(data);
 
 // WRITE YOUR CODE BELOW!
 function dog(name, bio, image) {
-  this.id = data.length:
+  this.id = data.length;
   this.name = name;
   this.image = image;
   this.bio = bio;
@@ -80,14 +80,22 @@ const createForm = () => {
   submit.setAttribute("id", "submit")
   submit.setAttribute("name", "submit")
   submit.setAttribute("value", "Let's add a doge!")
-  submit.setAttribute("class", "form_button")
-
+  submit.setAttribute("class", "form__button")
+  submit.addEventListener("submit", (event) => grabInfoFromForm())
+  
   form.appendChild(submit)
 
   section.appendChild(form)
 
   const main = document.querySelector("main")
   main.appendChild(section)
+}
+
+const grabInfoFromForm = () => {
+  const inputFieldName = document.getElementById("name").value
+  setTimeout(console.log("… submitted", inputFieldName), 3000)
+  const inputIMG = document.querySelector("input#image")
+  const inputBio = document.querySelector("input#bio")
 }
 
 const fillNav = () => {
@@ -104,6 +112,7 @@ const fillNav = () => {
 
 const fillMain = (element) => {
   const main = document.querySelector("main")
+  main.appendChild(element)
 }
 
 const test = (input) => console.log(input)
@@ -149,3 +158,5 @@ const renderDogCard = (dog) => {
 
 fillNav()
 addForm()
+
+createForm()
