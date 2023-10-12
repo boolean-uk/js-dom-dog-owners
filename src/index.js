@@ -115,9 +115,7 @@ data.forEach(dog => {
                 dogBio,
                 isDogNaughty)
         }
-
         renderDogCardLayout(dog)
-    
     }
     )
 
@@ -159,7 +157,7 @@ const createFormInput = () => {
     input.setAttribute('name', e)
     
     })
-    
+
     document.querySelector('#NAME').innerText = 'Dog\'s name'
     document.querySelector('#IMAGE').innerText = 'Dog\'s picture'
 }
@@ -192,23 +190,58 @@ const createSubmitButton = () => {
     submit.setAttribute('class', 'form__button')
 }
 
-//render form
+
 
 // display form when click on +
 const newForm = document.querySelector('.dogs-list__button--add')
 newForm.addEventListener('click', event => {
-    if(dogName.innerText !== 'No dogs ?!?' && dogName.innerText !== 'Add a new dog' ) {
+    if(dogName.innerText === 'Add a new dog') {
+    } else {
         mainCard.replaceChildren(form)
         renderForm()
     }
-    if(dogName.innerText === 'Add a new dog') {
-    } else {
-    renderForm()
-    }
+   
 })
 
 
 
 
 // TODO: get the inputed data from the form, temporarily store it
+// This is a temporary data store. It will save our data as long as we do not refresh the page.
+
+
+
+const newDog =   {
+    id: 8,
+    name: "",
+    bio: ``,
+    isGoodDog: true,
+    image: ""
+  }
+  
+  const newDogName = form.querySelector('input[name="name"]')
+
+  data.push(newDog)
+  console.log(data)
+//   const foodPrefsForms = document.querySelector('#food-preferences');
+//   const faveFoodInput = foodPrefsForms.querySelector('input[name="favourite-food"]')
+//   const hatedFoodInput = foodPrefsForms.querySelector('input[name="hated-food"]')
+  
+//   foodPrefsForms.addEventListener('submit', (event) => {
+//     // Prevent the browser from doing its default behaviour.
+//     // In the case of forms, it is preventing the refreshing of the page.
+//     event.preventDefault();
+  
+//     // Save the values that the user has typed to the input elements
+//     data.faveFood = faveFoodInput.value;
+//     data.hatedFood = hatedFoodInput.value;
+//     console.log(data)
+  
+//     // Reset the input values so that the form looks "fresh" again.
+//     // The `data` variable has already saved the data.
+//     faveFoodInput.value = '';
+//     hatedFoodInput.value = '';
+//   })
+
+
 // TODO: display the temporary data on click  
