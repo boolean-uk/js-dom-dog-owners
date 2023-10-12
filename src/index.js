@@ -118,7 +118,13 @@ function createNewDog() {
     const labelBio = createLabel("bio", "Dog's Bio");
     const textArea = createTextArea("5", "bio", "bio");
 
-    const inputButton = createInput("submit", "submit", "submit", "Let's add a dog!", "form__button");
+    const inputButton = createInput(
+        "submit",
+        "submit",
+        "submit",
+        "Let's add a dog!",
+        "form__button"
+    );
 
     main.append(section);
     section.append(h2);
@@ -169,14 +175,27 @@ function createInput(type, id, name, value, classe) {
     return input;
 }
 
-function createTextArea (rows, id, name){
-    const textArea = document.createElement("textarea")
+function createTextArea(rows, id, name) {
+    const textArea = document.createElement("textarea");
     textArea.setAttribute("rows", rows);
     textArea.setAttribute("id", id);
     textArea.setAttribute("name", name);
-    return textArea
+    return textArea;
 }
 
-addDog.addEventListener("click", () =>{
-createNewDog();
-})
+addDog.addEventListener("click", () => {
+    createNewDog();
+});
+
+
+const newDogData = [
+    {
+        name: "",
+        bio: "",
+        isGoodDog: true,
+        image: "",
+    },
+]
+
+const submitted = document.querySelector('#submit');
+submitted.addEventListener("submit")
