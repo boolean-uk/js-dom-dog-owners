@@ -100,8 +100,8 @@ function createP(dog) {
   p.append(em);
 
   dog.isGoodDog
-    ? (p.innerHTML = `${em.outerHTML} yes!`)
-    : (p.innerHTML = `${em.outerHTML} no!`);
+    ? p.append(" yes!")
+    : p.append(" no!")
 
   return p;
 }
@@ -159,7 +159,7 @@ function createForm() {
 
   formElements.push(createLabel("image", "picture"));
   formElements.push(createInput("input", "url", "image"));
-  
+
   formElements.push(createLabel("bio", "bio"));
   formElements.push(createInput("textarea", null, "bio", null, null, 5));
 
