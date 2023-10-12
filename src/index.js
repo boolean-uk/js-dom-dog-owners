@@ -106,7 +106,18 @@ const renderDogCardLayout = (dog) => {
 data.forEach(dog => {
 
     makeDogButton(dog)
-    dogsListElement.addEventListener('click', event => renderDogCardLayout(dog))
+    dogsListElement.addEventListener('click', event => {
+        if(dogName.innerText === 'Add a new dog') {
+            mainCard.replaceChildren(dogName,
+                dogPic,
+                dogBioTitle,
+                dogBio,
+                isDogNaughty)
+        }
+        renderDogCardLayout(dog)
+    
+    }
+    )
 
 })
 
@@ -120,9 +131,15 @@ data.forEach(dog => {
 //re-assign h2
 
 const renderForm = () => {
+
 const form = document.createElement('form')
 mainCard.append(form)
 
+if(dogName.innerText !== 'No dogs ?!?') {
+    mainCard.replaceChildren(form)
+}
+
+form.append(dogName)
 dogName.innerText = 'Add a new dog'
 
 const dogLabelsNames = ['name', 'image']
@@ -163,21 +180,25 @@ document.querySelector('#BIO').innerText = 'Dog\'s bio'
 
 //submit
 const submit = document.createElement('input')
-mainCard.append(submit)
+form.append(submit)
 submit.setAttribute('type', 'submit')
 submit.setAttribute('id', 'submit')
 submit.setAttribute('name', 'sbmit')
 submit.setAttribute('value', 'Let\'s add a dog!')
 submit.setAttribute('class', 'form__button')
 
-
-
 }
 
 
+// display form when click on +
+
+const newForm = document.querySelector('.dogs-list__button--add')
+newForm.addEventListener('click', event => {
+    renderForm()
+})
 
 
 
-// TODO: add an event to '+' so that form is displayed
+
 // TODO: get the inputed data from the form, temporarily store it
 // TODO: display the temporary data on click  
