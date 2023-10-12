@@ -16,6 +16,9 @@ const makeDogButton = (dog) => {
 
 //CARD LAYOUT - creates all elements (empty)
 
+//h2 title
+const dogName = document.querySelector('h2')
+
 // - img element
 const dogPic = document.createElement('img')
 mainCard.append(dogPic)
@@ -59,8 +62,8 @@ if (currentStatus === 'Good dog' ) {
 
 
 //CONTENTS - render the contents of each element inside the main card
+
 const renderDogName = (dog) => {
-    const dogName = document.querySelector('h2')
     dogName.innerText = `${dog.name}`
 }
 const renderDogImage = (dog) => {
@@ -109,7 +112,6 @@ data.forEach(dog => {
 
 
 // FORM
-// TODO: write the form's html structure in DOM
 
 
 //FORM layout
@@ -117,14 +119,16 @@ data.forEach(dog => {
 
 //re-assign h2
 
-
-
-
+const renderForm = () => {
 const form = document.createElement('form')
 mainCard.append(form)
 
-const dogLabelsNames = ['name', 'image', 'bio']
+dogName.innerText = 'Add a new dog'
 
+const dogLabelsNames = ['name', 'image']
+
+
+//input
 dogLabelsNames.forEach(e => {
 const label = document.createElement('label')
 const input = document.createElement('input')
@@ -141,29 +145,35 @@ input.setAttribute('name', e)
 
 document.querySelector('#NAME').innerText = 'Dog\'s name'
 document.querySelector('#IMAGE').innerText = 'Dog\'s picture'
+
+//textarea
+const label = document.createElement('label')
+label.setAttribute('for', 'bio')
+label.setAttribute('id', 'BIO')
+const textArea = document.createElement('textarea')
+textArea.setAttribute('rows', '5')
+textArea.setAttribute('id', 'bio')
+textArea.setAttribute('name', 'bio')
+
+form.append(label)
+form.append(textArea)
+
+
 document.querySelector('#BIO').innerText = 'Dog\'s bio'
 
+//submit
+const submit = document.createElement('input')
+mainCard.append(submit)
+submit.setAttribute('type', 'submit')
+submit.setAttribute('id', 'submit')
+submit.setAttribute('name', 'sbmit')
+submit.setAttribute('value', 'Let\'s add a dog!')
+submit.setAttribute('class', 'form__button')
 
 
 
+}
 
-
-
-
-    //   <h2>Add a new Dog</h2>
-    //   <form class="form">
-
-    //     <label for="name">Dog's name</label>
-    //     <input type="text" id="name" name="name">
-
-    //     <label for="image">Dog's picture</label>
-    //     <input type="url" id="image" name="image">
-
-    //     <label for="bio">Dog's bio</label>
-    //     <textarea rows="5" id="bio" name="bio"></textarea>
-
-    //     <input type="submit" id="submit" name="submit" value="Let's add a dog!" class="form__button">
-    //   </form>
 
 
 
