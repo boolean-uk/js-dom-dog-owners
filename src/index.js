@@ -83,11 +83,9 @@ function createDivDogSection(dog) {
   const p = document.createElement("p");
   p.innerText = dog.bio;
 
-  console.log("dog :>> ", dog);
   divDogSection.append(h3);
   divDogSection.append(p);
 
-  console.log("divDogSection :>> ", divDogSection);
   return divDogSection;
 }
 
@@ -177,7 +175,6 @@ function createForm() {
   formElements[6].addEventListener("click", (e) => {
     e.preventDefault();
     const completedForm = e.target.form;
-    console.log("form :>> ", form);
     const completedName = completedForm.querySelector("#name");
     const completedImage = completedForm.querySelector("#image");
     const completedBio = completedForm.querySelector("#bio");
