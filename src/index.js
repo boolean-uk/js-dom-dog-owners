@@ -58,22 +58,6 @@ if (currentStatus === 'Good dog' ) {
 })
 
 
-
-
-// p.addEventListener(
-//   'click',
-//   () => {
-//     const currentClass = p.getAttribute('class');
-
-//     if (currentClass === 'blue') {
-//       makeRed()
-//     } else {
-//       makeBlue()
-//     }
-//   }
-// )
-
-
 //CONTENTS - render the contents of each element inside the main card
 const renderDogName = (dog) => {
     const dogName = document.querySelector('h2')
@@ -124,3 +108,66 @@ data.forEach(dog => {
 })
 
 
+// FORM
+// TODO: write the form's html structure in DOM
+
+
+//FORM layout
+
+
+//re-assign h2
+
+
+
+
+const form = document.createElement('form')
+mainCard.append(form)
+
+const dogLabelsNames = ['name', 'image', 'bio']
+
+dogLabelsNames.forEach(e => {
+const label = document.createElement('label')
+const input = document.createElement('input')
+
+form.append(label)
+form.append(input)
+
+label.setAttribute('for', e)
+label.setAttribute('id', e.toUpperCase())
+input.setAttribute('id', e)
+input.setAttribute('name', e)
+
+})
+
+document.querySelector('#NAME').innerText = 'Dog\'s name'
+document.querySelector('#IMAGE').innerText = 'Dog\'s picture'
+document.querySelector('#BIO').innerText = 'Dog\'s bio'
+
+
+
+
+
+
+
+
+    //   <h2>Add a new Dog</h2>
+    //   <form class="form">
+
+    //     <label for="name">Dog's name</label>
+    //     <input type="text" id="name" name="name">
+
+    //     <label for="image">Dog's picture</label>
+    //     <input type="url" id="image" name="image">
+
+    //     <label for="bio">Dog's bio</label>
+    //     <textarea rows="5" id="bio" name="bio"></textarea>
+
+    //     <input type="submit" id="submit" name="submit" value="Let's add a dog!" class="form__button">
+    //   </form>
+
+
+
+
+// TODO: add an event to '+' so that form is displayed
+// TODO: get the inputed data from the form, temporarily store it
+// TODO: display the temporary data on click  
