@@ -34,6 +34,26 @@ data.forEach((dog) => {
     div.setAttribute("class", "main__dog-section__desc")
 
     // create elements within div then append to div
+    const h3 = document.createElement("h3")
+    h3.innerText = "Bio"
+
+    const bio = document.createElement("p")
+    bio.innerText = dog.bio
+
+    div.append(h3, bio)
+
+    const p = document.createElement("p")
+    // const em = document.createElement("em")
+    // em.innerText = "Is naughty?"
+    p.innerHTML = "<em>Is naughty?</em> yes!"
+
+    // console.log(p)
+    const button = document.createElement("button")
+    button.innerText = "Good dog!"
+
+
+
+
 
 
 
@@ -47,7 +67,7 @@ data.forEach((dog) => {
         content.forEach((element) => {
             element.remove()
         })
-        cardArea.append(h2, img, div)
+        cardArea.append(h2, img, div, p, button)
 
         //add dog card items here when complete
 
