@@ -154,15 +154,16 @@ function createForm() {
 
   const formElements = [];
 
-  formElements.append(createLabel("name", "name"));
-  formElements.append(createLabel("image", "picture"));
-  formElements.append(createLabel("bio", "bio"));
+  formElements.push(createLabel("name", "name"));
+  formElements.push(createInput("input", "text", "name"));
 
-  formElements.append(createInput("input", "text", "name"));
-  formElements.append(createInput("input", "url", "image"));
-  formElements.append(createInput("textarea", null, "bio", null, null, 5));
+  formElements.push(createLabel("image", "picture"));
+  formElements.push(createInput("input", "url", "image"));
+  
+  formElements.push(createLabel("bio", "bio"));
+  formElements.push(createInput("textarea", null, "bio", null, null, 5));
 
-  formElements.append(
+  formElements.push(
     createInput(
       "input",
       "submit",
@@ -173,7 +174,7 @@ function createForm() {
     )
   );
 
-  inputSubmit.addEventListener("click", (e) => {
+  formElements[6].addEventListener("click", (e) => {
     e.preventDefault();
     const completedForm = e.target.form;
     console.log("form :>> ", form);
