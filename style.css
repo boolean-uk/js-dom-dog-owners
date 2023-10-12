@@ -147,7 +147,7 @@ img {
   background-color: var(--green);
 }
 
-.form > button {
+.form>button {
   width: 30%;
   justify-self: center;
   margin: 1rem 0;
