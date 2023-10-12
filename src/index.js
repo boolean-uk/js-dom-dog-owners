@@ -62,12 +62,16 @@ function createDogCard(dog) {
 
     //Bottom Half
     const p = document.createElement("p");
-    p.innerHTML = "<em>Is naughty?</em> yes!"
+    const em = document.createElement("em");
+    em.innerText = "Is naughty? ";
+    let answer = document.createTextNode("");
+    p.append(em, answer);
+
     const button =  document.createElement("button");
     button.innerText = "Bad dog!";
     dog.isGoodDog ? 
-    (button.innerText = "Good Dog!", p.innerHTML = "<em>Is naughty?</em> no!")
-    : (button.innerText = "Bad Dog!", p.innerHTML = "<em>Is naughty?</em> yes!");
+    (button.innerText = "Good Dog!", answer = "No!", p.append(em, answer))
+    : (button.innerText = "Bad Dog!", answer = "Yes!", p.append(em, answer));
 
     button.addEventListener("click", goodDogBadDog);
 
@@ -89,8 +93,8 @@ function goodDogBadDog() {
     const p = document.querySelector(".main__dog-section > p");
 
     button.innerText === "Good Dog!" ?
-    (button.innerText = "Bad Dog!", p.innerHTML = "<em>Is naughty?</em> yes!")
-    : (button.innerText = "Good Dog!", p.innerHTML = "<em>Is naughty?</em> no!");
+    (button.innerText = "Bad Dog!", p.innerHTML = "<em>Is naughty?</em> Yes!")
+    : (button.innerText = "Good Dog!", p.innerHTML = "<em>Is naughty?</em> No!");
 };
 
 //Form
