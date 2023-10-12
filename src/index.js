@@ -1,31 +1,38 @@
-function makeDogNavBar(dogs) {
+function createDogNavBar(dogs) {
+  const dogsList = document.querySelector(".dogs-list");
+  clearNavBar(dogsList)
   dogs.forEach((dog) => {
     const navListItem = document.createElement("li");
     const dogName = dog.name;
     navListItem.innerText = dogName;
     navListItem.className = "dogs-list__button";
-    const dogsList = document.querySelector(".dogs-list");
 
-    navListItem.addEventListener("click", () => makeDogCard(dog));
+    navListItem.addEventListener("click", () => createDogCard(dog));
     dogsList.append(navListItem);
   });
 }
 
-function makeDogCard(dog) {
+function clearNavBar(dogsList) {
+  while (dogsList.childElementCount > 1) {
+    dogsList.lastChild.remove()
+  }
+}
+
+function createDogCard(dog) {
   const main = selectMain();
   removeMainChildren();
 
-  const section = makeSection();
+  const section = createSection();
 
-  const h2 = makeH2(dog);
+  const h2 = createH2(dog);
 
-  const img = makeImg(dog);
+  const img = createImg(dog);
 
-  const divDogSection = makeDivDogSection(dog);
+  const divDogSection = createDivDogSection(dog);
 
-  const p = makeP(dog);
+  const p = createP(dog);
 
-  const button = makeButton(dog);
+  const button = createButton(dog);
 
   main.append(section);
 
@@ -47,26 +54,26 @@ function removeMainChildren() {
   });
 }
 
-function makeSection() {
+function createSection() {
   const section = document.createElement("section");
   section.className = "main__dog-section";
   return section;
 }
 
-function makeH2(dog) {
+function createH2(dog) {
   const h2 = document.createElement("h2");
   h2.innerText = dog.name;
   return h2;
 }
 
-function makeImg(dog) {
+function createImg(dog) {
   const img = document.createElement("img");
   img.src = dog.image;
   img.alt = `picture of ${dog.name}`;
   return img;
 }
 
-function makeDivDogSection() {
+function createDivDogSection(dog) {
   const divDogSection = document.createElement("div");
   divDogSection.className = "main__dog-section__desc";
 
@@ -76,13 +83,15 @@ function makeDivDogSection() {
   const p = document.createElement("p");
   p.innerText = dog.bio;
 
+  console.log('dog :>> ', dog);
   divDogSection.append(h3);
   divDogSection.append(p);
 
+  console.log('divDogSection :>> ', divDogSection);
   return divDogSection;
 }
 
-function makeP(dog) {
+function createP(dog) {
   const p = document.createElement("p");
   const em = document.createElement("em");
 
@@ -97,7 +106,7 @@ function makeP(dog) {
   return p;
 }
 
-function makeButton(dog) {
+function createButton(dog) {
   const button = document.createElement("button");
   button.addEventListener("click", (e) => flipIsGoodDog(e, dog));
 
@@ -128,49 +137,112 @@ Do you wish to continue?`
   e.target.remove();
   p.remove();
 
-  parent.append(makeP(dog));
-  parent.append(makeButton(dog));
+  parent.append(createP(dog));
+  parent.append(createButton(dog));
 }
 
 function createForm() {
   const main = selectMain();
   removeMainChildren();
 
-  const formSection = makeSection();
+  const formSection = createSection();
 
-  const h2 = makeH2NewDog()
+  const h2 = createH2NewDog();
 
-  const form = document.createElement("form")
+  const form = document.createElement("form");
+  form.className = "form"
 
-  const label = document.createElement("label")
-  label.innerText = "Dog's name"
-  label.setAttribute("for", "name")
+  const formElements = []
 
-  const input = document.createElement("input")
-  input.type = "text"
-  input.id = "name"
-  input.name = "name"
+  const labelName = createLabel("name", "name");
+  const labelImage = createLabel("image", "picture");
+  const labelBio = createLabel("bio", "bio");
+
+  const inputName = createInput("input", "text", "name");
+  const inputImage = createInput("input", "url", "image");
+  const inputBio = createInput("textarea", null, "bio", null, null, 5);
   
-  formSection.append(h2)
-  formSection.append(form)
+  const inputSubmit = createInput(
+    "input",
+    "submit",
+    "submit",
+    "form__button",
+    "Let's add a dog!",
+    5
+  );
+  inputSubmit.addEventListener("click", (e) => {
+    e.preventDefault()
+    const completedForm = e.target.form
+    console.log('form :>> ', form);
+    const completedName = completedForm.querySelector("#name")
+    const completedImage = completedForm.querySelector("#image")
+    const completedBio = completedForm.querySelector("#bio")
 
-  form.append(label)
-  form.append(input)
+    const output = {
+      [completedName.id]: completedName.value,
+      [completedImage.id]: completedImage.value,
+      [completedBio.id]: completedBio.value,
+      isGoodDog: true,
+    }
+
+    dogs.unshift(output)
+    createDogNavBar(dogs);
+  })
+
+  formSection.append(h2);
+  formSection.append(form);
+
+  form.append(labelName);
+  form.append(inputName);
+
+  form.append(labelImage);
+  form.append(inputImage);
+
+  form.append(labelBio);
+  form.append(inputBio);
+  
+  form.append(inputSubmit);
 
   main.append(formSection);
 }
 
-function makeH2NewDog() {
-  const h2 = document.createElement("h2");
-  h2.innerText = "Add a new Dog"
-  return h2
+function createLabel(inputId, dogText) {
+  const label = document.createElement("label");
+  label.innerText = `Dog's ${dogText}`;
+  label.setAttribute("for", inputId);
+  return label;
 }
+
+function createInput(element, type, inputId, className, value, rowCount) {
+  const input = document.createElement(element);
+  input.type = type;
+  input.id = inputId;
+  input.name = inputId;
+
+  if (className) {
+    input.className = className;
+  }
+
+  if (rowCount) {
+    input.setAttribute("rows", rowCount);
+  }
+  return input;
+}
+
+function createH2NewDog() {
+  const h2 = document.createElement("h2");
+  h2.innerText = "Add a new Dog";
+  return h2;
+}
+
+const addButton = document.querySelector(".dogs-list__button--add")
+addButton.addEventListener("click", createForm)
 
 const dogs = data;
 
-makeDogNavBar(dogs);
+createDogNavBar(dogs);
 
-const dog = dogs[0];
-makeDogCard(dog);
+const globalDog = dogs[1];
+createDogCard(globalDog);
 
 createForm();
