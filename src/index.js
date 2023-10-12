@@ -126,7 +126,15 @@ data.forEach(dog => {
 
 // FORM
 const form = document.createElement('form')
-mainCard.append(form)
+form.setAttribute('class', 'form')
+
+const renderForm = () => {
+    mainCard.append(form)
+    renderFormTitle()
+    createFormInput()
+    createTextArea()
+    createSubmitButton()
+}
 
 //FORM layout
 
@@ -185,22 +193,18 @@ const createSubmitButton = () => {
 }
 
 //render form
-const renderForm = () => {
-
-    if(dogName.innerText !== 'No dogs ?!?') {
-        mainCard.replaceChildren(form)
-    }
-
-    renderFormTitle()
-    createFormInput()
-    createTextArea()
-    createSubmitButton()
-}
 
 // display form when click on +
 const newForm = document.querySelector('.dogs-list__button--add')
 newForm.addEventListener('click', event => {
+    if(dogName.innerText !== 'No dogs ?!?' && dogName.innerText !== 'Add a new dog' ) {
+        mainCard.replaceChildren(form)
+        renderForm()
+    }
+    if(dogName.innerText === 'Add a new dog') {
+    } else {
     renderForm()
+    }
 })
 
 
