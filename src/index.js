@@ -16,16 +16,7 @@ console.log(data);
    - 5. add click event listener to li
    - 6. build the structure below with js
 
-        <img src="https://images.unsplash.com/photo-1611003228941-98852ba62227?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2274&q=80" />
-        <h3>Bio</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, magnam. Facilis odio ipsam repudiandae ipsum. Cupiditate animi ab enim alias labore! Deleniti natus molestiae quae velit distinctio, laboriosam voluptate reiciendis.</p>
-        <div class="main__dog-section__btn">
-          <div class=".main__dog-section__desc">
-            <i>is Naughty?</i>
-            <p>Yes</p>
-          </div>
-          <button>Good Dog</button>
-        </div>
+       
 */
 
 // 1. Select the ul element  - dog-list__button. Class name gives array, query selector gives the actual element
