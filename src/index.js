@@ -83,25 +83,29 @@ function makeDivDogSection() {
 }
 
 function makeP(dog) {
-    const p = document.createElement("p");
-    const em = document.createElement("em");
+  const p = document.createElement("p");
+  const em = document.createElement("em");
 
-    em.innerText = "Is naughty?";
+  em.innerText = "Is naughty?";
 
-    p.append(em);
+  p.append(em);
 
-    dog.isGoodDog ? p.innerHTML = `${em.outerHTML} yes!` : p.innerHTML = `${em.outerHTML} no!`;
+  dog.isGoodDog
+    ? (p.innerHTML = `${em.outerHTML} yes!`)
+    : (p.innerHTML = `${em.outerHTML} no!`);
 
-    return p;
+  return p;
 }
 
 function makeButton(dog) {
-    const button = document.createElement("button");
-    button.addEventListener("click", (e) => flipIsGoodDog(e, dog));
+  const button = document.createElement("button");
+  button.addEventListener("click", (e) => flipIsGoodDog(e, dog));
 
-    dog.isGoodDog ? button.innerText = `Good dog!` : button.innerText = `Bad dog!`;
+  dog.isGoodDog
+    ? (button.innerText = `Good dog!`)
+    : (button.innerText = `Bad dog!`);
 
-    return button;
+  return button;
 }
 
 function flipIsGoodDog(e, dog) {
@@ -116,10 +120,7 @@ Do you wish to continue?`
       return null;
     }
   }
-
   dog.isGoodDog = !dog.isGoodDog;
-
-  e.target = makeButton(dog); // TODO: I thought this would work but not sure why :(
 
   const parent = e.target.parentElement;
   const p = parent.children[3];
@@ -131,9 +132,45 @@ Do you wish to continue?`
   parent.append(makeButton(dog));
 }
 
+function createForm() {
+  const main = selectMain();
+  removeMainChildren();
+
+  const formSection = makeSection();
+
+  const h2 = makeH2NewDog()
+
+  const form = document.createElement("form")
+
+  const label = document.createElement("label")
+  label.innerText = "Dog's name"
+  label.setAttribute("for", "name")
+
+  const input = document.createElement("input")
+  input.type = "text"
+  input.id = "name"
+  input.name = "name"
+  
+  formSection.append(h2)
+  formSection.append(form)
+
+  form.append(label)
+  form.append(input)
+
+  main.append(formSection);
+}
+
+function makeH2NewDog() {
+  const h2 = document.createElement("h2");
+  h2.innerText = "Add a new Dog"
+  return h2
+}
+
 const dogs = data;
 
 makeDogNavBar(dogs);
 
-const dog = dogs[5];
+const dog = dogs[0];
 makeDogCard(dog);
+
+createForm();
