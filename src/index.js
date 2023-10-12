@@ -1,3 +1,11 @@
+// cored done ... sort of 
+
+
+
+//TODO: refactor larger variables into smaller ones
+//TODO: stop form from being created each time a dog nav button is clicked
+//TODO: extension - get the toggle function on good dog!/ bad dog! working 
+
 
 //access the mainCard section 
 const mainCard= document.querySelector('.main__dog-section')
@@ -7,7 +15,7 @@ const mainCard= document.querySelector('.main__dog-section')
 const dogsList = document.querySelector('.dogs-list')
 let dogsListElement
 
-let makeDogButton = (dog) => {
+const makeDogButton = (dog) => {
     dogsListElement = document.createElement('li')
     dogsList.append(dogsListElement)
     dogsListElement.innerText = `${dog.name}`
@@ -42,8 +50,8 @@ const question = document.createElement('em')
 
 const chooseIsGoodOrBad = document.createElement('button')
 
-
-//on click, change button value
+//TODO: sort this out (extension)
+//on click, change button value - NOT WORKING YET
 const makeDogGood = () => chooseIsGoodOrBad.innerText = 'Good dog!' 
 const makeDogBad = () => chooseIsGoodOrBad.innerText = 'Bad dog!' 
 
@@ -116,9 +124,7 @@ data.forEach(dog => {
                 isDogNaughty)
         }
         renderDogCardLayout(dog)
-    }
-    )
-
+    })
 })
 
 
@@ -203,34 +209,61 @@ newForm.addEventListener('click', event => {
    
 })
 
-
-
-
-// TODO: get the inputed data from the form, temporarily store it
-
-
-
 // this temporarily saves our newDog data into the data array
-const newDog =   {
-    id: 8,
-    name: "",
-    bio: ``,
-    isGoodDog: true,
-    image: ""
-  }
-  
-form.addEventListener('submit', event => {
+
+  form.addEventListener('submit', event => {
 
     event.preventDefault();
+
+    const newDog =   {
+        id: 0,
+        name: "",
+        bio: ``,
+        isGoodDog: true,
+        image: ""
+      }
+    data.unshift(newDog)
 
     newDog.name = form.querySelector('input[id="name"]').value
     newDog.image = form.querySelector('input[id="image"]').value
     newDog.bio = form.querySelector('textarea[id="bio"]').value
-    data.push(newDog)
-    console.log(newDog)
-    console.log('submitted')
-    console.log(newDog.name)
+
+    //clean the slate
+    dogsList.replaceChildren()
+    
+
+    // put a + button back
+    const add = document.createElement('li')
+    dogsList.append(add)
+    add.innerText = `+`
+    add.setAttribute('class', 'dogs-list__button dogs-list__button--add')
+    
+    //make sure it's functional
+    add.addEventListener('click', event => {
+        if(dogName.innerText === 'Add a new dog') {
+        } else {
+            mainCard.replaceChildren(form)
+            renderForm()
+        }
+       
+    })
+
+    data.forEach(dog => {
+        
+
+        makeDogButton(dog)
+        dogsListElement.addEventListener('click', event => {
+            
+            if(dogName.innerText === 'Add a new dog') {
+                mainCard.replaceChildren(dogName,
+                    dogPic,
+                    dogBioTitle,
+                    dogBio,
+                    isDogNaughty)
+            }
+            renderDogCardLayout(dog)
+        })
+    })
+
 })
 
-
-// TODO: display the temporary data on click  
