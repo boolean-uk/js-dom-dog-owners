@@ -32,5 +32,34 @@ const dogListItem = data.forEach((dog) => {
     dogBio.innerText = dog.bio;
     dogCard.append(dogBio);
 
+    const p = document.createElement('p')
+    const em = document.createElement('em')
+    const button = document.createElement('button')
+    p.innerText = 'Is naughty?'
+
+    if (dog.isGoodDog === false) {
+      em.innerText = 'Yes'
+      button.innerText = 'Bad Dog!'
+    } else {
+      em.innerText = 'No'
+      button.innerText = 'Good Dog!'
+    }
+    p.append(em)
+    dogCard.append(p)
+    dogCard.append(button)
+
+    button.addEventListener('click', () => {
+      if (dog.isGoodDog === false) {
+        dog.isGoodDog = true
+        em.innerText = 'No'
+        button.innerText = 'Good Dog!'
+      } else {
+        dog.isGoodDog = false
+        em.innerText = 'Yes'
+        button.innerText = 'Bad Dog!'
+      }
+    })
+    
+
   });
 });
