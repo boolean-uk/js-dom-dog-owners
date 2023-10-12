@@ -28,6 +28,7 @@ const goodBad = (data) => {
 
 const dogButtonList = document.querySelector(".dogs-list");
 const main = document.querySelector(".main");
+const addDog = document.querySelector(".dogs-list__button--add")
 
 const removeDogs = (value) => {
     const allContent = document.querySelectorAll(".main > *");
@@ -97,3 +98,34 @@ const createDogNav = (dogName) => {
 data.forEach((value) => {
     createDogNav(value);
 });
+
+
+function createForm() {
+    
+
+    const section = createSection();
+
+    const h2 = createH2();
+
+    const form = createForm();
+
+    const labelName = createLabel();
+    const inputText = createInput();
+
+    const labelImg = createLabel();
+    const inputImg = createInput();
+
+    const labelBio = createLabel();
+    const textArea = createTextArea();
+
+    const inputButton = createInput()
+
+    main.append(section)
+}
+
+function createSection(){
+    const section = document.createElement("section")
+}return section
+
+
+main.append(createForm)
