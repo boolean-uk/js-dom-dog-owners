@@ -4,7 +4,7 @@ console.log(data);
 
 const goodBadDog = () => {
     data.isGoodDog = !data.isGoodDog;
-}
+};
 
 const yesOrNo = (data) => {
     let answer = "";
@@ -29,10 +29,9 @@ const goodBad = (data) => {
 const dogButtonList = document.querySelector(".dogs-list");
 const main = document.querySelector(".main");
 
-
-const removeDogs = () => {
+const removeDogs = (value) => {
     const allContent = document.querySelectorAll(".main > *");
-    allContent.forEach((val) => val.remove());
+    allContent.forEach((value) => value.remove());
 };
 
 const createDog = (dogCard) => {
@@ -62,21 +61,23 @@ const createDog = (dogCard) => {
     dogBioSection.append(p);
 
     const pOne = document.createElement("p");
-    pOne.innerHTML = `<em> Is naughty? <em> ${yesOrNo(dogCard)}`;
+    const em = document.createElement("em");
+    em.innerText = "Is naughty?";
+    
+    let text = document.createTextNode(`${yesOrNo(dogCard)}`);
+    pOne.append(em);
+    pOne.append(text);
     mainDogSection.append(pOne);
 
-
-    // NEED HELP SORTING THIS ONE OUT//
     const button = document.createElement("button");
-    button.innerText = `${goodBad(dogCard)}`;
+    let buttonText = document.createTextNode(`${goodBad(dogCard)}`)
+    button.append(buttonText)
     mainDogSection.append(button);
+
     button.addEventListener("click", () => {
         goodBadDog();
-        console.log(data.isGoodDog)
-        pOne.innerHTML = `<em> Is naughty? <em> ${yesOrNo(dogCard)}`;
-        button.innerText = `${goodBad(dogCard)}`;
-        mainDogSection.append(pOne);
-        mainDogSection.append(button);
+        text.nodeValue = yesOrNo(data)
+        buttonText.nodeValue = goodBad(data)
     });
 };
 
@@ -92,7 +93,6 @@ const createDogNav = (dogName) => {
         createDog(dogName);
     });
 };
-
 
 data.forEach((value) => {
     createDogNav(value);
