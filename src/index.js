@@ -96,11 +96,22 @@ const renderDogCard = (dog) => {
   card.appendChild(p)
 
   const button = document.createElement("button")
-  button.innerText = "Good Dog!"
+  button.innerText = dog.isGoodDog ? "Good Dog!" : "Bad Dog!"
+  button.addEventListener("click", (event) => toggleOnClick(event.target))
 
   card.appendChild(button)
 
   main.appendChild(card)
+}
+
+const toggleOnClick = (button) => {
+  const pDesc = document.querySelector("section.main__dog-section > p")
+  
+  // .contains("Yes") ?  pDesc.innerText.replace("Yes", "NO") :  pDesc.innerText.replace("No", "Yes")
+  console.log(button)
+  const oldText = button.innerText
+  newText = oldText === "Good Dog!" ? "Bad Dog!" : "Good Dog!"
+  button.innerText = newText
 }
 
 const createForm = () => {
@@ -173,4 +184,4 @@ const createForm = () => {
 
 fillNav()
 addForm()
-createForm()
+// createForm()
