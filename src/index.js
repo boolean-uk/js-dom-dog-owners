@@ -107,6 +107,7 @@ data.forEach(dog => {
 
     makeDogButton(dog)
     dogsListElement.addEventListener('click', event => {
+        
         if(dogName.innerText === 'Add a new dog') {
             mainCard.replaceChildren(dogName,
                 dogPic,
@@ -114,6 +115,7 @@ data.forEach(dog => {
                 dogBio,
                 isDogNaughty)
         }
+
         renderDogCardLayout(dog)
     
     }
@@ -123,75 +125,79 @@ data.forEach(dog => {
 
 
 // FORM
-
-
-//FORM layout
-
-
-//re-assign h2
-
-const renderForm = () => {
-
 const form = document.createElement('form')
 mainCard.append(form)
 
-if(dogName.innerText !== 'No dogs ?!?') {
-    mainCard.replaceChildren(form)
+//FORM layout
+
+//title
+const renderFormTitle = () => {
+    form.append(dogName)
+    dogName.innerText = 'Add a new dog'
+}
+//input
+const createFormInput = () => {
+    const dogLabelsNames = ['name', 'image']
+    dogLabelsNames.forEach(e => {
+    const label = document.createElement('label')
+    const input = document.createElement('input')
+    
+    form.append(label)
+    form.append(input)
+    
+    label.setAttribute('for', e)
+    label.setAttribute('id', e.toUpperCase())
+    input.setAttribute('id', e)
+    input.setAttribute('name', e)
+    
+    })
+    
+    document.querySelector('#NAME').innerText = 'Dog\'s name'
+    document.querySelector('#IMAGE').innerText = 'Dog\'s picture'
 }
 
-form.append(dogName)
-dogName.innerText = 'Add a new dog'
-
-const dogLabelsNames = ['name', 'image']
-
-
-//input
-dogLabelsNames.forEach(e => {
-const label = document.createElement('label')
-const input = document.createElement('input')
-
-form.append(label)
-form.append(input)
-
-label.setAttribute('for', e)
-label.setAttribute('id', e.toUpperCase())
-input.setAttribute('id', e)
-input.setAttribute('name', e)
-
-})
-
-document.querySelector('#NAME').innerText = 'Dog\'s name'
-document.querySelector('#IMAGE').innerText = 'Dog\'s picture'
-
-//textarea
-const label = document.createElement('label')
-label.setAttribute('for', 'bio')
-label.setAttribute('id', 'BIO')
-const textArea = document.createElement('textarea')
-textArea.setAttribute('rows', '5')
-textArea.setAttribute('id', 'bio')
-textArea.setAttribute('name', 'bio')
-
-form.append(label)
-form.append(textArea)
-
-
-document.querySelector('#BIO').innerText = 'Dog\'s bio'
+//textarea (bio)
+const createTextArea = () => {
+    const label = document.createElement('label')
+    label.setAttribute('for', 'bio')
+    label.setAttribute('id', 'BIO')
+    const textArea = document.createElement('textarea')
+    textArea.setAttribute('rows', '5')
+    textArea.setAttribute('id', 'bio')
+    textArea.setAttribute('name', 'bio')
+    
+    form.append(label)
+    form.append(textArea)
+    
+    
+    document.querySelector('#BIO').innerText = 'Dog\'s bio'
+}
 
 //submit
-const submit = document.createElement('input')
-form.append(submit)
-submit.setAttribute('type', 'submit')
-submit.setAttribute('id', 'submit')
-submit.setAttribute('name', 'sbmit')
-submit.setAttribute('value', 'Let\'s add a dog!')
-submit.setAttribute('class', 'form__button')
-
+const createSubmitButton = () => { 
+    const submit = document.createElement('input')
+    form.append(submit)
+    submit.setAttribute('type', 'submit')
+    submit.setAttribute('id', 'submit') 
+    submit.setAttribute('name', 'sbmit')
+    submit.setAttribute('value', 'Let\'s add a dog!')
+    submit.setAttribute('class', 'form__button')
 }
 
+//render form
+const renderForm = () => {
+
+    if(dogName.innerText !== 'No dogs ?!?') {
+        mainCard.replaceChildren(form)
+    }
+
+    renderFormTitle()
+    createFormInput()
+    createTextArea()
+    createSubmitButton()
+}
 
 // display form when click on +
-
 const newForm = document.querySelector('.dogs-list__button--add')
 newForm.addEventListener('click', event => {
     renderForm()
