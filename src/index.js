@@ -93,7 +93,7 @@ createNavButtons()
 function formName() {
     const formName = document.createElement('input');
     formName.setAttribute('type', 'text');
-    formName.setAttribute('placeholder', 'Name');
+    formName.setAttribute('placeholder', 'Enter your dog\'s name');
     formName.setAttribute('class', 'form__input');
     return formName;
 };
@@ -101,14 +101,14 @@ function formName() {
 function formImage() {
     const formImage = document.createElement('input');
     formImage.setAttribute('type', 'text');
-    formImage.setAttribute('placeholder', 'Image URL');
+    formImage.setAttribute('placeholder', 'Enter an Image URL');
     formImage.setAttribute('class', 'form__input');
     return formImage;
 };
 
 function formBio() {
     const formBio = document.createElement('textarea');
-    formBio.setAttribute('placeholder', 'Bio');
+    formBio.setAttribute('placeholder', 'Tell us about your dog...');
     formBio.setAttribute('class', 'form__input');
     return formBio;
 };
@@ -122,7 +122,12 @@ function formSubmit() {
 };
 
 function createForm() {
+    container.innerHTML = ''
     const form = document.createElement('form');
+    const formHeader = document.createElement('h2');
+    formHeader.setAttribute('class', 'form__header');
+    formHeader.innerText = 'Add a Dog';
+    form.append(formHeader)
     form.setAttribute('class', 'form');
     form.append(formName())
     form.append(formImage())
@@ -130,3 +135,5 @@ function createForm() {
     form.append(formSubmit())
     container.append(form);
 };
+
+createForm()
