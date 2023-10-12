@@ -28,7 +28,7 @@ const goodBad = (data) => {
 
 const dogButtonList = document.querySelector(".dogs-list");
 const main = document.querySelector(".main");
-const addDog = document.querySelector(".dogs-list__button--add")
+const addDog = document.querySelector(".dogs-list__button--add");
 
 const removeDogs = (value) => {
     const allContent = document.querySelectorAll(".main > *");
@@ -64,21 +64,21 @@ const createDog = (dogCard) => {
     const pOne = document.createElement("p");
     const em = document.createElement("em");
     em.innerText = "Is naughty?";
-    
+
     let text = document.createTextNode(`${yesOrNo(dogCard)}`);
     pOne.append(em);
     pOne.append(text);
     mainDogSection.append(pOne);
 
     const button = document.createElement("button");
-    let buttonText = document.createTextNode(`${goodBad(dogCard)}`)
-    button.append(buttonText)
+    let buttonText = document.createTextNode(`${goodBad(dogCard)}`);
+    button.append(buttonText);
     mainDogSection.append(button);
 
     button.addEventListener("click", () => {
         goodBadDog();
-        text.nodeValue = yesOrNo(data)
-        buttonText.nodeValue = goodBad(data)
+        text.nodeValue = yesOrNo(data);
+        buttonText.nodeValue = goodBad(data);
     });
 };
 
@@ -99,33 +99,82 @@ data.forEach((value) => {
     createDogNav(value);
 });
 
-
-function createForm() {
-    
-
+function createNewDog() {
+    removeDogs();
     const section = createSection();
+    section.setAttribute("class", "main__dog-section");
 
-    const h2 = createH2();
+    const h2 = createH2("Add a new Dog");
 
     const form = createForm();
+    form.setAttribute("class", "form");
 
-    const labelName = createLabel();
-    const inputText = createInput();
+    const labelName = createLabel("name", "Dog's name");
+    const inputText = createInput("text", "name", "name", "", "");
 
-    const labelImg = createLabel();
-    const inputImg = createInput();
+    const labelImg = createLabel("image", "Dog's Picture");
+    const inputUrl = createInput("url", "image", "image", "", "");
 
-    const labelBio = createLabel();
-    const textArea = createTextArea();
+    const labelBio = createLabel("bio", "Dog's Bio");
+    const textArea = createTextArea("5", "bio", "bio");
 
-    const inputButton = createInput()
+    const inputButton = createInput("submit", "submit", "submit", "Let's add a dog!", "form__button");
 
-    main.append(section)
+    main.append(section);
+    section.append(h2);
+    section.append(form);
+
+    form.append(labelName);
+    form.append(inputText);
+
+    form.append(labelImg);
+    form.append(inputUrl);
+
+    form.append(labelBio);
+    form.append(textArea);
+
+    form.append(inputButton);
 }
 
-function createSection(){
-    const section = document.createElement("section")
-}return section
+function createSection() {
+    const section = document.createElement("section");
+    return section;
+}
 
+function createH2(string) {
+    const h2 = document.createElement("h2");
+    h2.innerText = string;
+    return h2;
+}
 
-main.append(createForm)
+function createForm() {
+    const form = document.createElement("form");
+    return form;
+}
+
+function createLabel(target, string) {
+    const label = document.createElement("label");
+    label.setAttribute("for", target);
+    label.innerText = string;
+    return label;
+}
+
+function createInput(type, id, name, value, classe) {
+    const input = document.createElement("input");
+    input.setAttribute("type", type);
+    input.setAttribute("id", id);
+    input.setAttribute("name", name);
+    input.setAttribute("value", value);
+    input.setAttribute("class", classe);
+    return input;
+}
+
+function createTextArea (rows, id, name){
+    const textArea = document.createElement("textarea")
+    textArea.setAttribute("rows", rows);
+    textArea.setAttribute("id", id);
+    textArea.setAttribute("name", name);
+    return textArea
+}
+
+createNewDog();
