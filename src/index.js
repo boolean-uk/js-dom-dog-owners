@@ -177,4 +177,6 @@ function createTextArea (rows, id, name){
     return textArea
 }
 
+addDog.addEventListener("click", () =>{
 createNewDog();
+})
