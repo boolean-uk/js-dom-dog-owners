@@ -83,36 +83,40 @@ function makeDivDogSection() {
 }
 
 function makeP(dog) {
-  const p = document.createElement("p");
-  const em = document.createElement("em");
+    const p = document.createElement("p");
+    const em = document.createElement("em");
 
-  em.innerText = "Is naughty?";
+    em.innerText = "Is naughty?";
 
-  p.append(em);
+    p.append(em);
 
-  if (dog.isGoodDog) {
-    p.innerHTML = `${em.outerHTML} yes!`;
-  } else {
-    p.innerHTML = `${em.outerHTML} no!`;
-  }
+    dog.isGoodDog ? p.innerHTML = `${em.outerHTML} yes!` : p.innerHTML = `${em.outerHTML} no!`;
 
-  return p;
+    return p;
 }
 
 function makeButton(dog) {
-  const button = document.createElement("button");
-  button.addEventListener("click", (e) => flipIsGoodDog(e, dog));
+    const button = document.createElement("button");
+    button.addEventListener("click", (e) => flipIsGoodDog(e, dog));
 
-  if (dog.isGoodDog) {
-    button.innerText = `Good dog!`;
-  } else {
-    button.innerText = `Bad dog!`;
-  }
+    dog.isGoodDog ? button.innerText = `Good dog!` : button.innerText = `Bad dog!`;
 
-  return button;
+    return button;
 }
 
 function flipIsGoodDog(e, dog) {
+  if (dog.isGoodDog) {
+    if (
+      confirm(
+        `Attention, proceeding will mark ${dog.name} as a bad dog.
+Do you wish to continue?`
+      )
+    ) {
+    } else {
+      return null;
+    }
+  }
+
   dog.isGoodDog = !dog.isGoodDog;
 
   e.target = makeButton(dog); // TODO: I thought this would work but not sure why :(
