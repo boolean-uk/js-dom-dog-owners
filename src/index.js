@@ -29,78 +29,17 @@ const addForm = () => {
   addForm.addEventListener("click", () => createForm())
 }
 
-const createForm = () => {
-  clearMain()
-  const section = document.createElement("section")
-  section.setAttribute("class", "main__dog-section")
-
-  const h2 = document.createElement("h2")
-  h2.innerText = "Add a new Doge"
-  section.appendChild(h2)
-
-  const form = document.createElement("form")
-  form.setAttribute("class", "form")
-
-  const formName = document.createElement("label")
-  formName.setAttribute("for", "name")
-  formName.innerText = "Dog's name"
-
-  const inputFieldName = document.createElement("input")
-  inputFieldName.setAttribute("type", "text")
-  inputFieldName.setAttribute("id", "name")
-  inputFieldName.setAttribute("name", "name")
-
-  const formIMG = document.createElement("label")
-  formIMG.setAttribute("for", "image")
-  formIMG.innerText = "Dog's picture"
-
-  const inputIMG = document.createElement("input")
-  inputIMG.setAttribute("type", "url")
-  inputIMG.setAttribute("id", "image")
-  inputIMG.setAttribute("name", "image")
-
-  const formBio = document.createElement("label")
-  formBio.setAttribute("for", "bio")
-  formBio.innerText = "Dog's bio"
-
-  const inputBio = document.createElement("textarea")
-  inputBio.setAttribute("rows", "5")
-  inputBio.setAttribute("id", "bio")
-  inputBio.setAttribute("name", "bio")
-
-  form.appendChild(formName)
-  form.appendChild(inputFieldName)
-  form.appendChild(formIMG)
-  form.appendChild(inputIMG)
-  form.appendChild(formBio)
-  form.appendChild(inputBio)
-
-  const submit = document.createElement("input")
-  submit.setAttribute("type", "submit")
-  submit.setAttribute("id", "submit")
-  submit.setAttribute("name", "submit")
-  submit.setAttribute("value", "Let's add a doge!")
-  submit.setAttribute("class", "form__button")
-  submit.addEventListener("submit", (event) => grabInfoFromForm())
-  
-  form.appendChild(submit)
-
-  section.appendChild(form)
-
-  const main = document.querySelector("main")
-  main.appendChild(section)
-}
-
-const grabInfoFromForm = () => {
-  const inputFieldName = document.getElementById("name").value
-  setTimeout(console.log("… submitted", inputFieldName), 3000)
+const grabInfoFromForm = (formInput) => {
+  console.log("in grabInfo", formInput)
+  console.log(formInput.getAttribute(""))
+  const inputName = document.getElementById("name").value
+  setTimeout(console.log("… submitted", inputName), 3000)
   const inputIMG = document.querySelector("input#image")
   const inputBio = document.querySelector("input#bio")
 }
 
 const fillNav = () => {
   const nav = document.querySelector("header > ul")
-  console.log(nav)
   data.forEach(dog => {
     const li = document.createElement("li")
     li.setAttribute("class", "dogs-list__button")
@@ -109,6 +48,14 @@ const fillNav = () => {
     nav.append(li)
   })
 }
+
+const clearNav = () => {
+  const navItems = document.querySelectorAll("header > ul > li.dogs-list__button")
+  navItems.forEach(item => {
+    if (item.getAttribute("class").includes("dogs-list__button--add") === false) item.remove()
+  })
+}
+
 
 const fillMain = (element) => {
   const main = document.querySelector("main")
@@ -156,7 +103,74 @@ const renderDogCard = (dog) => {
   main.appendChild(card)
 }
 
+const createForm = () => {
+  clearMain()
+  const section = document.createElement("section")
+  section.setAttribute("class", "main__dog-section")
+
+  const h2 = document.createElement("h2")
+  h2.innerText = "Add a new Doge"
+  section.appendChild(h2)
+
+  const form = document.createElement("form")
+  form.setAttribute("class", "form")
+
+  const formName = document.createElement("label")
+  formName.setAttribute("for", "name")
+  formName.innerText = "Dog's name"
+
+  const inputName = document.createElement("input")
+  inputName.setAttribute("type", "text")
+  inputName.setAttribute("id", "name")
+  inputName.setAttribute("name", "name")
+
+  const formIMG = document.createElement("label")
+  formIMG.setAttribute("for", "image")
+  formIMG.innerText = "Dog's picture"
+
+  const inputIMG = document.createElement("input")
+  inputIMG.setAttribute("type", "url")
+  inputIMG.setAttribute("id", "image")
+  inputIMG.setAttribute("name", "image")
+
+  const formBio = document.createElement("label")
+  formBio.setAttribute("for", "bio")
+  formBio.innerText = "Dog's bio"
+
+  const inputBio = document.createElement("textarea")
+  inputBio.setAttribute("rows", "5")
+  inputBio.setAttribute("id", "bio")
+  inputBio.setAttribute("name", "bio")
+
+  form.appendChild(formName)
+  form.appendChild(inputName)
+  form.appendChild(formIMG)
+  form.appendChild(inputIMG)
+  form.appendChild(formBio)
+  form.appendChild(inputBio)
+
+  const submit = document.createElement("input")
+  submit.setAttribute("type", "submit")
+  submit.setAttribute("id", "submit")
+  submit.setAttribute("name", "submit")
+  submit.setAttribute("value", "Let's add a doge!")
+  submit.setAttribute("class", "form__button")
+  form.addEventListener("submit", (event) => {
+    event.preventDefault()
+    clearNav()
+    addDog(inputName.value, inputIMG.value, inputBio.value)
+    // setTimeout(() => addDog(inputName.value, inputIMG.value, inputBio.value), 5000)
+    alert("Adding dog in a second…")
+  })
+  
+  form.appendChild(submit)
+
+  section.appendChild(form)
+
+  const main = document.querySelector("main")
+  main.appendChild(section)
+}
+
 fillNav()
 addForm()
-
 createForm()
