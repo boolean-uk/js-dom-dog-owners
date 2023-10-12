@@ -1,11 +1,3 @@
-//TODO: render the navbar (dog list) : DONE
-//TODO: break down the problem: DONE
-//TODO: draft overal code structure, name functions: DONE
-//TODO: write the functions to render the image and info for dog[0]: DONE
-//TODO: Make dog[0] main card render only on click: DONE
-//TODO: figure out how to make this apply to all other dogs and their corresponding buttons : DONE
-//TODO: find out how to reset things after each click so that only the card for the last selected dog is displayed: DONE
-//TODO: refactor, so that the forEach() loop only apply to the assignement of certain content or attributes (eg. img src, innerText, ...) and NOT to the creation of the elements containing those: DONE
 
 //access the mainCard section 
 const mainCard= document.querySelector('.main__dog-section')
@@ -42,7 +34,44 @@ infoSection.setAttribute('class', "main__dog-section__desc")
 // - nice doggo? 
 const isDogNaughty = document.createElement('p')
 mainCard.append(isDogNaughty)
+const question = document.createElement('em')
 
+
+const chooseIsGoodOrBad = document.createElement('button')
+
+
+//on click, change button value
+const makeDogGood = () => chooseIsGoodOrBad.innerText = 'Good dog!' 
+const makeDogBad = () => chooseIsGoodOrBad.innerText = 'Bad dog!' 
+
+chooseIsGoodOrBad.innerText = 'Good dog!'
+let currentStatus  = chooseIsGoodOrBad.innerText 
+
+
+chooseIsGoodOrBad.addEventListener('click', event => {
+if (currentStatus === 'Good dog' ) {
+    makeDogBad() 
+    currentStatus  = chooseIsGoodOrBad.innerText} else { 
+        makeDogGood()
+        currentStatus  = chooseIsGoodOrBad.innerText
+    }  
+})
+
+
+
+
+// p.addEventListener(
+//   'click',
+//   () => {
+//     const currentClass = p.getAttribute('class');
+
+//     if (currentClass === 'blue') {
+//       makeRed()
+//     } else {
+//       makeBlue()
+//     }
+//   }
+// )
 
 
 //CONTENTS - render the contents of each element inside the main card
@@ -63,11 +92,18 @@ const renderBio = (dog) => {
     dogBio.innerText = `${dog.bio}`
 }
 
+
 const renderIsDogNaughty = (dog) => {
-    isDogNaughty.innerText = `Is naughty? ${
-        dog.isGoodDog === true ? "No!" : "Yes!"
-    }`
+    
+    question.innerText = 'Is naughty? '
+    isDogNaughty.append(question)
+
+    const text = document.createTextNode(`${dog.isGoodDog === true ? "No!" : "Yes!"}`)
+    isDogNaughty.append(text)
+    mainCard.append(chooseIsGoodOrBad) 
+    
 }
+
 
 //render the main card
 const renderDogCardLayout = (dog) => {
@@ -87,5 +123,4 @@ data.forEach(dog => {
 
 })
 
-//extension
-const createIsGoodOrBad = () => {}
+
