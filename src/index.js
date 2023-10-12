@@ -61,7 +61,7 @@ data.forEach((singleDog) => {
         dogImg.src = singleDog.image
         mainDogSection.append(dogImg)
 
-        // create main dog section Div
+        // Look at the HTML template - line 33 - Create main dog section Div
         const mainSectionDiv = document.createElement('div')
 
         //9. add bio title
@@ -87,9 +87,19 @@ data.forEach((singleDog) => {
         buttonBadOrGood.innerText = "Good dog!"
         mainDogSection.append(buttonBadOrGood)
 
+
+        // 12. add event listener to goodOrBad button
         buttonBadOrGood.addEventListener("click", () => {
-            buttonBadOrGood.innerText = "Bad dog!"
-            p.innerHTML = "<em>Is naughty?</em> no!"
+
+
+            if (singleDog.isGoodDog === false) {
+                p.innerHTML = "<em>Is naughty?</em> no"
+                buttonBadOrGood.innerText = "Bad dog!"
+            }
+            else {
+                p.innerHTML = "<em>Is naughty?</em> yes!"
+                buttonBadOrGood.innerText = "Good dog!"
+            }
         })
 
     })
