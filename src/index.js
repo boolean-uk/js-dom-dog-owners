@@ -7,7 +7,7 @@ const mainCard= document.querySelector('.main__dog-section')
 const dogsList = document.querySelector('.dogs-list')
 let dogsListElement
 
-const makeDogButton = (dog) => {
+let makeDogButton = (dog) => {
     dogsListElement = document.createElement('li')
     dogsList.append(dogsListElement)
     dogsListElement.innerText = `${dog.name}`
@@ -207,10 +207,10 @@ newForm.addEventListener('click', event => {
 
 
 // TODO: get the inputed data from the form, temporarily store it
-// This is a temporary data store. It will save our data as long as we do not refresh the page.
 
 
 
+// this temporarily saves our newDog data into the data array
 const newDog =   {
     id: 8,
     name: "",
@@ -219,29 +219,18 @@ const newDog =   {
     image: ""
   }
   
-  const newDogName = form.querySelector('input[name="name"]')
+form.addEventListener('submit', event => {
 
-  data.push(newDog)
-  console.log(data)
-//   const foodPrefsForms = document.querySelector('#food-preferences');
-//   const faveFoodInput = foodPrefsForms.querySelector('input[name="favourite-food"]')
-//   const hatedFoodInput = foodPrefsForms.querySelector('input[name="hated-food"]')
-  
-//   foodPrefsForms.addEventListener('submit', (event) => {
-//     // Prevent the browser from doing its default behaviour.
-//     // In the case of forms, it is preventing the refreshing of the page.
-//     event.preventDefault();
-  
-//     // Save the values that the user has typed to the input elements
-//     data.faveFood = faveFoodInput.value;
-//     data.hatedFood = hatedFoodInput.value;
-//     console.log(data)
-  
-//     // Reset the input values so that the form looks "fresh" again.
-//     // The `data` variable has already saved the data.
-//     faveFoodInput.value = '';
-//     hatedFoodInput.value = '';
-//   })
+    event.preventDefault();
+
+    newDog.name = form.querySelector('input[id="name"]').value
+    newDog.image = form.querySelector('input[id="image"]').value
+    newDog.bio = form.querySelector('textarea[id="bio"]').value
+    data.push(newDog)
+    console.log(newDog)
+    console.log('submitted')
+    console.log(newDog.name)
+})
 
 
 // TODO: display the temporary data on click  
