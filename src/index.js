@@ -98,7 +98,7 @@ const dogListItem = data.forEach(dog => {
 
         const dogDisplayBottomContent = dogDisplayBottom.querySelectorAll('div > *');
 
-            if (dog.isGoodDo === true) {
+            if (dog.isGoodDo) {
                 dogDisplayBottomContent.forEach((element) => element.remove());
                 dogDisplayBottom.append(question(dog), button(dog));
             }       
@@ -108,4 +108,74 @@ const dogListItem = data.forEach(dog => {
             }
         })
     })
+})
+
+
+// FORM
+const addDog = document.querySelector(".dogs-list__button--add");
+const formContainer = document.querySelector("section");
+const formHeader = document.createElement("h2");
+const form = document.createElement("form");
+
+addDog.addEventListener("click", () => {
+    // REMOVE PREVIOUS DETAILS
+    const dogDisplayDetails = document.querySelectorAll("section > *");
+    dogDisplayDetails.forEach((element) => element.remove());
+
+    // ADD HEADER
+    formHeader.innerText = "Add a new Dog";
+    formContainer.append(formHeader);
+
+    // ADD MAIN FORM
+    formContainer.append(form);
+    form.setAttribute("class", "form");
+
+    // FORM NAME
+    const nameLabel = document.createElement("label");
+    const nameInput = document.createElement("input");
+
+    nameLabel.innerText = "Dog's name";
+    nameLabel.setAttribute("for", "name");
+    form.append(nameLabel);
+
+    nameInput.setAttribute("type", "text");
+    nameInput.setAttribute("id", "name");
+    nameInput.setAttribute("name", "name");
+    form.append(nameInput);
+
+    // FORM PHOTO
+    const photoLabel = document.createElement("label");
+    const photoInput = document.createElement("input");
+
+    photoLabel.innerText = "Dog's photo";
+    photoLabel.setAttribute("for", "image");
+    form.append(photoLabel);
+
+    photoInput.setAttribute("type", "url");
+    photoInput.setAttribute("id", "image");
+    photoInput.setAttribute("name", "image");
+    form.append(photoInput);
+
+    // FORM BIO
+    const bioLabel = document.createElement("label");
+    const bioTextarea = document.createElement("textarea");
+
+    bioLabel.innerText = "Dog's Bio";
+    bioLabel.setAttribute("for", "bio");
+    form.append(bioLabel);
+
+    bioTextarea.setAttribute("rows", "5");
+    bioTextarea.setAttribute("id", "bio");
+    bioTextarea.setAttribute("name", "bio");
+    form.append(bioTextarea);
+
+    // FORM SUBMIT BUTTON
+    const submitInput = document.createElement("input");
+
+    submitInput.setAttribute("type", "submit");
+    submitInput.setAttribute("id", "submit");
+    submitInput.setAttribute("name", "submit");
+    submitInput.setAttribute("value", "Let's add a dog");
+    submitInput.setAttribute("class", "form__button");
+    form.append(submitInput);
 })
