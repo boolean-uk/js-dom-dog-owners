@@ -90,6 +90,43 @@ function createNavButtons () {
 
 createNavButtons()
 
+function formName() {
+    const formName = document.createElement('input');
+    formName.setAttribute('type', 'text');
+    formName.setAttribute('placeholder', 'Name');
+    formName.setAttribute('class', 'form__input');
+    return formName;
+};
 
+function formImage() {
+    const formImage = document.createElement('input');
+    formImage.setAttribute('type', 'text');
+    formImage.setAttribute('placeholder', 'Image URL');
+    formImage.setAttribute('class', 'form__input');
+    return formImage;
+};
 
+function formBio() {
+    const formBio = document.createElement('textarea');
+    formBio.setAttribute('placeholder', 'Bio');
+    formBio.setAttribute('class', 'form__input');
+    return formBio;
+};
 
+function formSubmit() {
+    const formSubmit = document.createElement('input');
+    formSubmit.setAttribute('type', 'submit');
+    formSubmit.setAttribute('value', 'Submit');
+    formSubmit.setAttribute('class', 'form__submit');
+    return formSubmit;
+};
+
+function createForm() {
+    const form = document.createElement('form');
+    form.setAttribute('class', 'form');
+    form.append(formName())
+    form.append(formImage())
+    form.append(formBio())
+    form.append(formSubmit())
+    container.append(form);
+};
