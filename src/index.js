@@ -1,8 +1,16 @@
 console.log(data);
 
 // WRITE YOUR CODE BELOW!
+
 const main = document.querySelector('main');
 const dogButtons = document.querySelector("ul");
+const allDogs = document.querySelectorAll('.dogs-list__button');
+console.log(allDogs)
+function makeNaveBar() {
+    const navButtons = document.querySelector('ul')
+    while (navButtons.children.length > 1) {
+        navButtons.lastChild.remove();
+    }
 
 for (let i = 0; i < data.length; i++) {
 
@@ -18,23 +26,18 @@ for (let i = 0; i < data.length; i++) {
     dogButton.addEventListener('click', () => {
         main.innerHTML = '';
         createDogCard(dog);
+       
     })
 }
+}
+
+makeNaveBar()
 
 //  Dog card
 
 let wasDogClicked = false;
-const allDogs = document.querySelectorAll('.dogs-list__button');
-const bio = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum,minima voluptates libero cumque rerum consequatur optio aliquid sinteum maxime illo laborum omnis quo ab rem cupiditate nullaperspiciatis ipsum!"
 
 const addButton = allDogs[0]
-const firstDogButton = allDogs[1]
-const secondDogButton = allDogs[2]
-const thirdDogButton = allDogs[3]
-const fourthDogButton = allDogs[4]
-const fifthDogButton = allDogs[5]
-const sixthDogButton = allDogs[6]
-const seventhDogButton = allDogs[7]
 
 const dogCard = document.querySelector('.main__dog-section');
 
@@ -59,9 +62,17 @@ function createDogCard(dog) {
     dogBio.innerText = dog.bio;
     card.append(dogBio);
 
+    const dogBehave = document.createElement('p')
+    const italic = document.createElement('em')
+    italic.innerText = 'Is naughty?'
+    card.append(dogBehave)
+    card.append(italic );
+
+    const behave = document.createTextNode(dog.isGoodDog ? ' Yes!' : ' No!')
+    card.append(behave);
 
     console.log('createDogCard', dog);
-    main.append(card);
+    main.append(card)
 }
 
 // Add dog form
@@ -69,115 +80,126 @@ function createDogCard(dog) {
 let doesFormExist = false;
 
 
-const form = document.createElement('form');
-form.setAttribute('class', 'form');
-dogCard.append(form);
 addButton.addEventListener('click', () => {
-    form.innerHTML = '';
     dogForm()
+
 })
 
-    function dogForm() {
-        if (!doesFormExist) {
-            main.innerHTML = '';
+function dogForm() {
 
-            const dogFormNameLabel = document.createElement('label');
-            dogFormNameLabel.innerText = "Dog's name";
-            dogFormNameLabel.setAttribute('for', 'name');
+    console.log('dogForm', doesFormExist)
 
-            const dogNameInput = document.createElement('input');
-            dogNameInput.setAttribute('class', 'form');
-            dogNameInput.id = "name";
-            dogNameInput.type = "text";
-            dogNameInput.name = "name";
-            dogNameInput.style.width = "100%";
+    const section = document.createElement('section')
+    section.setAttribute('class', 'main__dog-section')
 
-            const dogFormImageLabel = document.createElement('label');
-            dogFormImageLabel.setAttribute('class', 'form');
-            dogFormImageLabel.innerText = "Dog's picture";
+    const form = document.createElement('form');
+    form.setAttribute('class', 'form');
 
-            const dogImageURL = document.createElement('input');
-            dogImageURL.setAttribute('for', 'form');
-            dogImageURL.type = "url";
-            dogImageURL.id = "image";
-            dogImageURL.name = "image";
-            dogImageURL.style.width = "100%";
+    const h2 = document.createElement('h2')
+    h2.innerText = "Add a new Dog"
+    h2.setAttribute('class', 'h2')
 
-            const dogFormBioLabel = document.createElement('label')
-            dogFormBioLabel.setAttribute('for', 'bio')
-            dogFormBioLabel.innerText = "Dog's Bio"
+    const dogFormNameLabel = document.createElement('label');
+    dogFormNameLabel.innerText = "Dog's name";
+    dogFormNameLabel.setAttribute('for', 'label');
 
-            const dogBioTextArea = document.createElement('textarea')
-            dogBioTextArea.setAttribute('class', 'form')
-            dogBioTextArea.rows = "5"
-            dogBioTextArea.id = "bio"
-            dogBioTextArea.name = "bio"
-            dogBioTextArea.style.width = "100%"
+    const dogNameInput = document.createElement('input');
+    dogNameInput.setAttribute('class', 'main__dog-section__desc ');
+    dogNameInput.id = "name";
+    dogNameInput.type = "text";
+    dogNameInput.name = "name";
+    dogNameInput.style.width = "100%";
 
-            const dogSubmit = document.createElement('input')
-            dogSubmit.setAttribute('class', 'form__button')
-            dogSubmit.type = "submit"
-            dogSubmit.id = "submit"
-            dogSubmit.name = "submit"
-            dogSubmit.value = "Let's add a dog!"
+    const dogFormImageLabel = document.createElement('label');
+    dogFormImageLabel.setAttribute('class', 'label');
+    dogFormImageLabel.innerText = "Dog's picture";
 
-            const card = document.createElement('main__dog-section')
-            card.setAttribute('class', 'section')
-            card.style.width = "100%";
-            dogCard.append(card);    
-        
+    const dogImageURL = document.createElement('input');
+    dogImageURL.setAttribute('for', 'input');
+    dogImageURL.type = "url";
+    dogImageURL.id = "image";
+    dogImageURL.name = "image";
+    dogImageURL.style.width = "100%";
 
-            form.append(dogFormNameLabel, dogNameInput, dogFormImageLabel, dogImageURL, dogFormBioLabel, dogBioTextArea, dogSubmit);
+    const dogFormBioLabel = document.createElement('label')
+    dogFormBioLabel.setAttribute('for', 'label')
+    dogFormBioLabel.innerText = "Dog's Bio"
 
-            main.append(form);
+    const dogBioTextArea = document.createElement('textArea')
+    dogBioTextArea.setAttribute('class', 'textArea')
+    dogBioTextArea.rows = "5"
+    dogBioTextArea.id = "bio"
+    dogBioTextArea.name = "bio"
+    dogBioTextArea.style.width = "100%"
 
-
-            addButton.addEventListener("click", createForm);
-
-            function createForm() {
-                if (doesFormExist === true) {
-                    dogNameInput.innerText = "Add a New Dog"
-                    dogFormNameLabel.innerText = "Dog's name"
-                    dogFormImageLabel.innerText = "Dog's image"
-                    dogFormBioLabel.innerText = "Dog's Bio"
-                    form.append(dogFormNameLabel, dogNameInput, dogFormImageLabel, dogImageURL, dogFormBioLabel, dogBioTextArea, dogSubmit);
-                    doesFormExist = false;
-
-                }
-            }
-
-            // Form data
-
-            const dogData = {
-                name: '',
-                image: '',
-                bio: '',
-            }
-
-            form.addEventListener('submit', (event) => {
-                event.preventDefault();
-
-                const userDogName = form.querySelector('input[name="name"]')
-                const userDogImage = form.querySelector('input[name="image"]')
-                const userDogBio = form.querySelector('textarea[name="bio"]')
-
-                dogData.name = userDogName.value;
-                dogData.image = userDogImage.value;
-                dogData.bio = userDogBio.value;
+    const dogSubmit = document.createElement('input')
+    dogSubmit.setAttribute('class', 'form__button')
+    dogSubmit.type = "submit"
+    dogSubmit.id = "submit"
+    dogSubmit.name = "submit"
+    dogSubmit.value = "Let's add a dog!"
 
 
-                console.log(dogData)
-
-                userDogName.value = '';
-                userDogImage.value = '';
-                userDogBio.value = '';
-
-            })
 
 
-        }
+    dogCard.innerHTML = '';
+
+    dogNameInput.innerText = "Add a New Dog"
+    dogFormNameLabel.innerText = "Dog's name"
+    dogFormImageLabel.innerText = "Dog's image"
+    dogFormBioLabel.innerText = "Dog's Bio"
+    doesFormExist = true;
+
+   
+    //    createForm();
+
+    form.append(h2, dogFormNameLabel, dogNameInput, dogFormImageLabel, dogImageURL, dogFormBioLabel, dogBioTextArea, dogSubmit);
+    dogCard.append(form);
+
+    section.append(form)
+    main.innerHTML = ""
+    main.append(section)
+
+    // Form data
+
+    const dogData = {
+        name: '',
+        image: '',
+        bio: '',
     }
 
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
 
+        const userDogName = form.querySelector('input[name="name"]')
+        const userDogImage = form.querySelector('input[name="image"]')
+        const userDogBio = form.querySelector('textarea[name="bio"]')
 
+        dogData.name = userDogName.value;
+        dogData.image = userDogImage.value;
+        dogData.bio = userDogBio.value;
 
+        userDogName.value = '';
+        userDogImage.value = '';
+        userDogBio.value = '';
+
+        const newPup = {
+            id: data.length + 1,
+            name: dogNameInput.value,
+            bio: dogFormBioLabel.value,
+            isGoodDog: true, 
+            image: dogImageURL.value
+        }
+
+        console.log('our new dog', newPup)
+        data.unshift(dogData)
+        makeNaveBar()
+        dogCard.isAddingDog = false
+        dogCard.selectedDog = null
+        dogCard.append(newPup)
+
+    
+
+    
+    })
+}

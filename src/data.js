@@ -12,10 +12,7 @@ const data = [
   {
     id: 2,
     name: "Nugget",
-    bio: `Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum,
-    minima voluptates libero cumque rerum consequatur optio aliquid sint
-    eum maxime illo laborum omnis quo ab rem cupiditate nulla
-    perspiciatis ipsum!`,
+    bio: `Bio 2`,
     isGoodDog: false,
     image: "https://curriculum-content.s3.amazonaws.com/js/woof-woof/dog_2.jpg"
   },
