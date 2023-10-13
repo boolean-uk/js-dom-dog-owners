@@ -90,50 +90,90 @@ function createNavButtons () {
 
 createNavButtons()
 
-function formName() {
-    const formName = document.createElement('input');
-    formName.setAttribute('type', 'text');
-    formName.setAttribute('placeholder', 'Enter your dog\'s name');
-    formName.setAttribute('class', 'form__input');
-    return formName;
-};
-
-function formImage() {
-    const formImage = document.createElement('input');
-    formImage.setAttribute('type', 'text');
-    formImage.setAttribute('placeholder', 'Enter an Image URL');
-    formImage.setAttribute('class', 'form__input');
-    return formImage;
-};
-
-function formBio() {
-    const formBio = document.createElement('textarea');
-    formBio.setAttribute('placeholder', 'Tell us about your dog...');
-    formBio.setAttribute('class', 'form__input');
-    return formBio;
-};
-
-function formSubmit() {
-    const formSubmit = document.createElement('input');
-    formSubmit.setAttribute('type', 'submit');
-    formSubmit.setAttribute('value', 'Submit');
-    formSubmit.setAttribute('class', 'form__submit');
-    return formSubmit;
-};
-
 function createForm() {
     container.innerHTML = ''
-    const form = document.createElement('form');
-    const formHeader = document.createElement('h2');
-    formHeader.setAttribute('class', 'form__header');
-    formHeader.innerText = 'Add a Dog';
-    form.append(formHeader)
-    form.setAttribute('class', 'form');
-    form.append(formName())
-    form.append(formImage())
-    form.append(formBio())
-    form.append(formSubmit())
-    container.append(form);
-};
+    const section = document.createElement('form');
+    section.classList.add('main__dog-section');
 
-createForm()
+    const title = document.createElement('h2');
+    title.innerText = 'Add a New Dog';
+    section.append(title);
+
+    const form = document.createElement('form');
+    form.classList.add('form');
+    
+    const nameLabel = document.createElement('label');
+    nameLabel.setAttribute('for', 'name');
+    nameLabel.innerText = "Dog's Name";
+    form.append(nameLabel);
+
+    const nameInput = document.createElement('input');
+    nameInput.setAttribute('type', 'text');
+    nameInput.setAttribute('id', 'name');
+    nameInput.setAttribute('name', 'name');
+    form.append(nameInput);
+
+    const imageLabel = document.createElement('label');
+    imageLabel.setAttribute('for', 'image');
+    imageLabel.innerText = "Dog's Image";
+    form.append(imageLabel);
+
+    const imageInput = document.createElement('input');
+    imageInput.setAttribute('type', 'url');
+    imageInput.setAttribute('id', 'image');
+    imageInput.setAttribute('name', 'image');
+    form.append(imageInput);
+
+    const bioLabel = document.createElement('label');
+    bioLabel.setAttribute('for', 'bio');
+    bioLabel.innerText = "Dog's Bio";
+    form.append(bioLabel);
+
+    const bioInput = document.createElement('textarea');
+    bioInput.setAttribute('rows', '5')
+    bioInput.setAttribute('id', 'bio');
+    bioInput.setAttribute('name', 'bio');
+    form.append(bioInput);
+
+    const submitButton = document.createElement('input');
+    submitButton.setAttribute('type', 'submit');
+    submitButton.setAttribute('id', 'submit');
+    submitButton.setAttribute('name', 'submit');
+    submitButton.setAttribute('value', "Let's Add a Dog!");
+    submitButton.classList.add('form__button');
+    form.append(submitButton);
+
+    form.addEventListener('submit', (e) => {
+        dogList.innerHTML = ''
+        container.innerHTML = ''
+        e.preventDefault();
+        const dog = {
+            id: data.length + 1,
+            name: e.target.name.value,
+            image: e.target.image.value,
+            bio: e.target.bio.value,
+            isGoodDog: true
+        }
+        data.push(dog);
+        console.log(data);
+        createDogCard(dog);
+        createNavButtons(dog);
+    });
+    section.append(form);
+    container.append(section);
+}
+
+function addDog() {
+    // targeting the plus button to add a new dog
+    const addNewDog = document.querySelector('.dogs-list__button.dogs-list__button--add');
+    addNewDog.addEventListener('click', () => {
+        console.log('add dog clicked')
+        createForm()
+    });
+}
+
+addDog()
+
+
+
+
