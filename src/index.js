@@ -64,14 +64,14 @@ function createDogCard(dog) {
     const p = document.createElement("p");
     const em = document.createElement("em");
     em.innerText = "Is naughty? ";
-    let answer = document.createTextNode("");
+    const answer = document.createElement("span");
     p.append(em, answer);
 
     const button =  document.createElement("button");
     button.innerText = "Bad dog!";
     dog.isGoodDog ? 
-    (button.innerText = "Good Dog!", answer = "No!", p.append(em, answer))
-    : (button.innerText = "Bad Dog!", answer = "Yes!", p.append(em, answer));
+    (button.innerText = "Good Dog!", answer.innerText = "No!", p.append(em, answer))
+    : (button.innerText = "Bad Dog!", answer.innerText = "Yes!", p.append(em, answer));
 
     button.addEventListener("click", goodDogBadDog);
 
@@ -89,12 +89,16 @@ function renderDogCard(dog) {
 };
 
 function goodDogBadDog() {
-    const button = document.querySelector(".main__dog-section > button");
     const p = document.querySelector(".main__dog-section > p");
+    const em = document.querySelector(".main__dog-section > p > em");
+    em.innerText = "Is naughty? ";
+    const answer = document.querySelector(".main__dog-section > p > span")
 
-    button.innerText === "Good Dog!" ?
-    (button.innerText = "Bad Dog!", p.innerHTML = "<em>Is naughty?</em> Yes!")
-    : (button.innerText = "Good Dog!", p.innerHTML = "<em>Is naughty?</em> No!");
+    const button =  document.querySelector(".main__dog-section > button");
+
+    button.innerText === "Bad Dog!" ? 
+    (button.innerText = "Good Dog!", answer.innerText = "No!", p.append(em, answer))
+    : (button.innerText = "Bad Dog!", answer.innerText = "Yes!", p.append(em, answer));
 };
 
 //Form
