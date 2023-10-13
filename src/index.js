@@ -50,6 +50,10 @@ data.forEach((dog) =>{
     const dogQuestion = document.createElement('p')
     dogSection.append(dogQuestion)
 
+    const dogQuestionEm = document.createElement('em')
+    dogQuestionEm.innerText = 'is naughty?'
+
+    dogSection.append(dogQuestion)
     const dogBehavior = dog.isGoodDog
 
     const button = document.createElement('button')
@@ -59,12 +63,14 @@ data.forEach((dog) =>{
     
 if( dogBehavior === true){
     button.innerText = 'Good dog!'
-    dogQuestion.innerHTML = '<em>is naughty?</em> No!';
+    dogQuestion.innerText = 'No '
+    dogQuestion.append(dogQuestionEm)
 
 }
 else{
     button.innerText = 'Bad dog!'
-    dogQuestion.innerHTML = '<em>is naughty?</em> Yes!';
+    dogQuestion.innerText = 'Yes '
+    dogQuestion.append(dogQuestionEm)
 
 }
 
@@ -73,27 +79,24 @@ else{
 
 })
 
-const dogNamebuttons = document.querySelectorAll('.dogs-list__button')
-const dogSection = document.querySelectorAll('.main__dog-section')
+const dogNameButtons = document.querySelectorAll('.dogs-list__button')
+const dogSections = document.querySelectorAll('.main__dog-section')
 const addDog = document.querySelector('.dogs-list__button--add')
 
-dogNamebuttons.forEach((dogName, index) =>{
-    dogName.addEventListener ('click', () =>{
-        if(dogSection[index].style.display === 'none' ){
-            dogSection[index].style.display = 'block'
-            dogSection[0].style.display ='none'
-           
-        }
-     
-    }) 
 
-     dogName.addEventListener( 'mouseout',  () =>{
-        if(dogSection[index].style.display === 'block' ){
-            dogSection[index].style.display = 'none'
-            dogSection[0].style.display ='block'
-            
-        }
-    }) 
-    
-})
 
+
+dogNameButtons.forEach((dogName, index) => {
+    dogName.addEventListener('click', () => {
+
+        dogSections.forEach((section) => {
+            section.style.display = 'none';
+        });
+
+        // Display the clicked dog's section
+        dogSections[index].style.display = 'block';
+    });
+
+      /// Here once the dogName is clicked,  the inner forEach would loop through  the section and display it none, 
+    //// then eventListener  triggers again and display the current clicked  section as block
+});
