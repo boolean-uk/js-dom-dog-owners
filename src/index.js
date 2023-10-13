@@ -191,9 +191,6 @@ function createNewDogForm() {
         // This adds values to the data.js
         data.unshift(newDog);
         removeDogsNames();
-        data.forEach((value) => {
-            createDogNav(value);
-        });
 
         // This clears the form again.
         dogsName.value = "";
@@ -248,11 +245,5 @@ function createTextArea(rows, id, name) {
     textArea.setAttribute("name", name);
     return textArea;
 }
-
-// When the plus button gets clicked it will run a function that adds the new dog form onto screen//
-addDog.addEventListener("click", () => {
-    createNewDogForm();
-});
-
 
 removeDogsNames();
