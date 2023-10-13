@@ -28,12 +28,6 @@ const goodBad = (data) => {
     }
     return answer;
 };
-
-// Some query selectors//
-const dogButtonList = document.querySelector(".dogs-list");
-const main = document.querySelector(".main");
-const addDog = document.querySelector(".dogs-list__button--add");
-
 // A function to remove dogs on the screen//
 const removeDogs = (value) => {
     const allContent = document.querySelectorAll(".main > *");
@@ -44,11 +38,25 @@ const removeDogs = (value) => {
 const removeDogsNames = (value) => {
     dogButtonList.innerHTML = "";
     const li = document.createElement("li");
-    li.classList.add("dogs-list__button")
+    li.classList.add("dogs-list__button");
     li.classList.add("dogs-list__button--add");
     li.innerText = "+";
     dogButtonList.append(li);
+
+    // The entire loop to render the dogs onto the page//
+    data.forEach((value) => {
+        createDogNav(value);
+    });
+
+    li.addEventListener("click", () => {
+        createNewDogForm();
+    });
 };
+
+// Some query selectors//
+const dogButtonList = document.querySelector(".dogs-list");
+const main = document.querySelector(".main");
+const addDog = document.querySelector(".dogs-list__button--add");
 
 //Main function to create a dog card//
 const createDog = (dogCard) => {
@@ -112,11 +120,6 @@ const createDogNav = (dogName) => {
     });
 };
 
-// The entire loop to render the dogs onto the page//
-data.forEach((value) => {
-    createDogNav(value);
-});
-
 // A function to create a form for the new dog//
 function createNewDogForm() {
     removeDogs();
@@ -151,7 +154,7 @@ function createNewDogForm() {
         "form__button"
     );
 
-    // All appends
+    // All appends for form and adding to main.
     main.append(section);
     section.append(h2);
     section.append(form);
@@ -172,10 +175,11 @@ function createNewDogForm() {
     const dogsPic = document.querySelector("#image");
     const dogsBio = document.querySelector("#bio");
 
-    // event listener for submitting new dog information.
+    // event listener for submitting new dog information and re-rendering nav-list.
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
+        // Creating new object for storage.
         const newDog = {
             id: data.length + 1,
             name: dogsName.value,
@@ -184,16 +188,17 @@ function createNewDogForm() {
             image: dogsPic.value,
         };
 
+        // This adds values to the data.js
         data.unshift(newDog);
         removeDogsNames();
         data.forEach((value) => {
             createDogNav(value);
         });
 
-        dogsName.value = '';
-        dogsPic.value = '';
-        dogsBio.value = '';
-        
+        // This clears the form again.
+        dogsName.value = "";
+        dogsPic.value = "";
+        dogsBio.value = "";
     });
 }
 
@@ -248,3 +253,6 @@ function createTextArea(rows, id, name) {
 addDog.addEventListener("click", () => {
     createNewDogForm();
 });
+
+
+removeDogsNames();
