@@ -91,8 +91,15 @@ const renderDogCard = (dog) => {
   div.appendChild(bioText)
 
   const p = document.createElement("p")
-  const eval = dog.isGoodDog ? "No" : "Yes"
-  p.innerHTML = `<em>Is naughty?</em> ${eval}!`
+  const em = document.createElement("em")
+  em.innerText = "Is naughty? "
+  p.appendChild(em)
+  
+  const eval = document.createElement("span")
+  eval.setAttribute("id", "evalDesc")
+  eval.innerText = dog.isGoodDog ? "No!" : "Yes!"
+  p.appendChild(eval)
+
   card.appendChild(p)
 
   const button = document.createElement("button")
@@ -105,13 +112,22 @@ const renderDogCard = (dog) => {
 }
 
 const toggleOnClick = (button) => {
-  const pDesc = document.querySelector("section.main__dog-section > p")
-  
-  // .contains("Yes") ?  pDesc.innerText.replace("Yes", "NO") :  pDesc.innerText.replace("No", "Yes")
-  console.log(button)
   const oldText = button.innerText
-  newText = oldText === "Good Dog!" ? "Bad Dog!" : "Good Dog!"
-  button.innerText = newText
+  const pDesc = document.querySelector("section.main__dog-section > p > span#evalDesc")
+
+  switch (oldText) {
+    case "Good Dog!":
+      button.innerText = "Bad Dog!"
+      pDesc.innerText = "Yes!"
+      break;
+      case "Bad Dog!":
+        button.innerText = "Good Dog!"
+        pDesc.innerText = "No!"
+      break;
+    default:
+      pDesc.innerText = "Maybe!"
+      break;
+  }
 }
 
 const createForm = () => {
