@@ -16,6 +16,8 @@ console.log(data);
    - 5. add click event listener to li
    - 6. build the structure below with js
 
+   Main Section
+-   Select the main Section
        
 */
 
@@ -83,6 +85,8 @@ data.forEach((singleDog) => {
         buttonBadOrGood.addEventListener("click", () => {
 
 
+            singleDog.isGoodDog = !singleDog.isGoodDog
+
             if (singleDog.isGoodDog === false) {
                 p.innerHTML = "<em>Is naughty?</em> no"
                 buttonBadOrGood.innerText = "Bad dog!"
@@ -95,6 +99,8 @@ data.forEach((singleDog) => {
 
     })
 })
+
+
 
 
 
