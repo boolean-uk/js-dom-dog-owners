@@ -101,6 +101,55 @@ data.forEach((singleDog) => {
 })
 
 
+// When the plus button is clicked --> should replace main card with a form to add a new dog to the list.
+
+// Template of form on the HTML file.
+
+// Once the form is submitted - add the new dog to the beginning of the list, right next to the plus button.
+
+// The data does not need to persist - so once you refresh the page, it is fine that your newly added data disappears.
+
+// This is a template for the add dog form
+
+//     <section class="main__dog-section">
+//       <h2>Add a new Dog</h2>
+//       <form class="form">
+
+//         <label for="name">Dog's name</label>
+//         <input type="text" id="name" name="name">
+
+//         <label for="image">Dog's picture</label>
+//         <input type="url" id="image" name="image">
+
+//         <label for="bio">Dog's bio</label>
+//         <textarea rows="5" id="bio" name="bio"></textarea>
+
+//         <input type="submit" id="submit" name="submit" value="Let's add a dog!" class="form__button">
+//       </form>
+//   </section>
+//    -->
+
+//PLAN
+
+// Everything should be appended in the main__dog-section.
+
+
+// 1.Select the main section  
+
+// 2. Create h2
+// Inside that give it text
+
+// 3. Create form tag
+// set the class attribute 
+
+// 4. Create label 
+// set "for" attribute
+// give it inner text
+
+// 5. Create image
+// set type to "text"
+// set id to "name"
+// set name to "name"
 
 
 
