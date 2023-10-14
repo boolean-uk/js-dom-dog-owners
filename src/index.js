@@ -166,48 +166,75 @@ plusButton.addEventListener('click', () => {
     // set "for" attribute
     // give it inner text - Dog's name - so possibly loop through the dog's name.
 
-    data.forEach((singleDog) => {
-        const labelForName = document.createElement('label')
-        labelForName.setAttribute("for", "name")
-        labelForName.innerText = singleDog.name
-        formCreated.append(labelForName)
-    })
 
+    const labelForName = document.createElement('label')
+    labelForName.setAttribute("for", "name")
+    labelForName.innerText = "Dog's name"
+    formCreated.append(labelForName)
+
+    // 5. Create input 
+    // set attributes like type, id, name
+    // append thre in put to the name
+    const inputForName = document.createElement('input')
+    inputForName.setAttribute('type', 'text')
+    inputForName.setAttribute('id', 'name')
+    inputForName.setAttribute('name', 'name')
+    formCreated.append(inputForName)
+
+    // 6. Create a label for dog's picture
+    // set attributes like for, inner text
+    // append this to form
+
+    const labelImg = document.createElement('label')
+    labelImg.setAttribute("for", "image")
+    labelImg.innerText = "Dog's picture"
+    formCreated.append(labelImg)
+
+    // 7. Create input
+    // set type to URL
+    // set id to image
+    // set name to image
+
+    const inputImg = document.createElement('input')
+    inputImg.setAttribute("type", "url")
+    inputImg.setAttribute("id", "image")
+    inputImg.setAttribute("name", "image")
+    formCreated.append(inputImg)
+
+    //8. Create a label 
+    // set for to "bio"
+    // set innerText = "dog's bio"
+
+    const labelBio = document.createElement('label')
+    labelBio.setAttribute("for", "bio")
+    labelBio.innerText = "Dog's bio"
+    formCreated.append(labelBio)
+
+    //9. create text area
+    // set rows to 5
+    // set id to bio
+    // set name to bio
+
+    const textArea = document.createElement("textarea")
+    textArea.setAttribute("rows", "5")
+    textArea.setAttribute("id", "bio")
+    textArea.setAttribute("name", "bio")
+    formCreated.append(textArea)
+
+    // 10. create input
+    // set type to submit
+    // set name to submit
+    // set value to "let's add a Dog"
+    // set class to form__button
+
+    const inputSubmit = document.createElement("input")
+    inputSubmit.setAttribute("type", "submit")
+    inputSubmit.setAttribute("id", "submit")
+    inputSubmit.setAttribute("name", "submit")
+    inputSubmit.setAttribute("value", "Let's add a dog!")
+    inputSubmit.setAttribute("class", "form__button")
+    formCreated.append(inputSubmit)
 
 })
-
-// 2. Create h2
-// Inside that give it text
-
-// 3. Create form tag
-// set the class attribute 
-
-// 4. Create label inside the form
-// set "for" attribute
-// give it inner text
-
-// 5. Create image
-// set type to "text"
-// set id to "name"
-// set name to "name"
-
-//6. create label
-// set attribute "for" --> to "bio"
-// set text to "Dog's Bio"
-
-//7. create textarea 
-// rows to 5
-// id to bio
-// name to bio
-
-//8. create input 
-// set type to "submit"
-// set id to submit
-// set name to submit
-// set value to let's add a dog
-// set class to "form__button"
-
-
-
 
 
