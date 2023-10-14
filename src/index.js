@@ -134,7 +134,47 @@ data.forEach((singleDog) => {
 // Everything should be appended in the main__dog-section.
 
 
-// 1.Select the main section  
+// 1.Select the main section - when the "plus" button is clicked, so we need an addEvent... then create the elements below 
+
+const plusButton = document.querySelector(".dogs-list__button--add")
+console.log("I am a plus Button", plusButton)
+
+// my question is do i need to create a variable for main section again and select the main page?
+plusButton.addEventListener('click', () => {
+    const mainSec = document.querySelector(".main__dog-section")
+    console.log("this is the main section, when plus clicked", mainSec)
+
+    // 2. Create h2
+    // Inside that give it text
+    // Reset the form
+    // Append h2 to mainSec
+
+    const formh2 = document.createElement('h2')
+    formh2.innerText = 'Add a new Dog'
+    // reset the container
+    mainSec.innerHTML = ""
+    mainSec.append(formh2)
+
+    // 3. Create form tag
+    // set the class attribute 
+
+    const formCreated = document.createElement('form')
+    formCreated.setAttribute("class", "form")
+    mainSec.append(formCreated)
+
+    // 4. Create label inside the form
+    // set "for" attribute
+    // give it inner text - Dog's name - so possibly loop through the dog's name.
+
+    data.forEach((singleDog) => {
+        const labelForName = document.createElement('label')
+        labelForName.setAttribute("for", "name")
+        labelForName.innerText = singleDog.name
+        formCreated.append(labelForName)
+    })
+
+
+})
 
 // 2. Create h2
 // Inside that give it text
@@ -142,7 +182,7 @@ data.forEach((singleDog) => {
 // 3. Create form tag
 // set the class attribute 
 
-// 4. Create label 
+// 4. Create label inside the form
 // set "for" attribute
 // give it inner text
 
@@ -150,6 +190,22 @@ data.forEach((singleDog) => {
 // set type to "text"
 // set id to "name"
 // set name to "name"
+
+//6. create label
+// set attribute "for" --> to "bio"
+// set text to "Dog's Bio"
+
+//7. create textarea 
+// rows to 5
+// id to bio
+// name to bio
+
+//8. create input 
+// set type to "submit"
+// set id to submit
+// set name to submit
+// set value to let's add a dog
+// set class to "form__button"
 
 
 
