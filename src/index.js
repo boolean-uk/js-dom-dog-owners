@@ -235,6 +235,34 @@ plusButton.addEventListener('click', () => {
     inputSubmit.setAttribute("class", "form__button")
     formCreated.append(inputSubmit)
 
+
+
 })
 
+/////////////////////////////////////////////////
+// Submission of the form, the new list should get added to the beginning of the list, right next to the plus button.
 
+// // create object for inputs
+// const inputs = {
+//     dogName: '',
+//     dogPic: '',
+//     dogBio: ''
+// }
+
+// select the inputs
+
+const selectingForm = document.querySelector('.form')
+
+const selectingInputName = document.querySelector('#name')
+// console.log(selectingInputName)
+
+const seletingInputURL = document.querySelector('#image')
+
+const seletingInputBio = document.querySelector('#bio')
+
+inputSubmit.addEventListener('submit'), (event) => {
+    // prevent the default
+    event.preventDefault()
+
+    singleDog.name = selectingInputName.value
+}
