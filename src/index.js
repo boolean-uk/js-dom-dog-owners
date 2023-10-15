@@ -24,125 +24,102 @@ console.log(data);
 // 1. Select the ul element  - dog-list__button. Class name gives array, query selector gives the actual element
 const dogListContainer = document.querySelector(".dogs-list")
 
-// 2. Using forEach
-data.forEach((singleDog) => {
-    //3.
-    const li = document.createElement('li')
-    //add text inside li
-    li.innerText = singleDog.name
-    // add class attribute
-    li.setAttribute("class", "dogs-list__button")
-    // 4. appending
-    dogListContainer.append(li)
-    // 5. adding click event
-    li.addEventListener("click", () => {
 
-        // 6. select the main section
-        const mainDogSection = document.querySelector(".main__dog-section")
+function render() {
 
-        // 7. create h2 and add text
-        const h2Main = document.createElement('h2')
-
-        h2Main.innerText = singleDog.name
-        //reset the container
-        mainDogSection.innerHTML = ""
-        mainDogSection.append(h2Main)
-
-
-        // 8. add the image and insert the src
-        const dogImg = document.createElement('img')
-        dogImg.src = singleDog.image
-        mainDogSection.append(dogImg)
-
-        // Look at the HTML template - line 33 - Create main dog section Div
-        const mainSectionDiv = document.createElement('div')
-
-        //9. add bio title
-        const addBioHeader = document.createElement('h3')
-        addBioHeader.innerText = "Bio"
-        mainSectionDiv.append(addBioHeader)
-
-        //10. add the bio
-        const bio = document.createElement('p')
-        bio.innerText = singleDog.bio
-        mainSectionDiv.append(bio)
-
-        mainDogSection.append(mainSectionDiv)
-
-        // 10. create p and append to mainDogSection
-        const p = document.createElement('p')
-        console.log(p)
-        p.innerHTML = "<em>Is naughty?</em> yes!"
-        mainDogSection.append(p)
-
-        // 11. Create Button and append to mainDogSection
-        const buttonBadOrGood = document.createElement('button')
-        buttonBadOrGood.innerText = "Good dog!"
-        mainDogSection.append(buttonBadOrGood)
-
-
-        // 12. add event listener to goodOrBad button
-        buttonBadOrGood.addEventListener("click", () => {
-
-
-            singleDog.isGoodDog = !singleDog.isGoodDog
-
-            if (singleDog.isGoodDog === false) {
-                p.innerHTML = "<em>Is naughty?</em> no"
-                buttonBadOrGood.innerText = "Bad dog!"
-            }
-            else {
-                p.innerHTML = "<em>Is naughty?</em> yes!"
-                buttonBadOrGood.innerText = "Good dog!"
-            }
-        })
-
+    const liBtns = document.querySelectorAll(".liBtn")
+    liBtns.forEach((li) => {
+        // removing each li button
+        li.remove()
     })
-})
+
+    // 2. Using forEach
+    data.forEach((singleDog) => {
+        //3.
+        const li = document.createElement('li')
+        //add text inside li
+        li.innerText = singleDog.name
+        // add class attribute
+        li.setAttribute("class", "dogs-list__button liBtn")
 
 
-// When the plus button is clicked --> should replace main card with a form to add a new dog to the list.
+        // 4. appending
+        dogListContainer.append(li)
+        // 5. adding click event
+        li.addEventListener("click", () => {
 
-// Template of form on the HTML file.
+            // 6. select the main section
+            const mainDogSection = document.querySelector(".main__dog-section")
 
-// Once the form is submitted - add the new dog to the beginning of the list, right next to the plus button.
+            // 7. create h2 and add text
+            const h2Main = document.createElement('h2')
 
-// The data does not need to persist - so once you refresh the page, it is fine that your newly added data disappears.
-
-// This is a template for the add dog form
-
-//     <section class="main__dog-section">
-//       <h2>Add a new Dog</h2>
-//       <form class="form">
-
-//         <label for="name">Dog's name</label>
-//         <input type="text" id="name" name="name">
-
-//         <label for="image">Dog's picture</label>
-//         <input type="url" id="image" name="image">
-
-//         <label for="bio">Dog's bio</label>
-//         <textarea rows="5" id="bio" name="bio"></textarea>
-
-//         <input type="submit" id="submit" name="submit" value="Let's add a dog!" class="form__button">
-//       </form>
-//   </section>
-//    -->
-
-//PLAN
-
-// Everything should be appended in the main__dog-section.
+            h2Main.innerText = singleDog.name
+            //reset the container
+            mainDogSection.innerHTML = ""
+            mainDogSection.append(h2Main)
 
 
-// 1.Select the main section - when the "plus" button is clicked, so we need an addEvent... then create the elements below 
+            // 8. add the image and insert the src
+            const dogImg = document.createElement('img')
+            dogImg.src = singleDog.image
+            mainDogSection.append(dogImg)
+
+            // Look at the HTML template - line 33 - Create main dog section Div
+            const mainSectionDiv = document.createElement('div')
+
+            //9. add bio title
+            const addBioHeader = document.createElement('h3')
+            addBioHeader.innerText = "Bio"
+            mainSectionDiv.append(addBioHeader)
+
+            //10. add the bio
+            const bio = document.createElement('p')
+            bio.innerText = singleDog.bio
+            mainSectionDiv.append(bio)
+
+            mainDogSection.append(mainSectionDiv)
+
+            // 10. create p and append to mainDogSection
+            const p = document.createElement('p')
+            console.log(p)
+            p.innerHTML = "<em>Is naughty?</em> yes!"
+            mainDogSection.append(p)
+
+            // 11. Create Button and append to mainDogSection
+            const buttonBadOrGood = document.createElement('button')
+            buttonBadOrGood.innerText = "Good dog!"
+            mainDogSection.append(buttonBadOrGood)
+
+
+            // 12. add event listener to goodOrBad button
+            buttonBadOrGood.addEventListener("click", () => {
+
+
+                singleDog.isGoodDog = !singleDog.isGoodDog
+
+                if (singleDog.isGoodDog === false) {
+                    p.innerHTML = "<em>Is naughty?</em> no"
+                    buttonBadOrGood.innerText = "Bad dog!"
+                }
+                else {
+                    p.innerHTML = "<em>Is naughty?</em> yes!"
+                    buttonBadOrGood.innerText = "Good dog!"
+                }
+            })
+
+        })
+    })
+
+}
+render()
 
 const plusButton = document.querySelector(".dogs-list__button--add")
-console.log("I am a plus Button", plusButton)
 
 // my question is do i need to create a variable for main section again and select the main page?
 plusButton.addEventListener('click', () => {
     const mainSec = document.querySelector(".main__dog-section")
-    console.log("this is the main section, when plus clicked", mainSec)
+
 
     // 2. Create h2
     // Inside that give it text
@@ -199,6 +176,7 @@ plusButton.addEventListener('click', () => {
     inputImg.setAttribute("type", "url")
     inputImg.setAttribute("id", "image")
     inputImg.setAttribute("name", "image")
+    inputImg.setAttribute("placeholder", "https://dog-link-here")
     formCreated.append(inputImg)
 
     //8. Create a label 
@@ -235,34 +213,35 @@ plusButton.addEventListener('click', () => {
     inputSubmit.setAttribute("class", "form__button")
     formCreated.append(inputSubmit)
 
+    // add event listener to input submit button
+    inputSubmit.addEventListener('click', (e) => {
+        e.preventDefault()
+        // get the variable names
+        const nameValue = inputForName.value
+        const imgValue = inputImg.value
+        const textAreaValue = textArea.value
+
+        if (nameValue !== '' && imgValue !== '' && textAreaValue !== '') {
+            // add dog data to the front of data
+            const newDogData = {
+                // give a unique ID
+                id: data.length + 1,
+                name: nameValue,
+                bio: textAreaValue,
+                isGoodDog: true,
+                image: imgValue
+            }
+            data.unshift(newDogData)
+            render()
+
+        }
+        else {
+            alert("Fields cannot be empty")
+        }
+
+    })
 
 
 })
 
-/////////////////////////////////////////////////
-// Submission of the form, the new list should get added to the beginning of the list, right next to the plus button.
 
-// // create object for inputs
-// const inputs = {
-//     dogName: '',
-//     dogPic: '',
-//     dogBio: ''
-// }
-
-// select the inputs
-
-const selectingForm = document.querySelector('.form')
-
-const selectingInputName = document.querySelector('#name')
-// console.log(selectingInputName)
-
-const seletingInputURL = document.querySelector('#image')
-
-const seletingInputBio = document.querySelector('#bio')
-
-inputSubmit.addEventListener('submit'), (event) => {
-    // prevent the default
-    event.preventDefault()
-
-    singleDog.name = selectingInputName.value
-}
