@@ -90,6 +90,13 @@ function createNavButtons () {
 
 createNavButtons()
 
+function renderAddButton() {
+    const addButton = document.createElement('li');
+    addButton.setAttribute('class', 'dogs-list__button dogs-list__button--add');
+    addButton.innerText = '+';
+    dogList.append(addButton);
+}
+
 function createForm() {
     container.innerHTML = ''
     const section = document.createElement('form');
@@ -157,11 +164,13 @@ function createForm() {
         data.push(dog);
         console.log(data);
         createDogCard(dog);
+        renderAddButton(dog);
         createNavButtons(dog);
     });
     section.append(form);
     container.append(section);
 }
+
 
 function addDog() {
     // targeting the plus button to add a new dog
