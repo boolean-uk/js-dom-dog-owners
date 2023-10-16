@@ -81,3 +81,23 @@ const createDogButton = (dog) => {
 data.forEach((dog) => {
  createDogButton(dog);
 });
+
+submitButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    const newDog = {
+    };
+    data.unshift(newDog);
+    displayDogList();
+    displaySelectedDog(newDog);
+  });
+
+  filterOption.addEventListener("change", () => {
+    displayDogList();
+  });
+  
+  sortOption.addEventListener("change", () => {
+    displayDogList();
+  });
+  
+
+
