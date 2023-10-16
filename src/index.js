@@ -1,15 +1,15 @@
 console.log(data);
 
 // WRITE YOUR CODE BELOW!
-function dog(name, bio, image) {
+function dog(name, image, bio) {
   this.id = data.length;
   this.name = name;
   this.image = image;
   this.bio = bio;
 }
 
-const addDog = (name, bio, image) => {
-  data.unshift(new dog(name, bio, image))
+const addDog = (name, image, bio) => {
+  data.unshift(new dog(name, image, bio))
   fillNav()
 }
 
@@ -187,7 +187,6 @@ const createForm = () => {
     clearNav()
     addDog(inputName.value, inputIMG.value, inputBio.value)
     // setTimeout(() => addDog(inputName.value, inputIMG.value, inputBio.value), 5000)
-    alert("Adding dog in a second…")
   })
   
   form.appendChild(submit)
