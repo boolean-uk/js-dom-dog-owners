@@ -95,6 +95,10 @@ function renderAddButton() {
     addButton.setAttribute('class', 'dogs-list__button dogs-list__button--add');
     addButton.innerText = '+';
     dogList.append(addButton);
+    addButton.addEventListener('click', () => {
+        console.log('new add button clicked')
+        createForm()
+    });
 }
 
 function createForm() {
