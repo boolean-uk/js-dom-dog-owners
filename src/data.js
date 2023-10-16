@@ -65,6 +65,13 @@ const data = [
             perspiciatis ipsum!`,
     isGoodDog: true,
     image: "https://curriculum-content.s3.amazonaws.com/js/woof-woof/dog_7.jpg"
+  },
+  {
+    id: 8,
+    name: "Kenny",
+    bio: `Hi, I'm Kenny. I'm the best dog in the world AND also the cutest!`,
+    isGoodDog: true,
+    image: "src/kenny.jpeg"
   }
 ];
 
