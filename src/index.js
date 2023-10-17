@@ -46,27 +46,9 @@ infoSection.setAttribute('class', "main__dog-section__desc")
 const isDogNaughty = document.createElement('p')
 mainCard.append(isDogNaughty)
 const question = document.createElement('em')
-
-
-const chooseIsGoodOrBad = document.createElement('button')
-
-//TODO: sort this out (extension)
-//on click, change button value - NOT WORKING YET
-const makeDogGood = () => chooseIsGoodOrBad.innerText = 'Good dog!' 
-const makeDogBad = () => chooseIsGoodOrBad.innerText = 'Bad dog!' 
-
-chooseIsGoodOrBad.innerText = 'Good dog!'
-let currentStatus  = chooseIsGoodOrBad.innerText 
-
-
-chooseIsGoodOrBad.addEventListener('click', event => {
-if (currentStatus === 'Good dog' ) {
-    makeDogBad() 
-    currentStatus  = chooseIsGoodOrBad.innerText} else { 
-        makeDogGood()
-        currentStatus  = chooseIsGoodOrBad.innerText
-    }  
-})
+isDogNaughty.append(question)
+let text = document.createTextNode('')
+isDogNaughty.append(text)
 
 
 //CONTENTS - render the contents of each element inside the main card
@@ -90,12 +72,41 @@ const renderBio = (dog) => {
 
 const renderIsDogNaughty = (dog) => {
     
-    question.innerText = 'Is naughty? '
-    isDogNaughty.append(question)
 
-    const text = document.createTextNode(`${dog.isGoodDog === true ? "No!" : "Yes!"}`)
-    isDogNaughty.append(text)
-    mainCard.append(chooseIsGoodOrBad) 
+    //question and answer
+    question.innerText = 'Is naughty? '
+    text.textContent = `${dog.isGoodDog === true ? "No!" : "Yes!"}`
+
+
+    let currentStatus = 'Good dog!'
+    const chooseIsGoodOrBad = document.createElement('button')
+    chooseIsGoodOrBad.innerText = currentStatus
+    mainCard.append(chooseIsGoodOrBad)
+    
+    
+
+
+    //toggle button
+    const makeDogGood = () => {
+        chooseIsGoodOrBad.innerText = 'Bad dog!' 
+        text.textContent= 'No!' 
+    }
+
+    const makeDogBad = () => {
+        chooseIsGoodOrBad.innerText = 'Good dog!' 
+        text.textContent= 'Yes!' 
+    }
+
+    chooseIsGoodOrBad.addEventListener('click', () => {
+        if (currentStatus === 'Good dog!' ) {
+            makeDogGood() 
+            currentStatus = chooseIsGoodOrBad.innerText 
+        } else { 
+            makeDogBad()
+            currentStatus = chooseIsGoodOrBad.innerText 
+        }  
+    })
+ 
     
 }
 
@@ -114,7 +125,7 @@ const renderDogCardLayout = (dog) => {
 data.forEach(dog => {
 
     makeDogButton(dog)
-    dogsListElement.addEventListener('click', event => {
+    dogsListElement.addEventListener('click', () => {
         
         if(dogName.innerText === 'Add a new dog') {
             mainCard.replaceChildren(dogName,
