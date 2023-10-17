@@ -49,6 +49,7 @@ const question = document.createElement('em')
 isDogNaughty.append(question)
 let text = document.createTextNode('')
 isDogNaughty.append(text)
+const chooseIsGoodOrBad = document.createElement('button')
 
 
 //CONTENTS - render the contents of each element inside the main card
@@ -79,11 +80,11 @@ const renderIsDogNaughty = (dog) => {
 
 
     let currentStatus = 'Good dog!'
-    const chooseIsGoodOrBad = document.createElement('button')
-    chooseIsGoodOrBad.innerText = currentStatus
+    // const chooseIsGoodOrBad = document.createElement('button')
+    // chooseIsGoodOrBad.innerText = currentStatus
+    // mainCard.append(chooseIsGoodOrBad)
     mainCard.append(chooseIsGoodOrBad)
-    
-    
+    chooseIsGoodOrBad.innerText = currentStatus
 
 
     //toggle button
@@ -132,7 +133,8 @@ data.forEach(dog => {
                 dogPic,
                 dogBioTitle,
                 dogBio,
-                isDogNaughty)
+                isDogNaughty,
+                chooseIsGoodOrBad)
         }
         renderDogCardLayout(dog)
     })
@@ -159,6 +161,8 @@ const renderFormTitle = () => {
     dogName.innerText = 'Add a new dog'
 }
 //input
+
+
 const createFormInput = () => {
     const dogLabelsNames = ['name', 'image']
     dogLabelsNames.forEach(e => {
@@ -180,6 +184,7 @@ const createFormInput = () => {
 }
 
 //textarea (bio)
+
 const createTextArea = () => {
     const label = document.createElement('label')
     label.setAttribute('for', 'bio')
@@ -214,7 +219,7 @@ const newForm = document.querySelector('.dogs-list__button--add')
 newForm.addEventListener('click', event => {
     if(dogName.innerText === 'Add a new dog') {
     } else {
-        mainCard.replaceChildren(form)
+        mainCard.replaceChildren(form)  
         renderForm()
     }
    
@@ -270,7 +275,8 @@ newForm.addEventListener('click', event => {
                     dogPic,
                     dogBioTitle,
                     dogBio,
-                    isDogNaughty)
+                    isDogNaughty,
+                    chooseIsGoodOrBad)
             }
             renderDogCardLayout(dog)
         })
