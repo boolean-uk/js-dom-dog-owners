@@ -117,6 +117,26 @@ const dogListItem = data.forEach((dog) => {
       submitInput.setAttribute("value", "Let's add a dog");
       submitInput.setAttribute("class", "form__button");
       form.append(submitInput);
+
+            form.addEventListener("submit", (event) => {
+              event.preventDefault();
+              const nameInsert = document.querySelector('input[name="name"]');
+              const imageInsert = document.querySelector('input[name="image"]');
+              const bioInsert = document.querySelector('input[name="bio"]');
+              const newDog = {
+                id : data.length + 1,
+                name: nameInsert,
+                bio: bioInsert,
+                isGoodDog: true,
+                image: imageInsert,
+              };
+              data.unshift(newDog);
+              console.log(data);
+              form.reset();
+
+    });
+
     });
   });
 });
+
