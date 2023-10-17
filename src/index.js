@@ -1,15 +1,15 @@
 console.log(data);
 
 const dogList = document.querySelector(".dogs-list");
+const dogCard = document.querySelector(".main__dog-section");
 
-const dogListItem = data.forEach((dog) => {
-  const list = document.createElement("li");
-  list.innerText = dog.name;
-  dogList.append(list);
-  list.setAttribute("class", "dogs-list__button ");
+const dogListItem = data => data.forEach((dog) => {
+  const navList = document.createElement("li");
+  navList.innerText = dog.name;
+  dogList.append(navList);
+  navList.setAttribute("class", "dogs-list__button ");
 
-  list.addEventListener("click", () => {
-    const dogCard = document.querySelector(".main__dog-section");
+  navList.addEventListener("click", () => {
     const dogDetails = document.querySelectorAll("section > *");
     dogDetails.forEach((element) => element.remove());
 
@@ -118,25 +118,26 @@ const dogListItem = data.forEach((dog) => {
       submitInput.setAttribute("class", "form__button");
       form.append(submitInput);
 
-            form.addEventListener("submit", (event) => {
-              event.preventDefault();
-              const nameInsert = document.querySelector('input[name="name"]');
-              const imageInsert = document.querySelector('input[name="image"]');
-              const bioInsert = document.querySelector('input[name="bio"]');
-              const newDog = {
-                id : data.length + 1,
-                name: nameInsert,
-                bio: bioInsert,
-                isGoodDog: true,
-                image: imageInsert,
-              };
-              data.unshift(newDog);
-              console.log(data);
-              form.reset();
-
-    });
-
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const name = document.querySelector('input[name="name"]');
+        const image = document.querySelector('input[name="image"]');
+        const bio = document.querySelector('textarea');
+        const newDog = {
+          id: data.length + 1,
+          name: name.value,
+          bio: bio.value,
+          isGoodDog: true,
+          image: image.value,
+        };
+        data.unshift(newDog);
+        console.log(data);
+        form.reset();
+        dogDetails.forEach((element) => element.remove());
+        dogListItem(data);
+      });
     });
   });
 });
 
+dogListItem(data);
