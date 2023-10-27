@@ -68,16 +68,25 @@ document.addEventListener("DOMContentLoaded", function () {
     dogGood.textContent="Is your dog good or bad?"
     dogGood.name = "dog-good";
 
+    const dogPhotoLabel = document.createElement("label");
+    dogPhotoLabel.textContent = "Upload dog's photo:";
+    const dogPhotoInput = document.createElement("input");
+    dogPhotoInput.type = "file";
+    dogPhotoInput.accept = "image/*";
+
     const addSubmit = document.createElement("input");
     addSubmit.type = "submit";
     addSubmit.value = "Add Dog";
 
     addForm.appendChild(dogName);
     addForm.appendChild(dogBio);
+    addForm.appendChild(dogGoodLabel);
     addForm.appendChild(dogGood);
+    addForm.appendChild(dogPhotoLabel);
+    addForm.appendChild(dogPhotoInput); 
     addForm.appendChild(addSubmit);
 
-    // Append the form to the mainDogSection
+    
     mainDogSection.appendChild(addForm);
 
     // Form submission event listener
@@ -89,15 +98,15 @@ document.addEventListener("DOMContentLoaded", function () {
         name: formData.get("dog-name"),
         bio: formData.get("dog-bio"),
         isGoodDog: formData.get("dog-good") === "on",
-        image: "https://via.placeholder.com/150", // Placeholder image URL
+        image: URL.createObjectURL(dogPhotoInput.files[0])
       };
 
       data.unshift(newDog);
 
-      // Clear the form
+      
       addForm.reset();
 
-      // Clear existing content in the mainDogSection
+     
       clearMainDogSection();
 
       // Re-render the dog list to include the newly added dog
