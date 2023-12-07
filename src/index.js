@@ -4,85 +4,106 @@
 const header = document.querySelector('.header')
 const main = document.querySelector('.main')
 const HeaderUl = document.querySelector('.dogs-list')
+const AddButton = document.querySelector(' .dogs-list__button--add')
 
-data.forEach((dogDetails) => {
-    const dogNameButton = document.createElement('li')
-    dogNameButton.setAttribute('class', 'dogs-list__button')
-    dogNameButton.innerText = dogDetails.name
-    HeaderUl.append(dogNameButton)
-})
+let dogNameButton;
 
-data.forEach((dog) => {
-    const dogSection = document.createElement('section')
-    dogSection.setAttribute('class', 'main__dog-section')
-    main.append(dogSection)
 
-    const dogName = document.createElement('h2')
-    dogName.innerText = dog.name
-    dogSection.append(dogName)
 
-    const dogImage = document.createElement('img')
-    dogImage.src = dog.image
-    dogSection.append(dogImage)
+const RenderHeader = ()=>{
+    data.forEach((dogDetails) => {
+         dogNameButton = document.createElement('li')
+        dogNameButton.setAttribute('class', 'dogs-list__button')
+        dogNameButton.innerText = dogDetails.name
+        HeaderUl.append(dogNameButton)
 
-    const dogDescription = document.createElement('div')
-    dogDescription.setAttribute('class', 'main__dog-section__desc')
-    dogSection.append(dogDescription)
-
-    const bio = document.createElement('h3')
-    bio.innerText = 'Bio'
-    dogDescription.append(bio)
-
-    const aboutDog = document.createElement('p')
-    aboutDog.innerText = dog.bio
-    dogDescription.append(aboutDog)
-
-    const dogQuestionContainer = document.createElement('p')
-    dogSection.append(dogQuestionContainer)
-
-    const dogQuestionEm = document.createElement('em')
-    dogQuestionEm.innerText = 'is naughty?'
-    dogQuestionContainer.append(dogQuestionEm)
-
-    let dogBehavior = dog.isGoodDog
-
-    const dogAnswer = document.createElement('p')
-    dogAnswer.innerText = dogBehavior ? 'No' : 'Yes'
-    dogQuestionContainer.append(dogAnswer)
-
-    const button = document.createElement('button')
-    button.innerText = dogBehavior ? 'Good Dog' : 'Bad Dog'
-    dogSection.append(button)
-
-    button.addEventListener('click', () => {
-        dogBehavior = !dogBehavior;
-        dogAnswer.innerText = dogBehavior ? 'No' : 'Yes'; 
-        button.innerText = dogBehavior ? 'Good Dog' : 'Bad Dog'; 
     })
+}
 
-    main.append(dogSection)
+RenderHeader()
 
-    dogSection.style.display = 'none'
-})
+const RenderDog = ()=>{
+    data.forEach((dog) => {
+        const dogSection = document.createElement('section')
+        dogSection.setAttribute('class', 'main__dog-section')
+        main.append(dogSection)
+    
+        const dogName = document.createElement('h2')
+        dogName.innerText = dog.name
+        dogSection.append(dogName)
+    
+        const dogImage = document.createElement('img')
+        dogImage.src = dog.image
+        dogSection.append(dogImage)
+    
+        const dogDescription = document.createElement('div')
+        dogDescription.setAttribute('class', 'main__dog-section__desc')
+        dogSection.append(dogDescription)
+    
+        const bio = document.createElement('h3')
+        bio.innerText = 'Bio'
+        dogDescription.append(bio)
+    
+        const aboutDog = document.createElement('p')
+        aboutDog.innerText = dog.bio
+        dogDescription.append(aboutDog)
+    
+        const dogQuestionContainer = document.createElement('p')
+        dogSection.append(dogQuestionContainer)
+    
+        const dogQuestionEm = document.createElement('em')
+        dogQuestionEm.innerText = 'is naughty?'
+        dogQuestionContainer.append(dogQuestionEm)
+    
+        let dogBehavior = dog.isGoodDog
+    
+        const dogAnswer = document.createElement('p')
+        dogAnswer.innerText = dogBehavior ? 'No' : 'Yes'
+        dogQuestionContainer.append(dogAnswer)
+    
+        const button = document.createElement('button')
+        button.innerText = dogBehavior ? 'Good Dog' : 'Bad Dog'
+        dogSection.append(button)
+    
+        button.addEventListener('click', () => {
+            dogBehavior = !dogBehavior;
+            dogAnswer.innerText = dogBehavior ? 'No' : 'Yes'; 
+            button.innerText = dogBehavior ? 'Good Dog' : 'Bad Dog'; 
+        })
+    
+        main.append(dogSection)
+    
+        dogSection.style.display = 'none'
+    
+       
+    })
+}
+
+RenderDog()
+
 
 const dogNameButtons = document.querySelectorAll('.dogs-list__button')
 const dogSections = document.querySelectorAll('.main__dog-section')
 const addDog = document.querySelector('.dogs-list__button--add')
 
-dogNameButtons.forEach((dogName, index) => {
+ dogNameButtons.forEach((dogName, index) => {
     dogName.addEventListener('click', () => {
         if (dogName !== dogNameButtons[0]) {
             formSection.style.display = 'none'
+            
         } else {
             formSection.style.display = 'block'
         }
         dogSections.forEach((section) => {
             section.style.display = 'none'
         })
-        // Display the clicked dog's section
         dogSections[index].style.display = 'block'
     })
-})
+}) 
+
+
+
+
 
 ////Form //////
 
@@ -126,39 +147,58 @@ bioTextArea.setAttribute('id', 'bio')
 bioTextArea.setAttribute('name', 'bio')
 form.append(bioTextArea)
 
-const submit = document.createElement('input')
-submit.setAttribute('type', 'submit')
+const submit = document.createElement('button')
 submit.setAttribute('id', 'submit')
 submit.setAttribute('value', "Let's add a dog")
+submit.innerText = "Let's add a dog"
 submit.setAttribute('class', 'form__button')
 form.append(submit)
 
 formSection.append(form)
 main.append(formSection)
 
-const submitForm = () => {
-    form.addEventListener('submit', (e) => {
-        e.preventDefault()
 
-        const newDog = {
-            id: data.length + 1,
-            name: inputName.value,
-            bio: bioTextArea.value,
-            isGoodDog: false,
-            image: inputImage.value
-        }
+const submitForm = (e) => {
 
-        data.unshift(newDog)
+    e.preventDefault()
+    const newDog = {
+        id: data.length + 1,
+        name: inputName.value,
+        bio: bioTextArea.value,
+        isGoodDog: false,
+        image: inputImage.value
+    }
 
-        inputName.value = ''
-        inputImage.value = ''
-        bioTextArea.value = ''
+    data.unshift( newDog)
+    console.log(data)
 
-        firstMainSection.style.display = 'none'
-    })
+   inputName.value = '';
+   inputImage.value = '';
+   bioTextArea.value = '';
+
+ 
 }
 
-submitForm()
+   
+form.addEventListener('submit', (e) => {
+    while (HeaderUl.children.length > 1) {
+        HeaderUl.removeChild(HeaderUl.children[1]);
+    }
+    submitForm(e)
+  
+    RenderHeader()
+    RenderDog() 
+    console.log('This is the new data after submission',data)
+    console.log( 'this is dog section after form submission',dogSections)
+    //Dog section is not updating
+    
+
+})
+
+
+
+
+
 
 const firstMainSection = document.querySelector('main > section:first-of-type')
 
