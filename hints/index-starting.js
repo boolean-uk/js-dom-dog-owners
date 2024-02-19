@@ -1,5 +1,5 @@
 
-function createDogListItem(dog){
+function createDogListItem(dog) {
   const li = document.createElement("li");
   const dogContainer = document.querySelector(".main");
 
@@ -13,7 +13,7 @@ function createDogListItem(dog){
   //the dog variable as a parameter. You will
   //also need to remove any existing dog card
   //from the dogContainer
- 
+
   return li;
 };
 
@@ -61,7 +61,7 @@ const createDogCard = (dog) => {
   //TODO: Update this section to create a new image
   //element and add it to the dog card. Set the source of 
   //the image to the image path on the dog object
-  
+
   const desc = createDogCardDesc(dog.bio);
   const bottomSection = createDogCardBottomSection(dog);
 
