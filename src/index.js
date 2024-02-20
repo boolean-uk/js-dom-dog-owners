@@ -2,9 +2,15 @@
 // WRITE YOUR CODE BELOW!
 const dogListUl = document.querySelector('.dogs-list')
 const mainDogSection = document.querySelector('.main__dog-section')
-const addDogForum = document.querySelector('.dogs-list__button--add')
 
-function RenderDogList() {
+function RenderDogList() {    
+    dogListUl.innerHTML = ''
+    const addDogForum = document.createElement('li')
+    addDogForum.setAttribute('class', 'dogs-list__button dogs-list__button--add')
+    addDogForum.innerText = '+'
+    addDogForum.addEventListener('click', (event) => AddForumOfDog())
+    dogListUl.appendChild(addDogForum)
+
     for (let i = 0; i < data.length; i++) {
         const dogList = document.createElement('li')
         dogList.setAttribute('class', 'dogs-list__button')
@@ -64,7 +70,12 @@ function RenderMainDogCard(dog) {
     mainDogSection.appendChild(button)
 }
 
+function SubmitNewDog() {
+}
+
 function AddForumOfDog() {
+    mainDogSection.innerHTML = ''
+
     const h2 = document.createElement('h2')
     const form = document.createElement('form')
     form.setAttribute('class', 'form')
@@ -99,6 +110,20 @@ function AddForumOfDog() {
     input3.setAttribute('name', 'submit')
     input3.setAttribute('value', "Let's add another dog!")
     input3.setAttribute('class', 'form__button')
+    
+    form.addEventListener('submit', (event) => {
+        const obj = 
+        {
+            id: 1,
+            name: input.value,
+            bio: textarea.value,
+            isGoodDog: true,
+            image: input2.value
+        }
+        
+        data.unshift(obj)
+        RenderDogList()
+    })
 
     form.appendChild(label)
     form.appendChild(input)
@@ -110,27 +135,10 @@ function AddForumOfDog() {
 
     mainDogSection.appendChild(h2)
     mainDogSection.appendChild(form)
-
-    for (let i = 0; i < data.length; i++) {
-        data[i].id += 1
-    }
-
-    const obj = 
-    {
-        id: 1,
-        name: 'Santo',
-        bio: 'Some text',
-        isGoodDog: true,
-        image: 'https://www.google.com/search?safe=active&sca_esv=1ba2041d0738a613&rlz=1C1GCEU_enSE1091SE1091&sxsrf=ACQVn09uHYUBhR1DVX06yUhaTZyuq1-brw:1708356276156&q=aussies&tbm=isch&source=lnms&sa=X&ved=2ahUKEwj5t_WH27eEAxVdAxAIHVR6DaoQ0pQJegQIDhAB&biw=1280&bih=593&dpr=1.5#imgrc=hJUus9orcmgDZM'
-    }
-    data.unshift(obj)
-    dogListUl.innerHTML = ''
-    RenderDogList()
 }
 
 function main() {
     RenderDogList()
-    addDogForum.addEventListener('click', (event) => AddForumOfDog())
 }
 
 main()
