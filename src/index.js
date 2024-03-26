@@ -1,9 +1,8 @@
-console.log(data);
 const dogList = document.querySelector('.dogs-list')
 const main = document.querySelector('.main')
 const dogSection = document.querySelector('.main__dog-section')
+const addDog = document.querySelector('.dogs-list__button--add')
 
-// WRITE YOUR CODE BELOW!
 function addDogListItem() {
     data.forEach((dog) => {
         const newDogListItem = document.createElement('li')
@@ -18,8 +17,6 @@ function addDogListItem() {
 }
 
 addDogListItem()
-
-
 
 function dogCard(dog) {
     const newSection = createDogSection()
@@ -95,4 +92,71 @@ function goodDogButton(dog) {
     const button = document.createElement('button')
     button.innerText = isGoodDogButton(dog)
     return button
+}
+
+addDog.addEventListener('click', () => {
+    const addSection = document.createElement('section')
+    const h2 = document.createElement('h2')
+    const form = dogForm()
+
+    main.innerHTML = ''
+
+    addSection.classList.add('main__dog-section')
+
+    h2.innerText = 'Add a new Dog'
+
+    addSection.append(h2)
+    addSection.append(form)
+
+    main.append(addSection)
+})
+
+function dogForm() {
+    const form = document.createElement('form')
+    const nameLabel = document.createElement('label')
+    const nameInput = document.createElement('input')
+    const imageLabel = document.createElement('label')
+    const imageInput = document.createElement('input')
+    const bioLabel = document.createElement('label')
+    const bioInput = document.createElement('textarea')
+    const submit = document.createElement('input')
+
+    form.classList.add('form')
+
+    nameLabel.setAttribute('for', "name")
+    nameLabel.innerText = "Dog's name"
+
+    nameInput.setAttribute('type', "text")
+    nameInput.setAttribute('id', "name")
+    nameInput.setAttribute('name', "name")
+
+    imageLabel.setAttribute('for', "image")
+    imageLabel.innerText = "Dog's picture"
+
+    imageInput.setAttribute('type', "url")
+    imageInput.setAttribute('id', "image")
+    imageInput.setAttribute('name', "image")
+
+    bioLabel.setAttribute('for', "bio")
+    bioLabel.innerText = "Dog's bio"
+
+    bioInput.setAttribute('rows', "5")
+    bioInput.setAttribute('id', "bio")
+    bioInput.setAttribute('name', "bio")
+
+    submit.setAttribute('type', "submit")
+    submit.setAttribute('id', "submit")
+    submit.setAttribute('name', "submit")
+    submit.setAttribute('value', "Let's add a dog!")
+    submit.classList.add('form__button')
+
+    form.append(nameLabel)
+    form.append(nameInput)
+    form.append(imageLabel)
+    form.append(imageInput)
+    form.append(bioLabel)
+    form.append(bioInput)
+    form.append(submit)
+
+    return form
 }
