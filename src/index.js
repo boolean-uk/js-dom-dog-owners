@@ -41,18 +41,35 @@ for (let i = 0; i < dog.length; i++) {
         bio.innerText = ('Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum')
         div.append(bio)
     
-        const goodOrBad = document.createElement('p')
-        cardSection.append(goodOrBad)
+        const goodOrBadElement = document.createElement('p')
+        cardSection.append(goodOrBadElement)
     
         const italics = document.createElement('em')
         italics.innerText = ('Is naughty?')
-        goodOrBad.innerText = ('yes!')
-        goodOrBad.append(italics)
-        
+        goodOrBadElement.append(italics)
+
         const goodOrBadButton = document.createElement('button')
-        goodOrBadButton.innerText = ('src', dog[i].isGoodDog)
+        const goodOrBad = dog[i].isGoodDog
+        if(goodOrBad === true) {
+            goodOrBadElement.innerText = ('No!')
+            goodOrBadButton.innerText = ('Good Dog')}
+            else {
+                goodOrBadElement.innerText = ('Yes!')
+                goodOrBadButton.innerText = ('Bad Dog')}
         cardSection.append(goodOrBadButton)
+
+    
+        
     })
 
+    addDogButton.addEventListener('click', () => {
+
+        cardSection.innerHTML = ''
+        const newDogHeading = document.createElement('h2')
+        newDogHeading.innerText = ('Add a new Dog')
+        cardSection.append(newDogHeading)
+        const newDogForm = document.createElement('form')
+        newDogForm.classList.add('form')
+    })
 }
     
