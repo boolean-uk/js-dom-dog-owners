@@ -27,13 +27,17 @@ for (let i = 0; i < data.length; i++) {
         image.setAttribute('src', data[i].image)
         dogsCards.append(image)
 
+        const divDogCard = document.createElement('div')
+        divDogCard.classList.add('main__dog-section__desc')
+        dogsCards.append(divDogCard)
+
         const h3Bio = document.createElement('h3')
         h3Bio.innerText = 'Bio'
-        dogsCards.append(h3Bio)
+        divDogCard.append(h3Bio)
 
         const bio = document.createElement('p')
         bio.innerText = data[i].bio
-        dogsCards.append(bio)
+        divDogCard.append(bio)
 
         const isNaughty = document.createElement('p')
         isNaughty.style.fontStyle = 'italic'
