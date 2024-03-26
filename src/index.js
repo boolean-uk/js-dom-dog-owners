@@ -6,7 +6,7 @@ const buildDogCard = (data) => {
   const sectionWithDiv = addDiv(sectionWithImg);
   const sectionWithBio = addBio(sectionWithDiv, data.bio);
   const sectionWithNaughty = addNaughty(sectionWithBio, data.isGoodDog);
-  const finalCard = addButton(sectionWithNaughty);
+  const finalCard = addButton(sectionWithNaughty, data);
   return finalCard;
 };
 
@@ -56,13 +56,16 @@ const addNaughty = (section, isGoodDog) => {
   newP.setAttribute("id", "good-dog");
   newP.prepend(newEm);
   section.append(newP);
-
   return section;
 };
 
-const addButton = (section) => {
+const addButton = (section, data) => {
   const newButton = document.createElement("button");
-  newButton.innerText = "Good Dog!";
+  if (data.isGoodDog) {
+    newButton.innerText = "Bad Dog!";
+  } else {
+    newButton.innerText = "Good Dog!";
+  }
   newButton.setAttribute("id", "good-button");
   section.append(newButton);
   return section;
