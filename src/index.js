@@ -9,16 +9,23 @@ function clearOldContent() {
     oldContent.remove()
 }
 
+function createSection() {
+    const section = document.createElement("section")
+    section.className = "main__dog-section"
+
+    return section
+}
+
 function createDogListItem(i) {
     const dogItem = document.createElement("li")
-        dogItem.className = "dogs-list__button"
-        dogItem.innerHTML = data[i].name
-        dogItem.id = data[i].id
-        dogItem.addEventListener("click", (e) => {
-            displayDog(e.currentTarget)
-        })
+    dogItem.className = "dogs-list__button"
+    dogItem.innerHTML = data[i].name
+    dogItem.id = data[i].id
+    dogItem.addEventListener("click", (e) => {
+        displayDog(e.currentTarget)
+    })
 
-        return dogItem
+    return dogItem
 }
 
 function populateDogList() {
@@ -41,8 +48,7 @@ function displayDog(object) {
         }
     })
 
-    const section = document.createElement("section")
-    section.className = "main__dog-section"
+    const section = createSection()
 
     const dogName = document.createElement("h2")
     dogName.innerHTML = dogDataSearch.name
@@ -60,15 +66,23 @@ function displayDog(object) {
     bioBody.innerHTML = dogDataSearch.bio
 
     const isNaughty = !dogDataSearch.isGoodDog
+    const naughtyCheck = isNaughty === true ? " yes!" : " no!"
 
     const naughtyBox = document.createElement("p")
-    naughtyBox.append((document.createElement("em").innerHTML = "Is naughty?"))
-    const naughtyCheck = isNaughty === true ? " yes!" : " no!"
+    naughtyBox.id = "naughty-box"
+    const isNaughtyEm = document.createElement("em")
+
+    isNaughtyEm.innerText = "Is naughty?"
+
+    naughtyBox.append(isNaughtyEm)
+
     naughtyBox.lastChild.after(naughtyCheck)
 
     const button = document.createElement("button")
-
-    button.innerText = "Good dog!"
+    button.innerText = isNaughty === true ? " Good Dog!" : " Bad Dog!"
+    button.addEventListener("click", (e) => {
+        goodBadDog(e.currentTarget)
+    })
 
     dogBody.append(bioHeader)
     dogBody.append(bioBody)
@@ -82,9 +96,40 @@ function displayDog(object) {
     main.append(section)
 }
 
+function goodBadDog(target) {
+    let dog
+    const naughtyBox = document.querySelector("#naughty-box")
+    const button = document.querySelector(".main__dog-section button")
+    const dogName = target.parentElement.querySelector("h2").innerHTML
+
+
+    data.forEach((element) => {
+        if (`${element.name}` === dogName) {
+            dog = element
+        }
+    })
+
+    let isNaughty = dog.isGoodDog
+    isNaughty === true ? (dog.isGoodDog = false) : (dog.isGoodDog = true)
+
+    const isNaughtyEm = document.createElement("em")
+    isNaughtyEm.innerText = "Is naughty?"
+
+    
+
+    isNaughty = !dog.isGoodDog
+    naughtyCheck = isNaughty === true ? " yes!" : " no!"
+
+    naughtyBox.innerHTML = ""
+    naughtyBox.append(isNaughtyEm)
+    naughtyBox.lastChild.after(naughtyCheck)
+
+    button.innerHTML = isNaughty === true ? " Good Dog!" : " Bad Dog!"
+}
+
 function addNewDog(form) {
     clearOldContent()
-    
+
     const dogName = form.querySelector("#name").value
     const dogImg = form.querySelector("#image").value
     const dogBio = form.querySelector("#bio").value
@@ -92,14 +137,13 @@ function addNewDog(form) {
         id: data.length + 1,
         name: dogName,
         bio: dogBio,
-    isGoodDog: true,
-    image: dogImg
+        isGoodDog: true,
+        image: dogImg,
     })
-    const listItem = createDogListItem(data.length-1)
+    const listItem = createDogListItem(data.length - 1)
     dogList.children[0].after(listItem)
 
-    const section = document.createElement("section")
-    section.className = "main__dog-section"
+    const section = createSection()
 
     const heading = document.createElement("h2")
     heading.innerHTML = "No dogs ?!?"
@@ -107,21 +151,19 @@ function addNewDog(form) {
     section.append(heading)
 
     main.append(section)
-
 }
 
 function newDog() {
     clearOldContent()
 
-    const section = document.createElement("section")
-    section.className = "main__dog-section"
+    const section = createSection()
 
     const heading = document.createElement("h2")
     heading.innerHTML = "Add a new Dog"
 
     const form = document.createElement("form")
     form.className = "form"
-    form.addEventListener('submit', (e) => {
+    form.addEventListener("submit", (e) => {
         e.preventDefault()
         addNewDog(e.currentTarget)
     })
