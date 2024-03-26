@@ -1,5 +1,4 @@
 //Build doggy card
-
 const buildDogCard = (data) => {
   const section = buildSection();
   const sectionWithName = addH2(section, data.name);
@@ -54,7 +53,7 @@ const addNaughty = (section, isGoodDog) => {
   const newEm = document.createElement("em");
   isGoodDog ? (newP.innerText = " Yes") : (newP.innerText = " No");
   newEm.innerText = "Is naughty?";
-  newP.setAttribute('id', 'good-dog')
+  newP.setAttribute("id", "good-dog");
   newP.prepend(newEm);
   section.append(newP);
 
@@ -64,13 +63,12 @@ const addNaughty = (section, isGoodDog) => {
 const addButton = (section) => {
   const newButton = document.createElement("button");
   newButton.innerText = "Good Dog!";
-  newButton.setAttribute('id', 'good-button')
+  newButton.setAttribute("id", "good-button");
   section.append(newButton);
   return section;
 };
 
-//Build header Buttons
-
+//Builds header Buttons
 const buildHeaderButtons = (data) => {
   const newLi = document.createElement("li");
   newLi.setAttribute("class", "dogs-list__button");
@@ -87,11 +85,10 @@ const populateHeader = () => {
   }
 };
 
-//Adds functionality to buttons
-
+//Adds functionality to header buttons
 const addEventListener = (li, data) => {
   li.addEventListener("click", () => {
-    refreshDog(data)
+    refreshDog(data);
   });
 };
 
@@ -170,7 +167,6 @@ const getNewTextArea = (rows, name) => {
 };
 
 // Adds listener to + button and builds and appends form
-
 const addDogButton = document.querySelector(".dogs-list__button--add");
 addDogButton.addEventListener("click", () => {
   let dogSection = document.querySelector("main");
@@ -181,7 +177,6 @@ addDogButton.addEventListener("click", () => {
 });
 
 // adds listener to form
-
 const addFormListener = (formSection) => {
   formSection.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -193,7 +188,6 @@ const addFormListener = (formSection) => {
 };
 
 //Add to data store and repopulate header
-
 const pushData = (name, pic, bio) => {
   const newDogObj = {};
   newDogObj.id = data.length;
@@ -206,22 +200,22 @@ const pushData = (name, pic, bio) => {
 
 // Add functionality to good-dog button!
 const addGoodButtonFunc = (data) => {
-    const goodButton = document.querySelector('#good-button')
-    goodButton.addEventListener('click', () => {
-        if (data.isGoodDog) {
-            data.isGoodDog = false
-        } else {
-        data.isGoodDog = true
-        }
-        refreshDog(data)
-    })
-}
+  const goodButton = document.querySelector("#good-button");
+  goodButton.addEventListener("click", () => {
+    if (data.isGoodDog) {
+      data.isGoodDog = false;
+    } else {
+      data.isGoodDog = true;
+    }
+    refreshDog(data);
+  });
+};
 
 //Refreshes currently displayed card
 const refreshDog = (data) => {
-    let newDog = buildDogCard(data);
-    let dogSection = document.querySelector("main");
-    dogSection.innerHTML = "";
-    dogSection.appendChild(newDog);
-    addGoodButtonFunc(data)
-}
+  let newDog = buildDogCard(data);
+  let dogSection = document.querySelector("main");
+  dogSection.innerHTML = "";
+  dogSection.appendChild(newDog);
+  addGoodButtonFunc(data);
+};
