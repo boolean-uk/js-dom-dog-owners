@@ -61,11 +61,7 @@ const addNaughty = (section, isGoodDog) => {
 
 const addButton = (section, data) => {
   const newButton = document.createElement("button");
-  if (data.isGoodDog) {
-    newButton.innerText = "Bad Dog!";
-  } else {
-    newButton.innerText = "Good Dog!";
-  }
+  data.isGoodDog ? newButton.innerText = "Bad Dog!" : newButton.innerText = "Good Dog!";
   newButton.setAttribute("id", "good-button");
   section.append(newButton);
   return section;
