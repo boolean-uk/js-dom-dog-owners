@@ -201,11 +201,7 @@ const pushData = (name, pic, bio) => {
 const addGoodButtonFunc = (data) => {
   const goodButton = document.querySelector("#good-button");
   goodButton.addEventListener("click", () => {
-    if (data.isGoodDog) {
-      data.isGoodDog = false;
-    } else {
-      data.isGoodDog = true;
-    }
+    data.isGoodDog ? data.isGoodDog = false : data.isGoodDog = true;
     refreshDog(data);
   });
 };
