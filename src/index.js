@@ -4,15 +4,26 @@ const dogList = document.querySelector(".dogs-list")
 const main = document.querySelector(".main")
 const addDog = document.querySelector(".dogs-list__button--add")
 
-function populateDogList() {
-    for (let i = 0; i < data.length; i++) {
-        const dogItem = document.createElement("li")
+function clearOldContent() {
+    const oldContent = document.querySelector(".main__dog-section")
+    oldContent.remove()
+}
+
+function createDogListItem(i) {
+    const dogItem = document.createElement("li")
         dogItem.className = "dogs-list__button"
         dogItem.innerHTML = data[i].name
         dogItem.id = data[i].id
         dogItem.addEventListener("click", (e) => {
             displayDog(e.currentTarget)
         })
+
+        return dogItem
+}
+
+function populateDogList() {
+    for (let i = 0; i < data.length; i++) {
+        const dogItem = createDogListItem(i)
         dogList.append(dogItem)
     }
 }
@@ -20,8 +31,7 @@ function populateDogList() {
 function displayDog(object) {
     const id = object.id
 
-    const oldContent = document.querySelector(".main__dog-section")
-    oldContent.remove()
+    clearOldContent()
 
     let dogDataSearch
 
@@ -72,9 +82,36 @@ function displayDog(object) {
     main.append(section)
 }
 
+function addNewDog(form) {
+    clearOldContent()
+    
+    const dogName = form.querySelector("#name").value
+    const dogImg = form.querySelector("#image").value
+    const dogBio = form.querySelector("#bio").value
+    data.push({
+        id: data.length + 1,
+        name: dogName,
+        bio: dogBio,
+    isGoodDog: true,
+    image: dogImg
+    })
+    const listItem = createDogListItem(data.length-1)
+    dogList.children[0].after(listItem)
+
+    const section = document.createElement("section")
+    section.className = "main__dog-section"
+
+    const heading = document.createElement("h2")
+    heading.innerHTML = "No dogs ?!?"
+
+    section.append(heading)
+
+    main.append(section)
+
+}
+
 function newDog() {
-    const oldContent = document.querySelector(".main__dog-section")
-    oldContent.remove()
+    clearOldContent()
 
     const section = document.createElement("section")
     section.className = "main__dog-section"
@@ -84,6 +121,10 @@ function newDog() {
 
     const form = document.createElement("form")
     form.className = "form"
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        addNewDog(e.currentTarget)
+    })
 
     const labelName = document.createElement("label")
     labelName.for = "name"
