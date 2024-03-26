@@ -109,6 +109,7 @@ addDog.addEventListener('click', () => {
     addSection.append(form)
 
     main.append(addSection)
+    
 })
 
 function dogForm() {
@@ -158,5 +159,15 @@ function dogForm() {
     form.append(bioInput)
     form.append(submit)
 
+    submit.addEventListener('click', (event) => {
+        event.preventDefault()
+
+        const newDogListItem = document.createElement('li')
+        newDogListItem.classList.add('dogs-list__button')
+        newDogListItem.innerText = nameInput.value
+        addDog.after(newDogListItem)
+    })
+
     return form
 }
+
