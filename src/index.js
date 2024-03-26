@@ -25,7 +25,9 @@ function dogInformation (dogTargetName) {
   const main = document.querySelector('.main')
   for(key in dogName) {
     if(dogTargetName === dogName[key].name){
-      const section = document.createElement('section')
+      const noDogSection = document.querySelector('.main__dog-section')
+      noDogSection.remove()
+    const section = document.createElement('section')
     section.classList.add('main__dog-section')
     const h2 = document.createElement('h2')
     h2.innerText = dogName[key].name
