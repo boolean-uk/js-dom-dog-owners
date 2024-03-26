@@ -1,5 +1,3 @@
-console.log(data)
-
 // WRITE YOUR CODE BELOW!
 
 const dogList = document.querySelector(".dogs-list")
@@ -20,7 +18,7 @@ function populateDogList() {
 
 function displayDog(object) {
     const id = object.id
-    console.log(id)
+
     const oldContent = document.querySelector(".main__dog-section")
     oldContent.remove()
 
@@ -31,7 +29,7 @@ function displayDog(object) {
             dogDataSearch = element
         }
     })
-    console.log(dogDataSearch)
+
 
    
 
