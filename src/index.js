@@ -25,7 +25,7 @@ function dogCard(dog) {
     const mainDogSection = createMainDogSection()
     const naughty = document.createElement('p')
     const em = document.createElement('em')
-    const button = goodDogButton(dog)
+    const button = document.createElement('button')
     
     main.innerHTML = ''
     
@@ -37,6 +37,8 @@ function dogCard(dog) {
     naughty.innerText = isGoodBoy(dog)
     em.innerText = 'Is naughty? '
 
+    button.innerText = isGoodDogButton(dog)
+
     newSection.append(dogName)
     newSection.append(image)
     newSection.append(mainDogSection)
@@ -45,6 +47,20 @@ function dogCard(dog) {
     newSection.append(button)
 
     main.append(newSection)
+
+    button.addEventListener('click', () => {
+        dog.isGoodDog = !dog.isGoodDog
+        
+        console.log(dog.isGoodDog)
+        naughty.innerText = isGoodBoy(dog)
+        em.innerText = 'Is naughty? '
+        button.innerText = isGoodDogButton(dog)
+
+        newSection.append(naughty)
+        naughty.prepend(em)
+        newSection.append(button)
+    })
+
 }
 
 function createDogSection() {
@@ -86,12 +102,6 @@ function isGoodDogButton(dog) {
         return 'Bad dog!'
     }
     return 'Good dog!'
-}
-
-function goodDogButton(dog) {
-    const button = document.createElement('button')
-    button.innerText = isGoodDogButton(dog)
-    return button
 }
 
 addDog.addEventListener('click', () => {
@@ -159,7 +169,7 @@ function dogForm() {
     form.append(bioInput)
     form.append(submit)
 
-    submit.addEventListener('click', (event) => {
+    form.addEventListener('submit', (event) => {
         event.preventDefault()
 
         const newDogListItem = document.createElement('li')
