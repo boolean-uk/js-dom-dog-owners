@@ -3,8 +3,8 @@
 const dogName = data
 
 dogsListFnc()
-dogInformation()
 
+showDog()
 
 
 function dogsListFnc(){
@@ -19,12 +19,13 @@ function dogsListFnc(){
   }
 }
 
-function dogInformation () { 
+
+function dogInformation (dogTargetName) { 
   let key = 0
   const main = document.querySelector('.main')
-
   for(key in dogName) {
-    const section = document.createElement('section')
+    if(dogTargetName === dogName[key].name){
+      const section = document.createElement('section')
     section.classList.add('main__dog-section')
     const h2 = document.createElement('h2')
     h2.innerText = dogName[key].name
@@ -49,37 +50,43 @@ function dogInformation () {
     const pQuestion = document.createElement('p')
     const em = document.createElement('em')
     em.innerText = 'Is naughty?'
-    pQuestion.append(em)
-    
-    pQuestion.innerText = 'goodOrBadDog(yesOrNo)'
-
+    let yesOrNo = dogName[key].isGoodDog
+    pQuestion.append(em,goodOrBadDogText(yesOrNo))    
     section.append(pQuestion)
     
     const button = document.createElement('button')
-    button.innerText = 'Good dog!'
+
+    button.innerText = goodOrBadDogBtn(yesOrNo)
     
     section.append(button)
 
     main.append(section)
+
+    break
+    }
   }
  }
 
+function showDog(){
+  const doglist2 = document.querySelector('.dogs-list')
+  
+  
+  doglist2.addEventListener('click', (event) => {
+    const dogTargetName = event.target.innerText
+    dogInformation(dogTargetName)
+    // console.log(event.target)
+  })
 
-//  <div class="main__dog-section__desc">
-//           <h3>Bio</h3>
-//           <p>
-//             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Harum,
-//             minima voluptates libero cumque rerum consequatur optio aliquid sint
-//             eum maxime illo laborum omnis quo ab rem cupiditate nulla
-//             perspiciatis ipsum!
-//           </p>
-//         </div>
-//         <p><em>Is naughty?</em> yes!</p>
-//         <button>Good dog!</button>
+}
 
-
-function goodOrBadDog(yesOrNo){
+function goodOrBadDogText(yesOrNo){
   if(yesOrNo){
     return 'Yes!'
   } else return 'No!'
+}
+
+function goodOrBadDogBtn(yesOrNo) {
+  if(yesOrNo){
+    return 'Good dog!'
+  } else return 'Bad dog!'
 }
