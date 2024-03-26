@@ -100,6 +100,19 @@ for (let i = 0; i < dog.length; i++) {
         dogBioLabel.innerText = ("Dog's bio")
         newDogForm.append(dogBioLabel)
 
+        const dogBioTextArea = document.createElement('textarea')
+        dogBioTextArea.setAttribute('rows', '5')
+        dogBioTextArea.setAttribute('id', 'bio')
+        dogBioTextArea.setAttribute('name', 'bio')
+        newDogForm.append(dogBioTextArea)
+
+        const submitNewDog = document.createElement('input')
+        submitNewDog.setAttribute('type', 'submit')
+        submitNewDog.setAttribute('id', 'submit')
+        submitNewDog.setAttribute('name', 'submit')
+        submitNewDog.setAttribute('value', "Let's add a dog!")
+        submitNewDog.setAttribute('class', 'form__button')
+        newDogForm.append(submitNewDog)
     })
 }
     
