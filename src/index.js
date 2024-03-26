@@ -51,7 +51,6 @@ function dogCard(dog) {
     button.addEventListener('click', () => {
         dog.isGoodDog = !dog.isGoodDog
         
-        console.log(dog.isGoodDog)
         naughty.innerText = isGoodBoy(dog)
         em.innerText = 'Is naughty? '
         button.innerText = isGoodDogButton(dog)
