@@ -54,19 +54,19 @@ for (let i = 0; i < data.length; i++) {
         buttonGoodDog.classList.add('form__button')
 
             if (data[i].isGoodDog === true) {
-                buttonGoodDog.innerText = 'Good dog!'
+                buttonGoodDog.innerText = 'Good dog'
             } else {
-                buttonGoodDog.innerText = 'Bad dog!'
+                buttonGoodDog.innerText = 'Bad dog'
             }
 
         dogsCards.append(buttonGoodDog)
 
         buttonGoodDog.addEventListener('click', () => {
             if (data[i].isGoodDog === true) {
-                buttonGoodDog.innerText = 'Bad dog!'
+                buttonGoodDog.innerText = 'Bad dog'
                 isNaughty.innerText = 'Is naughty? No'
             } else {
-                buttonGoodDog.innerText = 'Good dog!'
+                buttonGoodDog.innerText = 'Good dog'
                 isNaughty.innerText = 'Is naughty? Yes'
             }
         })
