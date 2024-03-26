@@ -88,8 +88,8 @@ const addEventListener = (li, data) => {
     li.addEventListener('click', () => {
         let newDog = buildDogCard(data)
         let dogSection = document.querySelector('main')
-        console.log(dogSection)
-        dogSection.removeChild('h2')
+       dogSection.innerHTML = ''
+        dogSection.appendChild(newDog)
        
     })
 }
