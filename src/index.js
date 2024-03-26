@@ -166,8 +166,35 @@ function dogForm() {
         newDogListItem.classList.add('dogs-list__button')
         newDogListItem.innerText = nameInput.value
         addDog.after(newDogListItem)
+
+        newDogListItem.addEventListener ('click', () => {
+            const newSection = createDogSection()
+            const dogName = document.createElement('h2')
+            const image = document.createElement('img')
+            const mainDogSection = document.createElement('div')
+            const bio = document.createElement('h3')
+            const p = document.createElement('p')
+            
+            main.innerHTML = ''
+            
+            dogName.innerText = nameInput.value
+        
+            image.setAttribute('src', imageInput.value)
+            image.setAttribute('alt', " ")
+
+            bio.innerText = 'Bio'
+            mainDogSection.classList.add('main__dog-section__desc')
+            p.innerText = bioInput.value
+        
+            newSection.append(dogName)
+            newSection.append(image)
+            newSection.append(mainDogSection)
+            mainDogSection.append(bio)
+            mainDogSection.append(p)
+        
+            main.append(newSection)
+        })
     })
 
     return form
 }
-
