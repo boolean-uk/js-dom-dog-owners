@@ -113,6 +113,19 @@ for (let i = 0; i < dog.length; i++) {
         submitNewDog.setAttribute('value', "Let's add a dog!")
         submitNewDog.setAttribute('class', 'form__button')
         newDogForm.append(submitNewDog)
+
+        newDogForm.addEventListener('submit', () => {
+            event.preventDefault()
+
+            const li = document.createElement('li')
+            li.classList.add('dogs-list__button')
+            dogList.append(li)
+
+            const headerH2 = document.createElement('h2')
+            headerH2.innerText = `${dogNameInput.value}`
+            li.append(headerH2)
+            
+        })
     })
 }
     
