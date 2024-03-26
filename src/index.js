@@ -68,8 +68,24 @@ for (let i = 0; i < dog.length; i++) {
         const newDogHeading = document.createElement('h2')
         newDogHeading.innerText = ('Add a new Dog')
         cardSection.append(newDogHeading)
+
         const newDogForm = document.createElement('form')
         newDogForm.classList.add('form')
+        cardSection.append(newDogForm)
+
+        const dogNameLabel = document.createElement('label')
+        dogNameLabel.setAttribute('for', 'name')
+        dogNameLabel.innerText = ("Dog's Name")
+        newDogForm.append(dogNameLabel)
+
+        const dogNameInput = document.createElement('input')
+        dogNameInput.setAttribute('type', 'text')
+        dogNameInput.setAttribute('id', 'name')
+        dogNameInput.setAttribute('name', 'name')
+        newDogForm.append(dogNameInput)
+        
+        
+
     })
 }
     
