@@ -5,21 +5,33 @@ const dogSection = document.querySelector('.main__dog-section')
 
 // WRITE YOUR CODE BELOW!
 function addDogListItem() {
-    for (let i = 0; i < data.length; i++) {
+    data.forEach((dog) => {
         const newDogListItem = document.createElement('li')
         newDogListItem.classList.add('dogs-list__button')
-        newDogListItem.innerText = data[i].name
+        newDogListItem.innerText = dog.name
         dogList.append(newDogListItem)
-    }
+        
+        newDogListItem.addEventListener('click', () => {
+        dogCard(dog)
+        })
+    })
 }
 
 addDogListItem()
 
-dogList.addEventListener('click', () => {
-    const newSection = createDogSection()
 
-    dogSection.replaceWith(newSection)
-})
+
+function dogCard(dog) {
+    const newSection = createDogSection()
+    const dogName = document.createElement('h2')
+    main.innerHTML = ''
+    
+    dogName.innerText = dog.name
+
+    newSection.append(dogName)
+
+    main.append(newSection)
+}
 
 function createDogSection() {
     const newSection = document.createElement('section')
