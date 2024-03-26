@@ -1,4 +1,3 @@
-
 //Build doggy card
 
 const buildDogCard = (data) => {
@@ -55,6 +54,7 @@ const addNaughty = (section, isGoodDog) => {
   const newEm = document.createElement("em");
   isGoodDog ? (newP.innerText = " Yes") : (newP.innerText = " No");
   newEm.innerText = "Is naughty?";
+  newP.setAttribute('id', 'good-dog')
   newP.prepend(newEm);
   section.append(newP);
 
@@ -64,6 +64,7 @@ const addNaughty = (section, isGoodDog) => {
 const addButton = (section) => {
   const newButton = document.createElement("button");
   newButton.innerText = "Good Dog!";
+  newButton.setAttribute('id', 'good-button')
   section.append(newButton);
   return section;
 };
@@ -90,10 +91,7 @@ const populateHeader = () => {
 
 const addEventListener = (li, data) => {
   li.addEventListener("click", () => {
-    let newDog = buildDogCard(data);
-    let dogSection = document.querySelector("main");
-    dogSection.innerHTML = "";
-    dogSection.appendChild(newDog);
+    refreshDog(data)
   });
 };
 
@@ -186,7 +184,6 @@ addDogButton.addEventListener("click", () => {
 
 const addFormListener = (formSection) => {
   formSection.addEventListener("submit", (event) => {
-
     event.preventDefault();
     const newDogName = formSection.querySelector("#name").value;
     const newDogPic = formSection.querySelector("#image").value;
@@ -195,16 +192,36 @@ const addFormListener = (formSection) => {
   });
 };
 
+//Add to data store and repopulate header
+
 const pushData = (name, pic, bio) => {
   const newDogObj = {};
   newDogObj.id = data.length;
   newDogObj.name = name;
   newDogObj.image = pic;
   newDogObj.bio = bio;
-
   data.push(newDogObj);
-  console.log(data);
   populateHeader();
 };
 
+// Add functionality to good-dog button!
+const addGoodButtonFunc = (data) => {
+    const goodButton = document.querySelector('#good-button')
+    goodButton.addEventListener('click', () => {
+        if (data.isGoodDog) {
+            data.isGoodDog = false
+        } else {
+        data.isGoodDog = true
+        }
+        refreshDog(data)
+    })
+}
 
+//Refreshes currently displayed card
+const refreshDog = (data) => {
+    let newDog = buildDogCard(data);
+    let dogSection = document.querySelector("main");
+    dogSection.innerHTML = "";
+    dogSection.appendChild(newDog);
+    addGoodButtonFunc(data)
+}
