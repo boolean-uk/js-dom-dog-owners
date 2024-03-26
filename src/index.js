@@ -84,7 +84,21 @@ for (let i = 0; i < dog.length; i++) {
         dogNameInput.setAttribute('name', 'name')
         newDogForm.append(dogNameInput)
         
-        
+        const dogImageLabel = document.createElement('label')
+        dogImageLabel.setAttribute('for', 'image')
+        dogImageLabel.innerText = ("Dog's picture")
+        newDogForm.append(dogImageLabel)
+
+        const dogImageInput = document.createElement('input')
+        dogImageInput.setAttribute('type', 'url')
+        dogImageInput.setAttribute('id', 'image')
+        dogImageInput.setAttribute('name', 'image')
+        newDogForm.append(dogImageInput)
+
+        const dogBioLabel = document.createElement('label')
+        dogBioLabel.setAttribute('for', 'bio')
+        dogBioLabel.innerText = ("Dog's bio")
+        newDogForm.append(dogBioLabel)
 
     })
 }
