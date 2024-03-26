@@ -8,8 +8,6 @@ const addDogButton = document.querySelector('.dogs-list__button--add')
 const dogHeaderButton = document.querySelector('.dogs-list__button')
 const cardSection = document.querySelector('.main__dog-section')
 
-const deleteH2 = document.querySelector('.main__dog-section h2')
-deleteH2.remove('h2')
 
 
 for (let i = 0; i < dog.length; i++) {
@@ -52,12 +50,8 @@ for (let i = 0; i < dog.length; i++) {
         goodOrBad.append(italics)
         
         const goodOrBadButton = document.createElement('button')
-        goodOrBadButton.setAttribute('src', dog[i].isGoodDog)
+        goodOrBadButton.innerText = ('src', dog[i].isGoodDog)
         cardSection.append(goodOrBadButton)
-    
-        const goodDogButton = document.createElement('button')
-        goodDogButton.innerText = ('Good dog!')
-        cardSection.append(goodDogButton)
     })
 
 }
