@@ -2,27 +2,24 @@
 
 const dogName = data
 let indexZero = 0
-dogsListFnc(dogName)
-showDog()
-addDog()
+
 
 
 function addDog(){
   const addDog = document.querySelector('.dogs-list__button--add')
   addDog.addEventListener('click', (event) => {
-    
   createDogForm()
+  console.log(addDog)
   })
 }
 
 function submitDog(dogForm) {
   const submit = document.querySelector('#submit')
-  console.log(submit)
 }
 
 function createDogForm(){
   const main = document.querySelector('.main')
-
+  console.log(main)
   removeH2Text()
     const section = document.createElement('section')
     section.classList.add('main__dog-section')
@@ -73,8 +70,6 @@ function createDogForm(){
 
   form.addEventListener('submit', (event) => {
     let newDogName = {}
-    const newDogList = dogName
-    let newnewnew = {}
     event.preventDefault()
     const dogList = document.querySelector('.dogs-list')
     dogList.innerHTML = ''
@@ -83,13 +78,6 @@ function createDogForm(){
     newAddButton.classList.add('dogs-list__button--add')
     newAddButton.innerText = '+'
     dogList.append(newAddButton)
-    // const header = document.querySelector('.header')
-    // console.log(header)
-    // const newDogList = document.createElement('ul')
-    // newDogList.classList.add('.dogs-list')
-    // header.append(newDogList)
-    
-
 
     newDogName = 
     {
@@ -99,10 +87,10 @@ function createDogForm(){
       image: inputImage.value,
       isGoodDog : true
     }
-    dogName.push(newDogName)
+  
+    dogName.unshift(newDogName)
     dogsListFnc(dogName)
   })
-  
 }
 
 function dogsListFnc(dogs){
@@ -192,3 +180,7 @@ function removeH2Text(){
   noDogSection.remove()
 }
 
+
+showDog()
+addDog()
+dogsListFnc(dogName)
