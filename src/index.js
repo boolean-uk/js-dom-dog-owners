@@ -76,6 +76,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function renderDogList() {
         dogList.innerHTML = "";
+    
+        const plusButton = document.createElement("li");
+        plusButton.textContent = "+";
+        plusButton.classList.add('dogs-list__button', 'plus-button');
+        plusButton.addEventListener("click", showAddDogForm);
+        dogList.appendChild(plusButton);
+    
         data.forEach((dog, index) => {
             const listItem = document.createElement("li");
             listItem.textContent = dog.name;
@@ -118,9 +125,28 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function showAddDogForm() {
-        mainDogSection.innerHTML = document.querySelector('.main__dog-section-add').innerHTML;
+
+        mainDogSection.innerHTML = "";
+
+        const formHTML = `
+            <form id="add-dog-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br>
+                <label for="bio">Bio:</label>
+                <textarea id="bio" name="bio" required></textarea><br>
+                <label for="image">Image URL:</label>
+                <input type="text" id="image" name="image" required><br>
+                <label for="is-good-dog">Is Good Dog?</label>
+                <input type="checkbox" id="is-good-dog" name="is-good-dog"><br>
+                <button type="submit">Add Dog</button>
+            </form>
+        `;
+    
+        mainDogSection.innerHTML = formHTML;
+
         document.getElementById('add-dog-form').addEventListener('submit', handleFormSubmit);
     }
+    
 
     function handleFormSubmit(event) {
         event.preventDefault();
