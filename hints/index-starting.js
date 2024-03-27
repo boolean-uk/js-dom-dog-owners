@@ -13,7 +13,7 @@ function createDogListItem(dog){
   //the dog variable as a parameter. You will
   //also need to remove any existing dog card
   //from the dogContainer
- 
+
   return li;
 };
 
