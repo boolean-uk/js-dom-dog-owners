@@ -135,18 +135,30 @@ function dogInformation (dogTargetName) {
     section.append(div)
 
     const pQuestion = document.createElement('p')
+
     const em = document.createElement('em')
     em.innerText = 'Is naughty?'
+
     let yesOrNo = dogName[key].isGoodDog
-    pQuestion.append(em,goodOrBadDogText(yesOrNo))    
-    section.append(pQuestion)
-    
+    pQuestion.append(em,goodOrBadDogText(yesOrNo))   
+
     const button = document.createElement('button')
-
     button.innerText = goodOrBadDogBtn(yesOrNo)
-    
-    section.append(button)
+    console.log()
+    button.addEventListener('click', (event) =>{
+      if(button.innerText === 'Good dog!'){
+        pQuestion.innerHTML = ''
+        button.innerText = 'Bad dog!'
+        pQuestion.append(em,'No!')  
+      } else {
+        pQuestion.innerHTML = ''
+        button.innerText = 'Good dog!'
+        pQuestion.append(em,'Yes!')  
+      }
+    })
 
+    section.append(pQuestion)
+    section.append(button)
     main.append(section)
 
     break
