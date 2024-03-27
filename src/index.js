@@ -2,6 +2,9 @@
 
 const dogName = data
 
+
+console.log(dogName)
+
 dogsListFnc()
 showDog()
 addDog()
@@ -10,11 +13,14 @@ addDog()
 function addDog(){
   const addDog = document.querySelector('.dogs-list__button--add')
   addDog.addEventListener('click', (event) => {
-    event.defaultPrevented
-  const dogForm = createDogForm()
-  
-  console.log(dogName[8])
+    
+  createDogForm()
   })
+}
+
+function submitDog(dogForm) {
+  const submit = document.querySelector('#submit')
+  console.log(submit)
 }
 
 function createDogForm(){
@@ -68,32 +74,31 @@ function createDogForm(){
   section.append(h2,form)
   main.append(section)
 
-  return main
+  form.addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    // console.log(event.target)
+    let lastIndex = dogName.length
+    console.log(lastIndex)
+    dogName[lastIndex] = 
+    {
+      id : lastIndex + 1,
+      name:inputName.value,
+      bio: textarea.value,
+      image: inputImage.value,
+      isGoodDog : true
+    }
+
+   
+    dogsListFnc()
+    console.log(dogName)
+  })
+  
 }
-
-{/* 
-<section class="main__dog-section">
-      <h2>Add a new Dog</h2>
-      <form class="form">
-
-        <label for="name">Dog's name</label>
-        <input type="text" id="name" name="name">
-
-        <label for="image">Dog's picture</label>
-        <input type="url" id="image" name="image">
-
-        <label for="bio">Dog's bio</label>
-        <textarea rows="5" id="bio" name="bio"></textarea>
-
-        <input type="submit" id="submit" name="submit" value="Let's add a dog!" class="form__button">
-      </form>
-  </section>
-   --></input> */}
 
 function dogsListFnc(){
   let key = 0
   const dogsList = document.querySelector('.dogs-list')
-
   for(key in dogName){
     const dogListBtn = document.createElement('li')
     dogListBtn.classList.add('dogs-list__button')
