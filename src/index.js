@@ -1,11 +1,8 @@
 // WRITE YOUR CODE BELOW!
 
 const dogName = data
-
-
-console.log(dogName)
-
-dogsListFnc()
+let indexZero = 0
+dogsListFnc(dogName)
 showDog()
 addDog()
 
@@ -75,34 +72,47 @@ function createDogForm(){
   main.append(section)
 
   form.addEventListener('submit', (event) => {
+    let newDogName = {}
+    const newDogList = dogName
+    let newnewnew = {}
     event.preventDefault()
+    const dogList = document.querySelector('.dogs-list')
+    dogList.innerHTML = ''
+    const newAddButton = document.createElement('li')
+    newAddButton.classList.add('dogs-list__button')
+    newAddButton.classList.add('dogs-list__button--add')
+    newAddButton.innerText = '+'
+    dogList.append(newAddButton)
+    // const header = document.querySelector('.header')
+    // console.log(header)
+    // const newDogList = document.createElement('ul')
+    // newDogList.classList.add('.dogs-list')
+    // header.append(newDogList)
+    
 
-    // console.log(event.target)
-    let lastIndex = dogName.length
-    console.log(lastIndex)
-    dogName[lastIndex] = 
+
+    newDogName = 
     {
-      id : lastIndex + 1,
+      id : 1,
       name:inputName.value,
       bio: textarea.value,
       image: inputImage.value,
       isGoodDog : true
     }
-
-   
-    dogsListFnc()
-    console.log(dogName)
+    dogName.push(newDogName)
+    dogsListFnc(dogName)
   })
   
 }
 
-function dogsListFnc(){
+function dogsListFnc(dogs){
   let key = 0
   const dogsList = document.querySelector('.dogs-list')
-  for(key in dogName){
+  for(key in dogs){
     const dogListBtn = document.createElement('li')
     dogListBtn.classList.add('dogs-list__button')
-    dogListBtn.innerText = dogName[key].name
+    dogListBtn.innerText = dogs[key].name
+
     dogsList.append(dogListBtn)
   }
 }
