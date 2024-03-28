@@ -1,10 +1,7 @@
+
 // WRITE YOUR CODE BELOW!
 
 const dogName = data
-let indexZero = 0
-
-
-
 function addDog(){
   const addDog = document.querySelector('.dogs-list__button--add')
   addDog.addEventListener('click', (event) => {
