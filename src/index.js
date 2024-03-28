@@ -37,10 +37,7 @@ createDogButtons()
 
 function createDogCard(headerH2) {
 
-    
-    
-    dog.forEach((headerH2) => {
-
+    dog.find(dog => dog.name === headerH2)
         cardSection.innerHTML = ''
         
         const cardH2 = document.createElement('h2')
@@ -83,8 +80,7 @@ function createDogCard(headerH2) {
             else {
                 goodOrBadElement.innerText = ('Yes!')
                 goodOrBadButton.innerText = ('Bad Dog')}
-    
-    })    
+        
 }
  
 
