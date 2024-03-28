@@ -57,8 +57,8 @@ function createDogCard(dogName) {
 
   const goodOrBadElement = document.createElement("p");
 
-  const italics = document.createElement("em");
-  italics.innerText = "Is naughty?";
+  const italics = document.createElement("em")
+  italics.innerText = "Is naughty?"
 
   goodOrBadElement.append(italics);
 
@@ -135,8 +135,11 @@ function newDogForm() {
     li.classList.add("dogs-list__button");
     dogList.append(li);
 
-    const headerH2 = document.createElement("h2");
-    headerH2.innerText = `${dogNameInput.value}`;
-    li.append(headerH2);
+    const newDog = document.createElement("h2");
+    newDog.innerText = `${dogNameInput.value}`;
+    li.append(newDog);
+    const secondIndexDogHeadr = dogList.children[1]
+    dogList.insertBefore(li, secondIndexDogHeadr)
+    
   });
 }
